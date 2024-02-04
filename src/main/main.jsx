@@ -1,10 +1,4 @@
-import Header from '../header/header';
-
 function Main() {
-  return (
-    <>
-      <Header />
-    </>
-  );
+  return <></>;
 }
 export default Main;
