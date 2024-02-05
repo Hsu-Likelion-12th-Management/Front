@@ -5,6 +5,10 @@ import Main from './main/main';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './header/header';
 import Activity from './activity/activity';
+import Project from './project/project';
+import Project11 from './project/project11';
+import Project12 from './project/project12';
+import Apply from './apply/apply';
 
 const Wrapper = styled.div`
   margin: 0 auto;
@@ -13,7 +17,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
 
-  max-width: 428px;
+  min-width: 428px;
   background-color: black;
   position: relative;
 `;
@@ -27,6 +31,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/Activity" element={<Activity />} />
+          <Route path="/Project" element={<Project />} />
+          <Route path="/Project11" element={<Project11 />} />
+          <Route path="/Project12" element={<Project12 />} />
+          <Route path="/Apply" element={<Apply />} />
         </Routes>
       </Wrapper>
     </Router>
