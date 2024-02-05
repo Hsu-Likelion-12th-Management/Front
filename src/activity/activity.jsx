@@ -100,7 +100,7 @@ function Activity() {
   return (
     <>
       <IntroContainer>
-        <img src={Hsulogo} style={{ width: '8%' }} />
+        <img src={Hsulogo} alt="한성로고" style={{ width: '8%' }} />
         <IntroP>활동 소개</IntroP>
       </IntroContainer>
       <WholeContainer>
