@@ -10,6 +10,7 @@ import ImgBanner from "../projectComponents/ImgBanner";
 import life from "../images/life.png";
 import happiness from "../images/happiness.png";
 import moah from "../images/moah.png";
+import Footer from "../footer/footer";
 
 const TitleText = styled.p`
   margin-top: 3.75rem;
@@ -75,11 +76,11 @@ function Project() {
         })}
       </div>
 
-      <div style={{ marginTop: "1rem", position: "relative" }}>
+      <div style={{ marginTop: "1rem", marginBottom: "5rem", position: "relative" }}>
         <MoreButton>더보기</MoreButton>
       </div>
 
-      
+      <Footer></Footer>
     </>
   );
 }
