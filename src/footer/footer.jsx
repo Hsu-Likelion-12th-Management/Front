@@ -64,7 +64,11 @@ function Footer() {
             <ContentP>이용약관</ContentP>
             <ContentP>개인정보처리방침</ContentP>
           </ContentPContainer>
-          <img src={Insta} style={{ width: '32px', height: '32px' }} />
+          <img
+            src={Insta}
+            alt="인스타"
+            style={{ width: '32px', height: '32px' }}
+          />
         </ContentContainer>
       </FooterContainer>
     </>
