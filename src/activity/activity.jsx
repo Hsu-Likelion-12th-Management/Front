@@ -31,9 +31,6 @@ const InContainer = styled.div`
   flex-direction: row;
   align-items: center;
   text-align: center;
-  @media (max-width: 768px) {
-    margin-left: 15px;
-  }
 `;
 
 const IntroP = styled.p`
@@ -91,9 +88,6 @@ const WholeContainer = styled.div`
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  @media (max-width: 768px) {
-    width: 78%;
-  }
 `;
 
 const ActivityContainer = styled.div`

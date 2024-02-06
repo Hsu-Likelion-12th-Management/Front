@@ -13,9 +13,6 @@ const HeaderContainer = styled.div`
   justify-content: flex-start;
   text-align: center;
   align-items: center;
-  @media (max-width: 768px) {
-    margin-left: 25px;
-  }
 `;
 
 const HeaderP = styled.p`
