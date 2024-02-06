@@ -9,6 +9,8 @@ import Project from './project/project';
 import Project11 from './project/project11';
 import Project12 from './project/project12';
 import Apply from './apply/apply';
+import Question from './qna/question';
+import Login from './login/login';
 
 const Wrapper = styled.div`
   margin: 0 auto;
@@ -17,12 +19,12 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
 
-  min-width: 428px; // 기본 최소 너비
+  min-width: 428px;
   background-color: black;
   position: relative;
 
   @media (max-width: 428px) {
-    min-width: 100%; // 화면 너비가 428px 이하일 때 최소 너비 조정
+    min-width: 60%;
   }
 `;
 
@@ -39,6 +41,8 @@ function App() {
           <Route path="/Project11" element={<Project11 />} />
           <Route path="/Project12" element={<Project12 />} />
           <Route path="/Apply" element={<Apply />} />
+          <Route path="/Question" element={<Question />} />
+          <Route path="/Login" element={<Login />} />
         </Routes>
       </Wrapper>
     </Router>
