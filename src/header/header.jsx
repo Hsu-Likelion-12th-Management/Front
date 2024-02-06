@@ -14,7 +14,7 @@ const HeaderContainer = styled.div`
   text-align: center;
   align-items: center;
   @media (max-width: 768px) {
-    margin-left: 10px;
+    margin-left: 25px;
   }
 `;
 

@@ -10,6 +10,17 @@ const FooterContainer = styled.div`
   flex-direction: row;
 `;
 
+const HsuLogo = styled.img`
+  width: 75px; // 기본 너비
+  height: 42px; // 기본 높이
+
+  @media (max-width: 768px) {
+    width: 55px;
+    height: 28px; // 화면 너비가 768px 이하일 때 높이 조정
+    margin-left: 25px;
+  }
+`;
+
 const ContentContainer = styled.div`
   margin-top: 33px;
   margin-left: 20px;
@@ -45,6 +56,7 @@ const GrayP = styled.p`
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+  white-space: nowrap;
 `;
 
 function Footer() {
@@ -52,11 +64,7 @@ function Footer() {
     <>
       <FooterContainer>
         <ContentContainer>
-          <img
-            src={Hsu}
-            alt="한성대로고"
-            style={{ width: '75px', height: '42px' }}
-          />
+          <HsuLogo src={Hsu} alt="한성대로고" />
           <ContentPContainer>
             <ContentP>멋쟁이사자처럼 한성대학교</ContentP>
             <GrayP>문의처: hansung@likelion.org</GrayP>
