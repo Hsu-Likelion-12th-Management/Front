@@ -13,6 +13,10 @@ export const GlobalStyle = createGlobalStyle`
     background-color: "#486455";
     color: white;
   }
+
+  body, html {
+    overflow-x: hidden; // 수평 스크롤 방지
+  }
   
   html, body, div, span, applet, object, iframe,
   h1, h2, h3, h4, h5, h6, p, blockquote, 

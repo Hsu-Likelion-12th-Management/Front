@@ -17,9 +17,13 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
 
-  min-width: 428px;
+  min-width: 428px; // 기본 최소 너비
   background-color: black;
   position: relative;
+
+  @media (max-width: 428px) {
+    min-width: 100%; // 화면 너비가 428px 이하일 때 최소 너비 조정
+  }
 `;
 
 function App() {

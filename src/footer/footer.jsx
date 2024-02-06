@@ -17,19 +17,17 @@ const HsuLogo = styled.img`
   @media (max-width: 768px) {
     width: 55px;
     height: 28px; // 화면 너비가 768px 이하일 때 높이 조정
-    margin-left: 25px;
   }
 `;
 
 const ContentContainer = styled.div`
+  width: 100%;
   margin-top: 33px;
   margin-left: 20px;
+  margin-right: 20px; // 오른쪽 마진 추가
   display: flex;
   flex-direction: row;
   gap: 24px;
-  @media (max-width: 768px) {
-    width: 85%;
-  }
 `;
 
 const ContentPContainer = styled.div`
@@ -37,6 +35,10 @@ const ContentPContainer = styled.div`
   flex-direction: column;
   margin-left: 4px;
   margin-right: 44px;
+
+  @media (max-width: 768px) {
+    margin-right: 25px;
+  }
   gap: 4px;
 `;
 
@@ -75,7 +77,7 @@ function Footer() {
           <img
             src={Insta}
             alt="인스타"
-            style={{ width: '32px', height: '32px' }}
+            style={{ width: '32px', height: '32px', marginRight: '20px' }}
           />
         </ContentContainer>
       </FooterContainer>
