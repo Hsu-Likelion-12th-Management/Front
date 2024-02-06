@@ -32,7 +32,7 @@ const InContainer = styled.div`
   align-items: center;
   text-align: center;
   @media (max-width: 768px) {
-    margin-left: 20px;
+    margin-left: 15px;
   }
 `;
 
@@ -92,7 +92,7 @@ const WholeContainer = styled.div`
   display: flex;
   flex-direction: column;
   @media (max-width: 768px) {
-    width: 80%;
+    width: 78%;
   }
 `;
 
