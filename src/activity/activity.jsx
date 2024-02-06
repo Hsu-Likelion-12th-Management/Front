@@ -8,6 +8,7 @@ import idea1 from '../images/idea1.jpeg';
 import idea2 from '../images/idea2.jpeg';
 import mid1 from '../images/midton1.jpeg';
 import mid2 from '../images/midton2.jpeg';
+import Footer from '../footer/footer';
 
 const StyledImage = styled.img`
   width: 186px;
@@ -23,10 +24,16 @@ const IntroContainer = styled.div`
   padding-bottom: 25px;
   padding-left: 20px;
   background: linear-gradient(to right, #ff7710, #191b24 60px);
+`;
+
+const InContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
   text-align: center;
+  @media (max-width: 768px) {
+    margin-left: 20px;
+  }
 `;
 
 const IntroP = styled.p`
@@ -84,6 +91,13 @@ const WholeContainer = styled.div`
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+  @media (max-width: 768px) {
+    width: 80%;
+  }
+`;
+
+const ActivityContainer = styled.div`
+  width: 100%;
 `;
 
 function Activity() {
@@ -99,63 +113,77 @@ function Activity() {
 
   return (
     <>
-      <IntroContainer>
-        <img src={Hsulogo} alt="한성로고" style={{ width: '8%' }} />
-        <IntroP>활동 소개</IntroP>
-      </IntroContainer>
-      <WholeContainer>
-        <StudyContainer>
-          <TitleP>팀 별 스터디</TitleP>
-          <ContentP>
-            기획,디자인,프론트엔드,백엔드 4개의 팀으로 주 1회 세션을 진행합니다.
-          </ContentP>
-          <PicContainer>
-            {ideaImages.map((image, idx) => (
-              <StyledImage
-                key={idx}
-                src={image}
-                alt={`Idea Image ${idx + 1}`}
-              />
-            ))}
-          </PicContainer>
-        </StudyContainer>
-        <StudyContainer>
-          <TitleP>아이디어톤</TitleP>
-          <ContentP>타 학교 멋사와 연합하여 해커톤을 진행했습니다.</ContentP>
-          <PicContainer>
-            {ideaImages.map((image, idx) => (
-              <StyledImage
-                key={idx}
-                src={image}
-                alt={`Idea Image ${idx + 1}`}
-              />
-            ))}
-          </PicContainer>
-        </StudyContainer>
-        <StudyContainer>
-          <TitleP>중앙해커톤</TitleP>
-          <HackP>
-            여름방학, 약 한 달간의 프로젝트 과정을 거쳐 무박으로 <br />
-            개발을 마무리하는 해커톤입니다.
-          </HackP>
-          <PicContainer>
-            {midImages.map((image, idx) => (
-              <StyledImage key={idx} src={image} alt={`Mid Image ${idx + 1}`} />
-            ))}
-          </PicContainer>
-        </StudyContainer>
-        <StudyContainer style={{ paddingBottom: '60px' }}>
-          <TitleP>연합해커톤</TitleP>
-          <ContentP>
-            타 대학과 자체적으로 연합하여 개최하는 해커톤입니다.{' '}
-          </ContentP>
-          <PicContainer>
-            {midImages.map((image, idx) => (
-              <StyledImage key={idx} src={image} alt={`Mid Image ${idx + 1}`} />
-            ))}
-          </PicContainer>
-        </StudyContainer>
-      </WholeContainer>
+      <ActivityContainer>
+        <IntroContainer>
+          <InContainer>
+            <img src={Hsulogo} alt="한성로고" style={{ width: '8%' }} />
+            <IntroP>활동 소개</IntroP>
+          </InContainer>
+        </IntroContainer>
+        <WholeContainer>
+          <StudyContainer>
+            <TitleP>팀 별 스터디</TitleP>
+            <ContentP>
+              기획,디자인,프론트엔드,백엔드 4개의 팀으로 주 1회 세션을
+              진행합니다.
+            </ContentP>
+            <PicContainer>
+              {ideaImages.map((image, idx) => (
+                <StyledImage
+                  key={idx}
+                  src={image}
+                  alt={`Idea Image ${idx + 1}`}
+                />
+              ))}
+            </PicContainer>
+          </StudyContainer>
+          <StudyContainer>
+            <TitleP>아이디어톤</TitleP>
+            <ContentP>타 학교 멋사와 연합하여 해커톤을 진행했습니다.</ContentP>
+            <PicContainer>
+              {ideaImages.map((image, idx) => (
+                <StyledImage
+                  key={idx}
+                  src={image}
+                  alt={`Idea Image ${idx + 1}`}
+                />
+              ))}
+            </PicContainer>
+          </StudyContainer>
+          <StudyContainer>
+            <TitleP>중앙해커톤</TitleP>
+            <HackP>
+              여름방학, 약 한 달간의 프로젝트 과정을 거쳐 무박으로 <br />
+              개발을 마무리하는 해커톤입니다.
+            </HackP>
+            <PicContainer>
+              {midImages.map((image, idx) => (
+                <StyledImage
+                  key={idx}
+                  src={image}
+                  alt={`Mid Image ${idx + 1}`}
+                />
+              ))}
+            </PicContainer>
+          </StudyContainer>
+          <StudyContainer style={{ paddingBottom: '60px' }}>
+            <TitleP>연합해커톤</TitleP>
+            <ContentP>
+              타 대학과 자체적으로 연합하여 개최하는 해커톤입니다.{' '}
+            </ContentP>
+            <PicContainer>
+              {midImages.map((image, idx) => (
+                <StyledImage
+                  key={idx}
+                  src={image}
+                  alt={`Mid Image ${idx + 1}`}
+                />
+              ))}
+            </PicContainer>
+          </StudyContainer>
+        </WholeContainer>
+        <Footer />
+      </ActivityContainer>
     </>
   );
 }
