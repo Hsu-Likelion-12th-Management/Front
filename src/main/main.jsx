@@ -3,8 +3,22 @@ import arrow from '../images/ArrowsClockwise.svg';
 import building from '../images/Buildings.svg';
 import user from '../images/Users.svg';
 import Roadmap from './roadmap';
+import Footer from '../footer/footer';
+import HansungLion from './hansunglion';
+import ActivityMain from './activitymain';
 
 function Main() {
+
+  const wrapper={
+    margin: '0 auto',
+    width: '100%',
+    minHeight: '100vh',
+    display: 'flex',
+    flexDirection: 'column',
+    minWidth: '428px',
+    backgroundColor: 'black',
+    position: 'relative'
+  }
 
   const logoStyle = {
     width: '93px',
@@ -88,7 +102,7 @@ function Main() {
   const stateContainerStyle={
     display:'flex',
     marginTop : '24px',
-    gap: '8px',
+    gap: '18px',
     marginLeft: '20px'
     
   }
@@ -101,7 +115,8 @@ function Main() {
     fontWeight: '500',
     lineHeight: 'normal',
     marginTop: '8px',
-    marginLeft: '20px'
+    marginLeft: '20px',
+    marginBottom:'40px'
   }
 
   return <>
@@ -136,6 +151,9 @@ function Main() {
     <div style={extraStyle}>&#40;2023년 11기 기준&#41;</div>
 
     <div><Roadmap/></div>
+    <div><HansungLion/></div>
+    <div><ActivityMain/></div>
+    <div><Footer/></div>
   </>;
 }
 export default Main;

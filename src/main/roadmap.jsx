@@ -8,7 +8,6 @@ function Roadmap(){
 
     const containerStyle={
         background: '#191B24',
-        width: '428px',
         height: '300px',
         flexShrink: '0',
         paddingTop:'40px'
