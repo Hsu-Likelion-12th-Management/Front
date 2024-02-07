@@ -1,0 +1,13 @@
+.menuBarContainer {
+  width: 12.5rem;
+  height: 55.375rem;
+  flex-shrink: 0;
+  background: var(--Gray5, #2A2A3A);
+}
+
+.menuBox {
+  margin: 1.75rem 0;
+  margin-left: 1.25rem;
+  display: flex;
+  gap: 0.25rem;
+}
