@@ -71,13 +71,11 @@
   margin-top: 4.81rem;
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 1.38rem;
+  justify-content: space-evenly;
 }
 
 /* 11기 소개 */
 .projectBg {
-  width: 26.75rem;
   height: 45.875rem;
   flex-shrink: 0;
   background: var(--Gray6, #191B24);
