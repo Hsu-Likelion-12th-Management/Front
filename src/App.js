@@ -11,6 +11,7 @@ import Project12 from './project/project12';
 import Apply from './apply/apply';
 import Question from './qna/question';
 import Login from './login/login';
+import Qnalist from './qna/qnalist';
 
 const Wrapper = styled.div`
   margin: 0 auto;
@@ -43,6 +44,7 @@ function App() {
           <Route path="/Apply" element={<Apply />} />
           <Route path="/Question" element={<Question />} />
           <Route path="/Login" element={<Login />} />
+          <Route path="/Qnalist" element={<Qnalist />} />
         </Routes>
       </Wrapper>
     </Router>
