@@ -56,6 +56,10 @@ const AskP = styled.p`
   @media (max-width: 428px) {
     font-size: 18px;
   }
+
+  & span {
+    color: #fff;
+  }
 `;
 
 const QuesButton = styled.button`
@@ -252,7 +256,7 @@ function Qnalist() {
           <AskP>
             한성대학교 멋쟁이사자처럼에게
             <br />
-            무엇이든 물어보세요!
+            <span>무엇이든 물어보세요!</span>
           </AskP>
         </Pcontainer>
         <QuesButton>질문하기</QuesButton>
