@@ -30,6 +30,7 @@ const IntroP = styled.p`
 const AuthorContainer = styled.div`
   display: flex;
   align-items: center;
+  flex-direction: row;
   gap: 7px;
 `;
 
@@ -104,12 +105,12 @@ const Reply = styled.div`
 `;
 
 const ContentField = styled.div`
-  width: 388px;
+  width: 100%;
   height: 200px;
   flex-shrink: 0;
   border-radius: 8px;
   background: var(--Black, #0f1015);
-  padding-left: 16px;
+  padding-left: 14px;
   padding-top: 13px;
 `;
 
@@ -120,6 +121,10 @@ const StyledParagraph = styled.p`
   font-style: normal;
   font-weight: 500;
   line-height: 170%;
+
+  @media (max-width: 428px) {
+    font-size: 12px;
+  }
 `;
 
 const AnswerContainer = styled.div`
@@ -134,15 +139,50 @@ const AnswerContainer = styled.div`
 
 const AnswerField = styled.div`
   display: flex;
+  text-align: left;
   flex-direction: column;
   padding-top: 17px;
   padding-left: 16px;
-  width: 388px;
+  padding-right: 14px;
+  width: 90%;
   height: 99px;
   flex-shrink: 0;
   border-radius: 8px;
   border: 1px solid var(--Gray5, #2a2a3a);
   background: var(--Gray6, #191b24);
+`;
+
+const Minutes = styled.p`
+  color: var(--Gray3, #626682);
+  text-align: center;
+  /* detail/detail_medium_12 */
+  font-family: Pretendard;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+`;
+
+const InfoContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 8px;
+`;
+
+const AnswerContent = styled.div`
+  margin-top: 8px;
+`;
+
+const AnswerText = styled.p`
+  color: #fff;
+  font-family: Pretendard;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 170%;
 `;
 
 function Qnacontent() {
@@ -152,6 +192,7 @@ function Qnacontent() {
         '안녕하세요! 아기사자가 되고 싶은 김지은입니다. 8월에 진행되는\n중앙해커톤은 다른 학교와 함께 팀을 이뤄서 참여하는건가요?\n감사합니다!',
       answer:
         '안녕하세요 :) 아니요! 중앙해커톤은 학교 내 멋사들과\n팀을 이뤄서 참가합니다!',
+      createdAt: '2분전',
     },
   ];
 
@@ -161,6 +202,12 @@ function Qnacontent() {
         {line}
       </StyledParagraph>
     ));
+  };
+
+  const renderAnswerWithLineBreaks = (text) => {
+    return text
+      .split('\n')
+      .map((line, index) => <AnswerText key={index}>{line}</AnswerText>);
   };
 
   return (
@@ -190,12 +237,18 @@ function Qnacontent() {
         </ContentField>
       </Contentcontainer>
       <AnswerContainer>
-        <AnswerField>
-          <AuthorContainer>
-            <Graycircle src={GrayCircle} alt="Gray Circle" />
-            <ItemContent>운영진</ItemContent>
-          </AuthorContainer>
-        </AnswerField>
+        {contents.map((content, index) => (
+          <AnswerField key={index}>
+            <InfoContainer>
+              <AuthorContainer>
+                <Graycircle src={GrayCircle} alt="Gray Circle" />
+                <ItemContent>운영진</ItemContent>
+              </AuthorContainer>
+              <Minutes>{content.createdAt}</Minutes>
+            </InfoContainer>
+            {renderAnswerWithLineBreaks(content.answer)}
+          </AnswerField>
+        ))}
       </AnswerContainer>
       <Footer />
     </>
