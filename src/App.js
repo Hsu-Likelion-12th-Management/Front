@@ -13,6 +13,7 @@ import Question from './qna/question';
 import Login from './login/login';
 import Qnalist from './qna/qnalist';
 import Qnacontent from './qna/qnacontent';
+import EleventhProject from './eleventhproject/eleventhproject';
 
 const Wrapper = styled.div`
   margin: 0 auto;
@@ -47,6 +48,8 @@ function App() {
           <Route path="/Login" element={<Login />} />
           <Route path="/Qnalist" element={<Qnalist />} />
           <Route path="/Qnacontent" element={<Qnacontent />} />
+          <Route path="/Eleven" element={<EleventhProject />} />
+
         </Routes>
       </Wrapper>
     </Router>
