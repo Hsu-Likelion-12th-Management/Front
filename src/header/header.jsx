@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import Menubar from '../images/menubar.png';
 import SideMenuBar from '../menubar/menubar';
-import { useState } from 'react';
 
 const HeaderContainer = styled.div`
   padding-top: 30px;

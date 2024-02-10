@@ -47,7 +47,7 @@ function App() {
   return (
     <Router>
       <GlobalStyle />
-      <Overlay $showMenu={showMenu} />
+      <Overlay showMenu={showMenu} />
       <Wrapper>
         <Header showMenu={showMenu} setShowMenu={setShowMenu} />
         <Routes>
