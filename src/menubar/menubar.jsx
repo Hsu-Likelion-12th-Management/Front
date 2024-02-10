@@ -45,7 +45,7 @@ function List({ image, children, tailText, activeImg, activeText, setActiveText,
   );
 }
 
-export default function SideMenuBar() {
+export default function SideMenuBar({showMenu}) {
   const [activeButton, setActiveButton] = useState(null);
 
   const activeButtonHandler = (text) => {
@@ -53,7 +53,7 @@ export default function SideMenuBar() {
   }
 
   return (
-    <div className="menuBarContainer">
+    <div className={showMenu ? "menuBarContainer" : "hideMenuBarContainer"}>
       <div className="menuBox">
         <img src={Menubar} />
         <p className="menuText">메뉴</p>

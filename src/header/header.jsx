@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import Menubar from '../images/menubar.png';
+import SideMenuBar from '../menubar/menubar';
+import { useState } from 'react';
 
 const HeaderContainer = styled.div`
   padding-top: 30px;
@@ -24,17 +26,27 @@ const HeaderP = styled.p`
 `;
 
 function Header() {
+  const [showMenu, setShowMenu] = useState(false);
+
+  const showMenuHandler = () => {
+    setShowMenu(!showMenu);
+  };
+
   return (
     <>
       <HeaderContainer>
-        <img
-          src={Menubar}
-          alt="메뉴바"
-          style={{ width: '24px', height: '18px' }}
-        />
+        <button onClick={showMenuHandler}>
+          <img
+            src={Menubar}
+            alt="메뉴바"
+            style={{ width: '24px', height: '18px' }}
+          />
+        </button>
         <HeaderP color="#FFFFFF">한성대학교</HeaderP>
         <HeaderP color="#FF7710">멋쟁이사자처럼</HeaderP>
       </HeaderContainer>
+      <SideMenuBar showMenu={showMenu} setShowMenu={setShowMenu} />
+      {/* {showMenu && <SideMenuBar />} */}
     </>
   );
 }
