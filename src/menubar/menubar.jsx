@@ -4,7 +4,7 @@ import smallLogo from "../images/smallLogo.svg";
 import whiteLogo from "../images/whiteLogo.svg";
 import whiteNote from "../images/whiteNote.svg";
 import grayNote from "../images/grayNote.svg";
-import Moniter from "../images/Monitor.svg";
+import Monitor from "../images/Monitor.svg";
 import whiteMonitor from "../images/whiteMonitor.svg";
 import chats from "../images/Chats.svg";
 import whiteChats from "../images/whiteChats.svg";
@@ -20,30 +20,17 @@ const ListContainer = styled.div`
   gap: 1.5rem;
 `;
 
-const ListBox = styled.button`
-    display: flex;
-    gap: 0.5rem;
-    margin-left: 1.25rem;
-    align-items: center;
-    font-family: Pretendard;
-    font-size: 1rem;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    color: ${(props) => props.activeText ? "var(--White, #fff)" : "var(--Gray2, #7f85a3)"};
-  `;
-
-function List({ image, children, tailText, activeImg, activeText, setActiveText, ...props }) {
+function List({ image, activeImg, activeText, setActiveText, text}) {
 
   const handleClick = () => {
-    setActiveText(props.text);
+    setActiveText(text);
   }
 
   return (
-    <ListBox onClick={handleClick} >
+    <button className={activeText ? "activeListBox" : "listBox"} onClick={handleClick} >
       <img src={activeText ? activeImg : image} alt="img" />
-      <p>{props.text}</p>
-    </ListBox>
+      <p>{text}</p>
+    </button>
   );
 }
 
@@ -61,14 +48,14 @@ export default function SideMenuBar({showMenu, setShowMenu}) {
   return (
     <div className={showMenu ? "menuBarContainer" : "hideMenuBarContainer"}>
       <div className="menuBox" onClick={closeMenuHandler}>
-        <img src={Menubar} />
+        <img src={Menubar} alt="menuBar" />
         <p className="menuText">메뉴</p>
       </div>
       <ListContainer>
         <List image={smallLogo} activeImg={whiteLogo} text="멋사란?" activeText={activeButton === "멋사란?"} setActiveText={activeButtonHandler} />
         <List image={grayNote} activeImg={whiteNote} text="활동 소개" activeText={activeButton === "활동 소개"} setActiveText={activeButtonHandler} />
         <div>
-          <List image={Moniter} activeImg={whiteMonitor} text="프로젝트" activeText={activeButton === "프로젝트"} setActiveText={activeButtonHandler} tailText={true} />
+          <List image={Monitor} activeImg={whiteMonitor} text="프로젝트" activeText={activeButton === "프로젝트"} setActiveText={activeButtonHandler} />
           <div className="tailTextBox">
             <button>11기</button>
             <button>12기</button>
