@@ -24,6 +24,7 @@ function List({ image, children, tailText, activeImg, activeText, setActiveText,
   const handleClick = () => {
     setActiveText(props.text);
   }
+
   const ListBox = styled.button`
     display: flex;
     gap: 0.5rem;
@@ -45,8 +46,12 @@ function List({ image, children, tailText, activeImg, activeText, setActiveText,
   );
 }
 
-export default function SideMenuBar({showMenu}) {
+export default function SideMenuBar({showMenu, setShowMenu}) {
   const [activeButton, setActiveButton] = useState(null);
+
+  const closeMenuHandler = () => {
+    setShowMenu(false);
+  }
 
   const activeButtonHandler = (text) => {
     setActiveButton(text);
@@ -54,7 +59,7 @@ export default function SideMenuBar({showMenu}) {
 
   return (
     <div className={showMenu ? "menuBarContainer" : "hideMenuBarContainer"}>
-      <div className="menuBox">
+      <div className="menuBox" onClick={closeMenuHandler}>
         <img src={Menubar} />
         <p className="menuText">메뉴</p>
       </div>

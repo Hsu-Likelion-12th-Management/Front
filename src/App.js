@@ -13,6 +13,7 @@ import Question from './qna/question';
 import Login from './login/login';
 import Qnalist from './qna/qnalist';
 import EleventhProject from './eleventhproject/eleventhproject';
+import { useState } from 'react';
 
 const Wrapper = styled.div`
   margin: 0 auto;
@@ -30,12 +31,24 @@ const Wrapper = styled.div`
   }
 `;
 
+const Overlay = styled.div`
+  display: ${(props) => (props.showMenu ? "block" : "none")};
+  position: fixed; 
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+`;
+
+
 function App() {
+  const [showMenu, setShowMenu] = useState(false);
+
   return (
     <Router>
       <GlobalStyle />
-      <Wrapper>
-        <Header />
+      <Overlay showMenu={showMenu} />
+      <Wrapper showMenu={showMenu}>
+        <Header showMenu={showMenu} setShowMenu={setShowMenu} />
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/Activity" element={<Activity />} />
