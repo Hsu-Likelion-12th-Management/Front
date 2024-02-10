@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import "./menubar.css";
 import Menubar from "../images/menubar.png";
 import smallLogo from "../images/smallLogo.svg";
@@ -13,6 +14,7 @@ import whitePencil from "../images/whitePencil.svg";
 import hsuLogo from "../images/grayHsuLogo.svg";
 import styled from "styled-components";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const ListContainer = styled.div`
   display: flex;
@@ -20,10 +22,13 @@ const ListContainer = styled.div`
   gap: 1.5rem;
 `;
 
-function List({ image, activeImg, activeText, setActiveText, text}) {
+function List({ image, activeImg, activeText, setActiveText, text, path}) {
+
+  let navigate = useNavigate();
 
   const handleClick = () => {
     setActiveText(text);
+    navigate(path);
   }
 
   return (
@@ -35,6 +40,7 @@ function List({ image, activeImg, activeText, setActiveText, text}) {
 }
 
 export default function SideMenuBar({showMenu, setShowMenu}) {
+
   const [activeButton, setActiveButton] = useState(null);
 
   const closeMenuHandler = () => {
@@ -53,16 +59,16 @@ export default function SideMenuBar({showMenu, setShowMenu}) {
       </div>
       <ListContainer>
         <List image={smallLogo} activeImg={whiteLogo} text="멋사란?" activeText={activeButton === "멋사란?"} setActiveText={activeButtonHandler} />
-        <List image={grayNote} activeImg={whiteNote} text="활동 소개" activeText={activeButton === "활동 소개"} setActiveText={activeButtonHandler} />
+        <List image={grayNote} activeImg={whiteNote} text="활동 소개" activeText={activeButton === "활동 소개"} setActiveText={activeButtonHandler} path="/activity" />
         <div>
-          <List image={Monitor} activeImg={whiteMonitor} text="프로젝트" activeText={activeButton === "프로젝트"} setActiveText={activeButtonHandler} />
+          <List image={Monitor} activeImg={whiteMonitor} text="프로젝트" activeText={activeButton === "프로젝트"} setActiveText={activeButtonHandler} path="/Project" />
           <div className="tailTextBox">
-            <button>11기</button>
-            <button>12기</button>
+            <Link to="/Project11"><button>11기</button></Link>
+            <Link to="/Project12"><button>12기</button></Link>
           </div>
         </div>
-        <List image={chats} activeImg={whiteChats} text="Q&A" activeText={activeButton === "Q&A"} setActiveText={activeButtonHandler} />
-        <List image={apply} activeImg={whitePencil} text="지원하기" activeText={activeButton === "지원하기"} setActiveText={activeButtonHandler} />
+        <List image={chats} activeImg={whiteChats} text="Q&A" activeText={activeButton === "Q&A"} setActiveText={activeButtonHandler} path="/Qnalist" />
+        <List image={apply} activeImg={whitePencil} text="지원하기" activeText={activeButton === "지원하기"} setActiveText={activeButtonHandler} path="/Apply "/>
       </ListContainer>
       <img src={hsuLogo} alt="hsuLogo" style={{marginTop: "26rem", marginLeft: "1.25rem" }} />
     </div>
