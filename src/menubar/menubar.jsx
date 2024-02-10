@@ -5,7 +5,7 @@ import whiteLogo from "../images/whiteLogo.svg";
 import whiteNote from "../images/whiteNote.svg";
 import grayNote from "../images/grayNote.svg";
 import Moniter from "../images/Monitor.svg";
-import whiteMoniter from "../images/whiteMonitor.svg";
+import whiteMonitor from "../images/whiteMonitor.svg";
 import chats from "../images/Chats.svg";
 import whiteChats from "../images/whiteChats.svg";
 import apply from "../images/PencilSimpleLine.svg";
@@ -19,13 +19,8 @@ const ListContainer = styled.div`
   flex-direction: column;
   gap: 1.5rem;
 `;
-function List({ image, children, tailText, activeImg, activeText, setActiveText, ...props }) {
 
-  const handleClick = () => {
-    setActiveText(props.text);
-  }
-
-  const ListBox = styled.button`
+const ListBox = styled.button`
     display: flex;
     gap: 0.5rem;
     margin-left: 1.25rem;
@@ -35,8 +30,14 @@ function List({ image, children, tailText, activeImg, activeText, setActiveText,
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-    color: ${activeText ? "var(--White, #fff)" : "var(--Gray2, #7f85a3)"};
+    color: ${(props) => props.activeText ? "var(--White, #fff)" : "var(--Gray2, #7f85a3)"};
   `;
+
+function List({ image, children, tailText, activeImg, activeText, setActiveText, ...props }) {
+
+  const handleClick = () => {
+    setActiveText(props.text);
+  }
 
   return (
     <ListBox onClick={handleClick} >
@@ -67,7 +68,7 @@ export default function SideMenuBar({showMenu, setShowMenu}) {
         <List image={smallLogo} activeImg={whiteLogo} text="멋사란?" activeText={activeButton === "멋사란?"} setActiveText={activeButtonHandler} />
         <List image={grayNote} activeImg={whiteNote} text="활동 소개" activeText={activeButton === "활동 소개"} setActiveText={activeButtonHandler} />
         <div>
-          <List image={Moniter} activeImg={whiteMoniter} text="프로젝트" activeText={activeButton === "프로젝트"} setActiveText={activeButtonHandler} tailText={true} />
+          <List image={Moniter} activeImg={whiteMonitor} text="프로젝트" activeText={activeButton === "프로젝트"} setActiveText={activeButtonHandler} tailText={true} />
           <div className="tailTextBox">
             <button>11기</button>
             <button>12기</button>
