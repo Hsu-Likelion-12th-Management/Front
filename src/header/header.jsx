@@ -25,8 +25,7 @@ const HeaderP = styled.p`
   color: ${(props) => props.color || 'white'};
 `;
 
-function Header() {
-  const [showMenu, setShowMenu] = useState(false);
+function Header({showMenu, setShowMenu}) {
 
   const showMenuHandler = () => {
     setShowMenu(!showMenu);
@@ -34,7 +33,7 @@ function Header() {
 
   return (
     <>
-      <HeaderContainer>
+      <HeaderContainer showMenu={showMenu}>
         <button onClick={showMenuHandler}>
           <img
             src={Menubar}
