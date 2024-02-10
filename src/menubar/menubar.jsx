@@ -58,7 +58,7 @@ export default function SideMenuBar({showMenu, setShowMenu}) {
         <p className="menuText">메뉴</p>
       </div>
       <ListContainer>
-        <List image={smallLogo} activeImg={whiteLogo} text="멋사란?" activeText={activeButton === "멋사란?"} setActiveText={activeButtonHandler} />
+        <List image={smallLogo} activeImg={whiteLogo} text="멋사란?" activeText={activeButton === "멋사란?"} setActiveText={activeButtonHandler} path="/" />
         <List image={grayNote} activeImg={whiteNote} text="활동 소개" activeText={activeButton === "활동 소개"} setActiveText={activeButtonHandler} path="/activity" />
         <div>
           <List image={Monitor} activeImg={whiteMonitor} text="프로젝트" activeText={activeButton === "프로젝트"} setActiveText={activeButtonHandler} path="/Project" />
