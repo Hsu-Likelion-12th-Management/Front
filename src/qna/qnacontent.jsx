@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import Hsulogo from '../images/hsulogo.png';
 import Footer from '../footer/footer';
 import GrayCircle from '../images/graycircle.png';
+import Edit from '../images/editpencil.png';
 
 const IntroContainer = styled.div`
   width: 100%;
@@ -41,7 +42,6 @@ const Graycircle = styled.img`
 
 const ItemContent = styled.span`
   color: var(--White, #fff);
-
   /* body/body_medium_14 */
   font-family: Pretendard;
   font-size: 14px;
@@ -185,6 +185,21 @@ const AnswerText = styled.p`
   line-height: 170%;
 `;
 
+const ContentFlexContainer = styled.div`
+  display: flex; // Stack children vertically
+  justify-content: space-between;
+  padding-right: 14px;
+  padding-bottom: 12px;
+  height: 100%;
+`;
+
+const EditIcon = styled.img`
+  width: 20px; // Set your desired width
+  height: 20px; // Set your desired height
+  margin-top: auto; // Push the icon to the bottom
+  align-self: flex-end; // Align the icon to the right
+`;
+
 function Qnacontent() {
   const contents = [
     {
@@ -230,9 +245,10 @@ function Qnacontent() {
         </Rowcontainer>
         <ContentField>
           {contents.map((content, index) => (
-            <div key={index}>
+            <ContentFlexContainer key={index}>
               <div>{renderTextWithLineBreaks(content.question)}</div>
-            </div>
+              <EditIcon src={Edit} alt="수정" />
+            </ContentFlexContainer>
           ))}
         </ContentField>
       </Contentcontainer>
