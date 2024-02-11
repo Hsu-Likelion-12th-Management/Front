@@ -1,0 +1,67 @@
+.bgContainer {
+  width: 17.5rem;
+  height: 19.5625rem;
+  flex-shrink: 0;
+  border-radius: 0.5rem;
+  background: var(--White, #FFF);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 50;
+}
+
+.closeImg {
+  position: absolute;
+  top: 0.63rem;
+  right: 0.63rem;
+}
+
+.ivText {
+  color: var(--Black, #0F1015);
+  font-family: Pretendard;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin-top: 1.75rem;
+}
+
+.inputContainer {
+  margin-top: 2.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.inputContainer input {
+  width: 15rem;
+  height: 2.5rem;
+  flex-shrink: 0;
+  border-radius: 0.25rem;
+  background: #F0F1F9;
+  padding-left: 0.81rem;
+}
+.inputContainer input::placeholder {
+  color: var(--Gray1, #BFC4D8);
+  font-family: Pretendard;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.confirmButton {
+  margin-top: 3.88rem;
+  width: 6.25rem;
+  height: 2.5rem;
+  flex-shrink: 0;
+  border-radius: 0.25rem;
+  background: var(--Gray5, #2A2A3A);
+  color: var(--White, #FFF);
+  font-family: Pretendard;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
