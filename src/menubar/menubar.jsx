@@ -63,7 +63,7 @@ export default function SideMenuBar({showMenu, setShowMenu}) {
         <div>
           <List image={Monitor} activeImg={whiteMonitor} text="프로젝트" activeText={activeButton === "프로젝트"} setActiveText={activeButtonHandler} path="/Project" />
           <div className="tailTextBox">
-            <Link to="/Project11"><button>11기</button></Link>
+            <Link to="/eleven"><button>11기</button></Link>
             <Link to="/Project12"><button>12기</button></Link>
           </div>
         </div>

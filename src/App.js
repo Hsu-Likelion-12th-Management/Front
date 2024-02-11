@@ -19,6 +19,7 @@ import Login from "./login/login";
 import Qnalist from "./qna/qnalist";
 import Qnacontent from "./qna/qnacontent";
 import EleventhProject from "./eleventhproject/eleventhproject";
+import Overlay from "./overlay/Overlay";
 import { useState, useEffect } from "react";
 
 const Wrapper = styled.div`
@@ -35,14 +36,6 @@ const Wrapper = styled.div`
   @media (max-width: 428px) {
     min-width: 60%;
   }
-`;
-
-const Overlay = styled.div`
-  display: ${(props) => (props.showMenu ? "block" : "none")};
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.4);
-  z-index: 1;
 `;
 
 const LocationWatcher = ({ setShowMenu }) => {
