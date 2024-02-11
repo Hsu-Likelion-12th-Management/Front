@@ -1,7 +1,7 @@
-import "./App.css";
-import styled from "styled-components";
-import { GlobalStyle } from "./style/globalStyle";
-import Main from "./main/main";
+import './App.css';
+import styled from 'styled-components';
+import { GlobalStyle } from './style/globalStyle';
+import Main from './main/main';
 import {
   BrowserRouter as Router,
   Routes,
@@ -22,6 +22,7 @@ import EleventhProject from "./eleventhproject/eleventhproject";
 import Overlay from "./overlay/Overlay";
 import { useState, useEffect } from "react";
 
+
 const Wrapper = styled.div`
   margin: 0 auto;
   width: 100%;
@@ -38,6 +39,16 @@ const Wrapper = styled.div`
   }
 `;
 
+
+const Overlay = styled.div`
+  display: ${(props) => (props.showMenu ? 'block' : 'none')};
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+`;
+
+
 const LocationWatcher = ({ setShowMenu }) => {
   let location = useLocation();
   useEffect(() => {
@@ -45,10 +56,16 @@ const LocationWatcher = ({ setShowMenu }) => {
   }, [location]);
 
   return null;
-}
+};
 
 function App() {
   const [showMenu, setShowMenu] = useState(false);
+
+  const [questions, setQuestions] = useState([]);
+
+  const addQuestion = (question) => {
+    setQuestions([...questions, question]);
+  };
 
   return (
     <Router>
@@ -63,9 +80,12 @@ function App() {
           <Route path="/Project11" element={<Project11 />} />
           <Route path="/Project12" element={<Project12 />} />
           <Route path="/Apply" element={<Apply />} />
-          <Route path="/Question" element={<Question />} />
+          <Route
+            path="/Question"
+            element={<Question addQuestion={addQuestion} />}
+          />
           <Route path="/Login" element={<Login />} />
-          <Route path="/Qnalist" element={<Qnalist />} />
+          <Route path="/Qnalist" element={<Qnalist questions={questions} />} />
           <Route path="/Qnacontent" element={<Qnacontent />} />
           <Route path="/Eleven" element={<EleventhProject />} />
         </Routes>
