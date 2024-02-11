@@ -10,7 +10,11 @@ import ImgBanner from "../projectComponents/ImgBanner";
 import life from "../images/life.png";
 import happiness from "../images/happiness.png";
 import moah from "../images/moah.png";
+import lisa from "../images/prj4.PNG";
+import book from "../images/prj5.PNG";
+import bear from "../images/prj6.PNG";
 import Footer from "../footer/footer";
+import { useState } from "react";
 
 const TitleText = styled.p`
   margin-top: 3.75rem;
@@ -41,6 +45,12 @@ const MoreButton = styled.button`
 
 function Project() {
   const projectImg = [life, happiness, moah];
+  const moreProjectImg = [bear, book, lisa];
+  const [moreImg, setMoreImg] = useState(false);
+
+  const moreContentHandler = () => {
+    setMoreImg(true);
+  };
 
   return (
     <>
@@ -70,14 +80,45 @@ function Project() {
 
       <TitleText>11기</TitleText>
 
-      <div className="projectBg">
+      <div className={moreImg ? "moreProjectBg" : "projectBg"}>
         {projectImg.map((image, index) => {
           return <img src={image} key={index} alt={`이미지[${index}]`} />;
         })}
+        {moreImg &&
+          moreProjectImg.map((image, index) => {
+            return (
+              <img
+                src={image}
+                key={index}
+                alt={`이미지[${index}]`}
+                style={{ width: "20.75rem", height: "11.625rem" }}
+              />
+            );
+          })}
       </div>
+      {/* {moreImg && (
+        <div className="moreProjectBg">
+          {moreProjectImg.map((image, index) => {
+            return (
+              <img
+                src={image}
+                key={index}
+                alt={`이미지[${index}]`}
+                style={{ width: "20.75rem", height: "11.625rem" }}
+              />
+            );
+          })}
+        </div>
+      )} */}
 
-      <div style={{ marginTop: "1rem", marginBottom: "5rem", position: "relative" }}>
-        <MoreButton>더보기</MoreButton>
+      <div
+        style={{
+          marginTop: "1rem",
+          marginBottom: "5rem",
+          position: "relative",
+        }}
+      >
+        <MoreButton onClick={moreContentHandler}>더보기</MoreButton>
       </div>
 
       <Footer></Footer>

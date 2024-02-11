@@ -86,3 +86,15 @@
   align-items: center;
   gap: 2rem;
 }
+
+.moreProjectBg {
+  height: 85rem;
+  flex-shrink: 0;
+  background: var(--Gray6, #191B24);
+  margin-top: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
