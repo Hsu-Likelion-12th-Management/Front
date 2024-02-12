@@ -66,7 +66,7 @@ function App() {
 
   const closeShowMenu = () => {
     setShowMenu(false);
-  }
+  };
 
   return (
     <Router>
@@ -87,7 +87,10 @@ function App() {
           />
           <Route path="/Login" element={<Login />} />
           <Route path="/Qnalist" element={<Qnalist questions={questions} />} />
-          <Route path="/Qnacontent" element={<Qnacontent />} />
+          <Route
+            path="/Qnacontent/:id"
+            element={<Qnacontent questions={questions} />}
+          />
           <Route path="/Eleven" element={<EleventhProject />} />
         </Routes>
         <LocationWatcher setShowMenu={setShowMenu} />

@@ -218,19 +218,23 @@ function Qnalist({ questions }) {
       </AskContainer>
       <QuestionListContainer>
         {questions.map((question) => (
-          <QuestionItem key={question.id}>
-            <AuthorContainer>
-              <Graycircle
-                src={GrayCircle}
-                alt="Gray Circle"
-                style={{ marginRight: '7px' }}
-              />
-              <ItemContent>{question.author}</ItemContent>
-            </AuthorContainer>
-            <ItemContent>{question.content}</ItemContent>
-            <ItemContent>{question.date}</ItemContent>
-            <Reply status={question.status}>{question.status}</Reply>
-          </QuestionItem>
+          <div key={question.id}>
+            <Link to={`/Qnacontent/${question.id}`}>
+              <QuestionItem>
+                <AuthorContainer>
+                  <Graycircle
+                    src={GrayCircle}
+                    alt="Gray Circle"
+                    style={{ marginRight: '7px' }}
+                  />
+                  <ItemContent>{question.author}</ItemContent>
+                </AuthorContainer>
+                <ItemContent>{question.title}</ItemContent>
+                <ItemContent>{question.date}</ItemContent>
+                <Reply status={question.status}>{question.status}</Reply>
+              </QuestionItem>
+            </Link>
+          </div>
         ))}
       </QuestionListContainer>
 
