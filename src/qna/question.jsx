@@ -139,7 +139,8 @@ function Question({ addQuestion }) {
     const newQuestion = {
       id: Date.now(), // ID 생성
       author: name, // 이름
-      content: title, //제목
+      title: title, //제목
+      content: content,
       date: new Date().toLocaleDateString(), // 현재 날짜
       status: '답변 중',
     };
