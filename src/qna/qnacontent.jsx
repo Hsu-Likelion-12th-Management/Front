@@ -3,6 +3,9 @@ import Hsulogo from '../images/hsulogo.png';
 import Footer from '../footer/footer';
 import GrayCircle from '../images/graycircle.png';
 import Edit from '../images/editpencil.png';
+import { useState } from 'react';
+import IdentityVerification from '../IdentityVerification/IdentityVerification';
+import Overlay from '../overlay/Overlay';
 
 const IntroContainer = styled.div`
   width: 100%;
@@ -198,6 +201,7 @@ const EditIcon = styled.img`
   height: 20px; // Set your desired height
   margin-top: auto; // Push the icon to the bottom
   align-self: flex-end; // Align the icon to the right
+  cursor: pointer;
 `;
 
 function Qnacontent() {
@@ -225,6 +229,16 @@ function Qnacontent() {
       .map((line, index) => <AnswerText key={index}>{line}</AnswerText>);
   };
 
+  const [showIV, setShowIV] = useState(false);
+
+  const showIVHandler = () => {
+    setShowIV(true);
+  }
+
+  const closeIVHandler = () => {
+    setShowIV(false);
+  }
+
   return (
     <>
       <IntroContainer>
@@ -233,6 +247,9 @@ function Qnacontent() {
           <IntroP>Q&A</IntroP>
         </InContainer>
       </IntroContainer>
+
+      {showIV && <IdentityVerification closeIVHandler={closeIVHandler}/>}
+      {showIV && <Overlay showIV={showIV} />}
 
       <Contentcontainer>
         <AuthorContainer>
@@ -247,7 +264,7 @@ function Qnacontent() {
           {contents.map((content, index) => (
             <ContentFlexContainer key={index}>
               <div>{renderTextWithLineBreaks(content.question)}</div>
-              <EditIcon src={Edit} alt="수정" />
+              <EditIcon src={Edit} alt="수정" onClick={showIVHandler}/>
             </ContentFlexContainer>
           ))}
         </ContentField>

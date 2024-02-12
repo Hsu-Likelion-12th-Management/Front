@@ -64,10 +64,14 @@ function App() {
     setQuestions([...questions, question]);
   };
 
+  const closeShowMenu = () => {
+    setShowMenu(false);
+  }
+
   return (
     <Router>
       <GlobalStyle />
-      <Overlay showMenu={showMenu} onClick={() => setShowMenu(false)} />
+      <Overlay showMenu={showMenu} closeShowMenu={closeShowMenu} />
       <Wrapper>
         <Header showMenu={showMenu} setShowMenu={setShowMenu} />
         <Routes>
