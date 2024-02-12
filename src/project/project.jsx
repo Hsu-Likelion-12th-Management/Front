@@ -91,25 +91,11 @@ function Project() {
                 src={image}
                 key={index}
                 alt={`이미지[${index}]`}
-                style={{ width: "20.75rem", height: "11.625rem" }}
+                style={{ width: "20.75rem", height: "11.625rem", borderRadius: "0.5rem" }}
               />
             );
           })}
       </div>
-      {/* {moreImg && (
-        <div className="moreProjectBg">
-          {moreProjectImg.map((image, index) => {
-            return (
-              <img
-                src={image}
-                key={index}
-                alt={`이미지[${index}]`}
-                style={{ width: "20.75rem", height: "11.625rem" }}
-              />
-            );
-          })}
-        </div>
-      )} */}
 
       <div
         style={{
