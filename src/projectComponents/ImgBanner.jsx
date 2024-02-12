@@ -31,7 +31,7 @@ export default function ImgBanner() {
         </button>
       </div>
       <div className="bannerImg">
-        <img src={projectImg[currentIndex]} alt="life" style={{ width: "20.75rem", height: "11.625rem" }}/>
+        <img src={projectImg[currentIndex]} alt="life" style={{ width: "20.75rem", height: "11.625rem", borderRadius: "0.5rem" }}/>
       </div>
       <div className="buttonBox">
         <button className="rigthButton" onClick={moveRight}>
