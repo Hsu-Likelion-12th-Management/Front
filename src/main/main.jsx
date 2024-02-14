@@ -1,3 +1,4 @@
+import styled from 'styled-components';
 import lionImg from '../images/lion.png';
 import arrow from '../images/ArrowsClockwise.svg';
 import building from '../images/Buildings.svg';
@@ -8,17 +9,6 @@ import HansungLion from './hansunglion';
 import ActivityMain from './activitymain';
 
 function Main() {
-
-  const wrapper={
-    margin: '0 auto',
-    width: '100%',
-    minHeight: '100vh',
-    display: 'flex',
-    flexDirection: 'column',
-    minWidth: '428px',
-    backgroundColor: 'black',
-    position: 'relative'
-  }
 
   const logoStyle = {
     width: '93px',
@@ -31,124 +21,161 @@ function Main() {
     marginLeft: '20px'
   }
 
-  const titleStyle={
-    color:'#FF7710',
-    fontFamily: 'Pretendard',
-    fontSize: '20px',
-    fontStyle: 'normal',
-    fontWeight: '700',
-    lineHeight: 'normal',
-    marginTop : '24px',
-    marginLeft: '20px'
-  }
+  const Title = styled.div`
+  color: #FF7710;
+  font-family: Pretendard;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin-top: 24px;
+  margin-left: 20px;
 
-  const explainStyle={
-    color: '#7F85A3',
-    fontFamily: 'Pretendard',
-    fontSize: '15px',
-    fontStyle: 'normal',
-    fontWeight: '500',
-    lineHeight: '170%',
-    marginTop : '16px',
-    marginLeft:'20px'
+  @media (max-width: 428px) {
+    font-size: 17px;
+    margin-left: 15px;
   }
+`;
 
-  const arrowStyle={
-    width: '24px',
-    height: '24px',
-    flexShrink : '0',
-    marginRight: '9px',
-    
+const Explain = styled.div`
+color: #7F85A3;
+font-family: Pretendard;
+font-size: 15px;
+font-style: normal;
+font-weight: 500;
+line-height: 170%;
+margin-top: 16px;
+margin-left: 20px;
+
+@media (max-width: 428px) {
+  font-size: 13px;
+  margin-left:15px;
+}
+`;
+
+const Arrow = styled.img`
+width: 24px;
+height: 24px;
+flex-shrink: 0;
+margin-right: 9px;
+
+@media (max-width: 428px) {
+  width: 20px;
+  height: 20px;
+}
+`;
+
+
+  const StateExplain = styled.div`
+  color: #FFF;
+  font-family: Pretendard;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+
+  @media (max-width: 428px) {
+    font-size: 12px;
   }
+`;
 
-  const stateExplainStyle={
-    color: '#FFF',
-    fontFamily: 'Pretendard',
-    fontSize: '15px',
-    fontStyle: 'normal',
-    fontWeight: '700',
-    lineHeight: 'normal',
+const NowExplain = styled.p`
+color: #BFC4D8;
+font-family: Pretendard;
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+margin-top: 13px;
+
+@media (max-width: 428px) {
+  font-size: 12px;
+}
+`;
+
+
+  const ExplainContainer = styled.div`
+  width: 124px;
+  height: 84px;
+  flex-shrink: 0;
+  border-radius: 6px;
+  background: #191B24;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 428px) {
+    width: 100px;
+    height: 75px;
+    background: #191B24;
   }
-
-  const nowExplainStyle={
-    color: '#BFC4D8',
-    fontFamily: 'Pretendard',
-    fontSize : '14px',
-    fontStyle: 'normal',
-    fontWeight: '500',
-    lineHeight: 'normal',
-    marginTop : '13px'
-
-  }
-
-  const explainContainerStyle={
-    width: '124px',
-    height: '84px',
-    flexShrink: '0',
-    borderRadius: '6px',
-    background: '#191B24',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center'
-    
-  }
+`;
 
   const firstLineContainerStyle={
     display:'flex',
     alignItems:'center'
   }
 
-  const stateContainerStyle={
-    display:'flex',
-    marginTop : '24px',
-    gap: '18px',
-    marginLeft: '20px'
-    
-  }
+  const StateContainer=styled.div`
+    display:flex;
+    margin-top : 24px;
+    gap: 18px;
+    margin-left: 20px;
 
-  const extraStyle={
-    color: '#484A64',
-    fontFamily: 'Pretendard',
-    fontSize: '12px',
-    fontStyle: 'normal',
-    fontWeight: '500',
-    lineHeight: 'normal',
-    marginTop: '8px',
-    marginLeft: '20px',
-    marginBottom:'40px'
-  }
+    @media (max-width: 428px) {
+      margin-left: 15px;
+      gap:10px;
+
+    }
+    `;
+
+  const Extra=styled.div`
+    color: #484A64;
+    font-family: Pretendard;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-top: 8px;
+    margin-left: 20px;
+    margin-bottom:40px;
+    
+    @media (max-width: 428px) {
+      margin-left:15px;
+    }
+    `;
 
   return <>
     <div style = {logoContainer}>
       <img src={lionImg} style={logoStyle}/>
     </div>
 
-    <div style={titleStyle}>“내 아이디어를 내 손으로 실현하자!”</div>
+    <Title>“내 아이디어를 내 손으로 실현하자!”</Title>
 
-    <div style={explainStyle}>
+    <Explain>
     멋쟁이사자처럼 대학 [LIKELION UNIV]은<br/> 
     2013년 서울대학교 1기로 시작해 <br/>
     현재 총 61개 대학, 약 2,000여명이 활동하고 있는<br/> 
     전국 최대 규모 IT 연합 창업 동아리입니다.<br/>
-    </div>
+    </Explain>
 
-    <div style={stateContainerStyle}>
-      <div style={explainContainerStyle}>
-        <div style={firstLineContainerStyle}><img src={arrow} style={arrowStyle}/><span style={stateExplainStyle}>운영 상태</span></div>
-        <p style={nowExplainStyle}>11기 운영 종료</p>
-      </div>
-      <div style={explainContainerStyle}>
-        <div style={firstLineContainerStyle}><img src={building} style={arrowStyle}/><span style={stateExplainStyle}>대학 수</span></div>
-        <p style={nowExplainStyle}>총 61개 대학</p>
-      </div>
-      <div style={explainContainerStyle}>
-        <div style={firstLineContainerStyle}><img src={user} style={arrowStyle}/><span style={stateExplainStyle}>구성원 수</span></div>
-        <p style={nowExplainStyle}>약 2,000여명</p>
-      </div>
-    </div>
+    <StateContainer>
+      <ExplainContainer>
+        <div style={firstLineContainerStyle}><Arrow src={arrow}/><StateExplain>운영 상태</StateExplain></div>
+        <NowExplain>11기 운영 종료</NowExplain>
+      </ExplainContainer>
+      <ExplainContainer>
+        <div style={firstLineContainerStyle}><Arrow src={building}/><StateExplain>대학 수</StateExplain></div>
+        <NowExplain>총 61개 대학</NowExplain>
+      </ExplainContainer>
+      <ExplainContainer>
+        <div style={firstLineContainerStyle}><Arrow src={user}/><StateExplain>구성원 수</StateExplain></div>
+        <NowExplain>약 2,000여명</NowExplain>
+      </ExplainContainer>
+    </StateContainer>
 
-    <div style={extraStyle}>&#40;2023년 11기 기준&#41;</div>
+    <Extra>&#40;2023년 11기 기준&#41;</Extra>
 
     <div><Roadmap/></div>
     <div><HansungLion/></div>
