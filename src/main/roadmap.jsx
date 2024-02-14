@@ -1,3 +1,4 @@
+import styled from 'styled-components';
 import logo1 from '../images/logo1.png';
 import logo2 from '../images/logo2.png';
 import logo3 from '../images/logo3.png';
@@ -6,12 +7,16 @@ import logo5 from '../images/logo5.png';
 
 function Roadmap(){
 
-    const containerStyle={
-        background: '#191B24',
-        height: '300px',
-        flexShrink: '0',
-        paddingTop:'40px'
-    }
+    const Container=styled.div`
+        background: #191B24;
+        height: 300px;
+        flex-shrink: 0;
+        padding-top: 40px;
+        @media (max-width: 428px) {
+            height:250px;
+            padding-top: 30px;
+        }
+        `;
 
     const titleStyle={
         marginLeft: '20px',
@@ -35,20 +40,23 @@ function Roadmap(){
         marginTop:'14.1px'
     }
 
-    const likelionStyle={
-        color: '#7F85A3',
-        fontFamily: 'Pretendard',
-        fontSize: '15px',
-        fontStyle: 'normal',
-        fontWeight: '500',
-        lineHeight: '170%',
-        marginTop:'24px',
-        marginLeft: '20px'
-    }
+    const LikeLion=styled.div`
+        color: #7F85A3;
+        font-family: Pretendard;
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 170%;
+        margin-top:24px;
+        margin-left: 20px;
+        @media (max-width: 428px) {
+            font-size: 12px;
+        }
+        `;
 
     return(
         <>
-            <div style={containerStyle}>
+            <Container>
                 <div style={titleStyle}>멋쟁이 사자처럼의 흔적</div>
                 <div style={logoContainerStyle}>
                 <img src={logo1} style={logoStyle}/>
@@ -57,10 +65,12 @@ function Roadmap(){
                 <img src={logo4} style={logoStyle}/>
                 <img src={logo5} style={logoStyle}/>
                 </div>
-                <div style={likelionStyle}>비프로일레븐, 자소설닷컴, 탈잉, 코로나 알리미, 메르스맵 등 <br/>
+                <LikeLion>
+                    비프로일레븐, 자소설닷컴, 탈잉, 코로나 알리미, 메르스맵 등 <br/>
                     다양한 분야 서비스 창업의 발판이 되었던 국내 유일무이 <br/>
-                    대학생 연합이기도 합니다!</div>
-            </div>
+                    대학생 연합이기도 합니다!
+                </LikeLion>
+            </Container>
         </>
     );
 }

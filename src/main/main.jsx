@@ -33,7 +33,6 @@ function Main() {
 
   @media (max-width: 428px) {
     font-size: 17px;
-    margin-left: 15px;
   }
 `;
 
@@ -49,7 +48,6 @@ margin-left: 20px;
 
 @media (max-width: 428px) {
   font-size: 13px;
-  margin-left:15px;
 }
 `;
 
@@ -122,9 +120,7 @@ margin-top: 13px;
     margin-top : 24px;
     gap: 18px;
     margin-left: 20px;
-
     @media (max-width: 428px) {
-      margin-left: 15px;
       gap:10px;
 
     }
@@ -140,10 +136,7 @@ margin-top: 13px;
     margin-top: 8px;
     margin-left: 20px;
     margin-bottom:40px;
-    
-    @media (max-width: 428px) {
-      margin-left:15px;
-    }
+
     `;
 
   return <>
