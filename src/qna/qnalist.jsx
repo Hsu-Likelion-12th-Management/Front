@@ -4,6 +4,7 @@ import Footer from '../footer/footer';
 import GrayCircle from '../images/graycircle.png';
 import React from 'react';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const QuestionContainer = styled.div`
   width: 100%;
@@ -62,26 +63,6 @@ const AskP = styled.p`
   }
 `;
 
-const QuesButton = styled.button`
-  width: 22%;
-  height: 35px;
-  flex-shrink: 0;
-  border-radius: 4px;
-  background: var(--Sub-color, #ff7710);
-  color: var(--White, #fff);
-  text-align: center;
-
-  font-family: Pretendard;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-
-  @media (max-width: 428px) {
-    font-size: 14px;
-  }
-`;
-
 const Pcontainer = styled.p`
   display: flex;
   flex-direction: row;
@@ -99,12 +80,17 @@ const QuestionItem = styled.div`
   align-items: center;
   padding: 10px;
   border-top: 1px solid #484a64;
+
+  &:last-child {
+    border-bottom: 1px solid #484a64;
+  }
 `;
 
 const AuthorContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 7px;
+  width: 30%;
 `;
 
 const Graycircle = styled.img`
@@ -113,14 +99,17 @@ const Graycircle = styled.img`
 `;
 
 const ItemContent = styled.span`
+  display: flex; // flex 컨테이너로 설정
+  justify-content: center; // 수평 가운데 정렬
+  align-items: center; // 수직 가운데 정렬
   color: var(--White, #fff);
-
-  /* body/body_medium_14 */
   font-family: Pretendard;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+  white-space: nowrap;
+  width: 35%;
 `;
 
 const Reply = styled.div`
@@ -145,6 +134,7 @@ const Reply = styled.div`
     props.status === '답변 중'
       ? 'var(--Sub-color, #FF7710)'
       : 'var(--Gray2, #7f85a3)'};
+  margin-left: auto; // 답변 상태를 오른쪽으로 정렬
 `;
 
 const PaginationContainer = styled.div`
@@ -180,68 +170,33 @@ function handlePageClick(number) {
   console.log(`Page ${number} clicked`);
 }
 
-function Qnalist() {
+const StyledLink = styled(Link)`
+  width: 22%;
+  height: 35px;
+  flex-shrink: 0;
+  border-radius: 4px;
+  background: var(--Sub-color, #ff7710);
+  color: var(--White, #fff);
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+
+  @media (max-width: 428px) {
+    font-size: 14px;
+  }
+`;
+
+function Qnalist({ questions }) {
   const [currentPage, setCurrentPage] = useState(1);
   const pageNumbers = [1, 2, 3];
-
-  const questions = [
-    {
-      id: 1,
-      author: '익명',
-      content: '모집 관련 질문입니다.',
-      date: '2024.01.29',
-      status: '답변완료',
-    },
-    {
-      id: 2,
-      author: '익명',
-      content: '모집 관련 질문입니다.',
-      date: '2024.01.29',
-      status: '답변 중',
-    },
-    {
-      id: 3,
-      author: '익명',
-      content: '모집 관련 질문입니다.',
-      date: '2024.01.29',
-      status: '답변완료',
-    },
-    {
-      id: 4,
-      author: '익명',
-      content: '모집 관련 질문입니다.',
-      date: '2024.01.29',
-      status: '답변 중',
-    },
-    {
-      id: 5,
-      author: '익명',
-      content: '모집 관련 질문입니다.',
-      date: '2024.01.29',
-      status: '답변완료',
-    },
-    {
-      id: 6,
-      author: '익명',
-      content: '모집 관련 질문입니다.',
-      date: '2024.01.29',
-      status: '답변 중',
-    },
-    {
-      id: 7,
-      author: '익명',
-      content: '모집 관련 질문입니다.',
-      date: '2024.01.29',
-      status: '답변 중',
-    },
-    {
-      id: 8,
-      author: '익명',
-      content: '모집 관련 질문입니다.',
-      date: '2024.01.29',
-      status: '답변완료',
-    },
-  ];
 
   return (
     <>
@@ -259,19 +214,27 @@ function Qnalist() {
             <span>무엇이든 물어보세요!</span>
           </AskP>
         </Pcontainer>
-        <QuesButton>질문하기</QuesButton>
+        <StyledLink to="/question">질문하기</StyledLink>
       </AskContainer>
       <QuestionListContainer>
         {questions.map((question) => (
-          <QuestionItem key={question.id}>
-            <AuthorContainer>
-              <Graycircle src={GrayCircle} alt="Gray Circle" />
-              <ItemContent>{question.author}</ItemContent>
-            </AuthorContainer>
-            <ItemContent>{question.content}</ItemContent>
-            <ItemContent>{question.date}</ItemContent>
-            <Reply status={question.status}>{question.status}</Reply>
-          </QuestionItem>
+          <div key={question.id}>
+            <Link to={`/Qnacontent/${question.id}`}>
+              <QuestionItem>
+                <AuthorContainer>
+                  <Graycircle
+                    src={GrayCircle}
+                    alt="Gray Circle"
+                    style={{ marginRight: '7px' }}
+                  />
+                  <ItemContent>{question.author}</ItemContent>
+                </AuthorContainer>
+                <ItemContent>{question.title}</ItemContent>
+                <ItemContent>{question.date}</ItemContent>
+                <Reply status={question.status}>{question.status}</Reply>
+              </QuestionItem>
+            </Link>
+          </div>
         ))}
       </QuestionListContainer>
 
@@ -279,7 +242,7 @@ function Qnalist() {
         {pageNumbers.map((number, index) => (
           <React.Fragment key={number}>
             <PageNumber
-              onClick={() => handlePageClick(number)} // 클릭 이벤트 핸들러를 설정합니다.
+              onClick={() => handlePageClick(number)}
               style={
                 currentPage === number
                   ? { color: 'var(--White, #FFF)', fontWeight: 700 }
@@ -289,7 +252,6 @@ function Qnalist() {
               {number}
             </PageNumber>
             {index < pageNumbers.length - 1 && <Divider />}{' '}
-            {/* Divider 조건부 렌더링 */}
           </React.Fragment>
         ))}
       </PaginationContainer>

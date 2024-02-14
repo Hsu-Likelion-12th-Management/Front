@@ -2,6 +2,11 @@ import styled from 'styled-components';
 import Hsulogo from '../images/hsulogo.png';
 import Footer from '../footer/footer';
 import GrayCircle from '../images/graycircle.png';
+import Edit from '../images/editpencil.png';
+import { useState } from 'react';
+import IdentityVerification from '../IdentityVerification/IdentityVerification';
+import Overlay from '../overlay/Overlay';
+import { useParams } from 'react-router-dom';
 
 const IntroContainer = styled.div`
   width: 100%;
@@ -30,6 +35,7 @@ const IntroP = styled.p`
 const AuthorContainer = styled.div`
   display: flex;
   align-items: center;
+  flex-direction: row;
   gap: 7px;
 `;
 
@@ -40,7 +46,6 @@ const Graycircle = styled.img`
 
 const ItemContent = styled.span`
   color: var(--White, #fff);
-
   /* body/body_medium_14 */
   font-family: Pretendard;
   font-size: 14px;
@@ -104,12 +109,12 @@ const Reply = styled.div`
 `;
 
 const ContentField = styled.div`
-  width: 388px;
+  width: 100%;
   height: 200px;
   flex-shrink: 0;
   border-radius: 8px;
   background: var(--Black, #0f1015);
-  padding-left: 16px;
+  padding-left: 14px;
   padding-top: 13px;
 `;
 
@@ -120,6 +125,10 @@ const StyledParagraph = styled.p`
   font-style: normal;
   font-weight: 500;
   line-height: 170%;
+
+  @media (max-width: 428px) {
+    font-size: 12px;
+  }
 `;
 
 const AnswerContainer = styled.div`
@@ -134,10 +143,12 @@ const AnswerContainer = styled.div`
 
 const AnswerField = styled.div`
   display: flex;
+  text-align: left;
   flex-direction: column;
   padding-top: 17px;
   padding-left: 16px;
-  width: 388px;
+  padding-right: 14px;
+  width: 90%;
   height: 99px;
   flex-shrink: 0;
   border-radius: 8px;
@@ -145,15 +156,58 @@ const AnswerField = styled.div`
   background: var(--Gray6, #191b24);
 `;
 
-function Qnacontent() {
-  const contents = [
-    {
-      question:
-        '안녕하세요! 아기사자가 되고 싶은 김지은입니다. 8월에 진행되는\n중앙해커톤은 다른 학교와 함께 팀을 이뤄서 참여하는건가요?\n감사합니다!',
-      answer:
-        '안녕하세요 :) 아니요! 중앙해커톤은 학교 내 멋사들과\n팀을 이뤄서 참가합니다!',
-    },
-  ];
+const Minutes = styled.p`
+  color: var(--Gray3, #626682);
+  text-align: center;
+  /* detail/detail_medium_12 */
+  font-family: Pretendard;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+`;
+
+const InfoContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 8px;
+`;
+
+const AnswerContent = styled.div`
+  margin-top: 8px;
+`;
+
+const AnswerText = styled.p`
+  color: #fff;
+  font-family: Pretendard;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 170%;
+`;
+
+const ContentFlexContainer = styled.div`
+  display: flex; // Stack children vertically
+  justify-content: space-between;
+  padding-right: 14px;
+  padding-bottom: 12px;
+  height: 100%;
+`;
+
+const EditIcon = styled.img`
+  width: 20px;
+  height: 20px;
+  margin-top: auto;
+  align-self: flex-end;
+  cursor: pointer;
+`;
+
+function Qnacontent({ questions }) {
+  const { id } = useParams(); // URL에서 id 가져오기
+  const question = questions.find((q) => q.id === parseInt(id));
 
   const renderTextWithLineBreaks = (text) => {
     return text.split('\n').map((line, index) => (
@@ -161,6 +215,22 @@ function Qnacontent() {
         {line}
       </StyledParagraph>
     ));
+  };
+
+  const renderAnswerWithLineBreaks = (text) => {
+    return text
+      .split('\n')
+      .map((line, index) => <AnswerText key={index}>{line}</AnswerText>);
+  };
+
+  const [showIV, setShowIV] = useState(false);
+
+  const showIVHandler = () => {
+    setShowIV(true);
+  };
+
+  const closeIVHandler = () => {
+    setShowIV(false);
   };
 
   return (
@@ -172,31 +242,40 @@ function Qnacontent() {
         </InContainer>
       </IntroContainer>
 
+      {showIV && <IdentityVerification closeIVHandler={closeIVHandler} />}
+      {showIV && <Overlay showIV={showIV} />}
+
       <Contentcontainer>
         <AuthorContainer>
           <Graycircle src={GrayCircle} alt="Gray Circle" />
-          <ItemContent>익명</ItemContent>
+          <ItemContent>{question.author}</ItemContent>
         </AuthorContainer>
         <Rowcontainer>
-          <TitleP>중앙해커톤 관련 질문</TitleP>
-          <Reply>답변 완료</Reply>
+          <TitleP>{question.title}</TitleP>
+          <Reply>{question.status}</Reply>
         </Rowcontainer>
         <ContentField>
-          {contents.map((content, index) => (
-            <div key={index}>
-              <div>{renderTextWithLineBreaks(content.question)}</div>
-            </div>
-          ))}
+          <ContentFlexContainer>
+            <div>{question.content}</div>
+            <EditIcon src={Edit} alt="수정" onClick={showIVHandler} />
+          </ContentFlexContainer>
         </ContentField>
       </Contentcontainer>
-      <AnswerContainer>
-        <AnswerField>
-          <AuthorContainer>
-            <Graycircle src={GrayCircle} alt="Gray Circle" />
-            <ItemContent>운영진</ItemContent>
-          </AuthorContainer>
-        </AnswerField>
-      </AnswerContainer>
+
+      {/* <AnswerContainer> 응답부분 지우지마세요 ~
+        {contents.map((content, index) => (
+          <AnswerField key={index}>
+            <InfoContainer>
+              <AuthorContainer>
+                <Graycircle src={GrayCircle} alt="Gray Circle" />
+                <ItemContent>운영진</ItemContent>
+              </AuthorContainer>
+              <Minutes>{content.createdAt}</Minutes>
+            </InfoContainer>
+            {renderAnswerWithLineBreaks(content.answer)}
+          </AnswerField>
+        ))}
+      </AnswerContainer> */}
       <Footer />
     </>
   );

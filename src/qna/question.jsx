@@ -1,10 +1,9 @@
 import styled from 'styled-components';
 import Hsulogo from '../images/hsulogo.png';
 import Footer from '../footer/footer';
-
-const QuestionContainer = styled.div`
-  width: 100%;
-`;
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import css from 'styled-components';
 
 const IntroContainer = styled.div`
   width: 100%;
@@ -56,7 +55,7 @@ const InputField = styled.input`
   border: 1px solid var(--Gray5, #2a2a3a);
   background: var(--Black, #0f1015);
   padding-left: 17px;
-  color: #fff; // 폰트 색상 추가
+  color: #fff;
 `;
 
 const FieldContainer = styled.div`
@@ -96,7 +95,7 @@ const TextAreaField = styled.textarea`
   color: #fff;
 
   &:focus {
-    outline: none; /* 포커스 테두리 제거 */
+    outline: none;
   }
 
   &::placeholder {
@@ -126,7 +125,41 @@ const ButtonContainer = styled.div`
   justify-content: flex-end;
 `;
 
-function Question() {
+function Question({ addQuestion }) {
+  const navigate = useNavigate();
+  const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+  const [error, setError] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const newQuestion = {
+      id: Date.now(), // ID 생성
+      author: name, // 이름
+      title: title, //제목
+      content: content,
+      date: new Date().toLocaleDateString(), // 현재 날짜
+      status: '답변 중',
+    };
+
+    addQuestion(newQuestion);
+
+    // 모든 필드가 채워져 있는지 검사
+    if (!name || !password || !title || !content) {
+      setError('모든 필드를 채워주세요.');
+      return;
+    }
+
+    setError('');
+    console.log('제출됨:', { name, password, title, content });
+
+    // 폼 제출이 성공적으로 처리된 후, Q&A 목록 페이지로 이동
+    navigate('/Qnalist');
+  };
+
   return (
     <>
       <IntroContainer>
@@ -135,40 +168,55 @@ function Question() {
           <IntroP>Q&A</IntroP>
         </InContainer>
       </IntroContainer>
-      <AskContainer>
-        <AskP>한성대학교 멋쟁이사자처럼에게</AskP>
-        <AskP style={{ color: '#FFF', marginBottom: '32px' }}>
-          무엇이든 물어보세요!
-        </AskP>
+      <form onSubmit={handleSubmit}>
+        <AskContainer>
+          <AskP>한성대학교 멋쟁이사자처럼에게</AskP>
+          <AskP style={{ color: '#FFF', marginBottom: '32px' }}>
+            무엇이든 물어보세요!
+          </AskP>
 
-        <BothContainer>
-          <FieldContainer>
-            <InputField placeholder="이름을 입력해주세요."></InputField>
-            <InputField placeholder="비밀번호를 입력해주세요."></InputField>
-          </FieldContainer>
-          <RequireP>*질문 게시 후 수정 또는 삭제에 사용됩니다.</RequireP>
-        </BothContainer>
+          <BothContainer>
+            <FieldContainer>
+              <InputField
+                placeholder="이름을 입력해주세요."
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+              <InputField
+                placeholder="비밀번호를 입력해주세요."
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </FieldContainer>
+            <RequireP>*질문 게시 후 수정 또는 삭제에 사용됩니다.</RequireP>
+          </BothContainer>
 
-        <BothContainer>
-          <InputField
-            placeholder="제목을 입력해주세요."
-            style={{ marginTop: '24px', width: '100%' }}
-          ></InputField>
-          <RequireP>*최대 15자까지 입력 가능합니다.</RequireP>
-        </BothContainer>
+          <BothContainer>
+            <InputField
+              placeholder="제목을 입력해주세요."
+              style={{ marginTop: '24px', width: '100%' }}
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              maxLength={11}
+            />
+            <RequireP>*최대 11자까지 입력 가능합니다.</RequireP>
+          </BothContainer>
 
-        <BothContainer style={{ marginBottom: '24px' }}>
-          <TextAreaField
-            placeholder="내용을 입력해주세요."
-            style={{ marginTop: '24px' }}
-          ></TextAreaField>
-          <RequireP>*최대 100자까지 입력 가능합니다.</RequireP>
-        </BothContainer>
-        <ButtonContainer>
-          <SubmitButton>등록하기</SubmitButton>
-        </ButtonContainer>
-      </AskContainer>
-
+          <BothContainer style={{ marginBottom: '24px' }}>
+            <TextAreaField
+              placeholder="내용을 입력해주세요."
+              style={{ marginTop: '24px' }}
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              maxLength={100}
+            />
+            <RequireP>*최대 100자까지 입력 가능합니다.</RequireP>
+          </BothContainer>
+          <ButtonContainer>
+            <SubmitButton type="submit">등록하기</SubmitButton>
+          </ButtonContainer>
+        </AskContainer>
+      </form>
       <Footer />
     </>
   );

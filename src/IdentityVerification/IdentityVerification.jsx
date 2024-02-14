@@ -1,10 +1,10 @@
 import "./IdentityVerification.css";
 import close from "../images/close.svg";
 
-export default function IdentityVerification() {
+export default function IdentityVerification({closeIVHandler}) {
   return (
     <div className="bgContainer">
-      <button>
+      <button onClick={closeIVHandler}>
         <img src={close} alt="closeImg" className="closeImg" />
       </button>
       <p className="ivText">본인 확인</p>
