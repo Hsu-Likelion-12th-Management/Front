@@ -503,58 +503,80 @@ function EleventhProject(){
         margin-top:8px;
         @media (max-width: 428px) {
             margin-left: 30px;
+            font-size: 11px;
         }
     `;
 
-    const exStyle={
-        color: '#7F85A3',
-        fontFamily: 'Pretendard',
-        fontSize: '12px',
-        fontStyle: 'normal',
-        fontWeight: '500',
-        lineHeight: '170%',
-        marginLeft:'48px',
-        marginTop:'12px'
+    const Extra=styled.div`
+    color: #7F85A3;
+    font-family: Pretendard;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 170%;
+    margin-left:48px;
+    margin-top:12px;
+    @media (max-width: 428px) {
+        margin-left: 30px;
+        font-size: 11px;
     }
+    `;
 
-    const interviewStyle={
-        width: '332px',
-        height: '132px',
-        flexShrink: '0',
-        borderRadius: '8px',
-        background: '#2A2A3A',
+    const InterviewContainer=styled.div`
+    width: 332px;
+    height: 132px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    background: #2A2A3A;
+    @media (max-width: 428px) {
+        width:300px;
+        height:95px;
     }
+    `;
 
-    const interviewContainerStyle={
-        display:'flex',
-        flexDirection:'column',
-        marginTop:'56px',
-        marginLeft:'48px',
-        gap:'8px',
-        marginBottom:'100px'
+    const Interview=styled.div`
+    display:flex;
+    flex-direction:column;
+    margin-top:56px;
+    margin-left:48px;
+    gap:8px;
+    margin-bottom:100px;
+    @media (max-width: 428px) {
+        margin-left: 30px;
     }
+    `;
 
-    const interviewNameStyle={
-        color: '#BFC4D8',
-        fontFamily: 'Pretendard',
-        fontSize: '12px',
-        fontStyle: 'normal',
-        fontWeight: '600',
-        lineHeight: 'normal',
-        marginBottom:'8px',
-        marginTop:'16px',
-        marginLeft:'15px'
+    const InterviewName=styled.div`
+    color: #BFC4D8;
+    font-family: Pretendard;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    marginB-bottom:8px;
+    margin-top:16px;
+    margin-left:15px;
+    @media (max-width: 428px) {
+        margin-left: 10px;
+        margin-top: 10px;
+        font-size: 10px;
+        margin-bottom: 5px;
     }
+    `;
 
-    const interviewContentStyle={
-        color: '#7F85A3',
-        fontFamily: 'Pretendard',
-        fontSize: '10.5px',
-        fontStyle: 'normal',
-        fontWeight: '400',
-        lineHeight: '170%',
-        marginLeft:'15px'
+    const InterviewContent=styled.div`
+    color: #7F85A3;
+    font-family: Pretendard;
+    font-size: 10.5px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 170%;
+    margin-left:15px;
+    @media (max-width: 428px) {
+        margin-left: 10px;
+        font-size: 9px;
     }
+    `;
 
     const handleNext = () => {
         if (currentIndex < 5) {
@@ -577,10 +599,10 @@ function EleventhProject(){
     const interviews = [];
     for (let i = 1; i <= interviewsToShow; i++) {
     interviews.push(
-        <div style={interviewStyle} key={i}>
-            <div style={interviewNameStyle}>{projectData[currentIndex][`interviewName${i}`]}</div>
-            <div style={interviewContentStyle}>{projectData[currentIndex][`interview${i}`]}</div>
-        </div>
+        <InterviewContainer key={i}>
+            <InterviewName>{projectData[currentIndex][`interviewName${i}`]}</InterviewName>
+            <InterviewContent>{projectData[currentIndex][`interview${i}`]}</InterviewContent>
+        </InterviewContainer>
         );
     }
 
@@ -605,13 +627,13 @@ function EleventhProject(){
         <Explain>
         {projectData[currentIndex].explanation}
         </Explain>
-        <div style={exStyle}>참가자 : {projectData[currentIndex].participants}</div>
-        <div style={exStyle}>사용 툴 : {projectData[currentIndex].tools}</div>
-        <div style={exStyle}>웹 링크 : {projectData[currentIndex].webLink}</div>
+        <Extra>참가자 : {projectData[currentIndex].participants}</Extra>
+        <Extra>사용 툴 : {projectData[currentIndex].tools}</Extra>
+        <Extra>웹 링크 : {projectData[currentIndex].webLink}</Extra>
 
-        <div style={interviewContainerStyle}>
+        <Interview>
         {interviews}
-        </div>
+        </Interview>
 
         <Footer/>
         </>
