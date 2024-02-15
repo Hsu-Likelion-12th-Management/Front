@@ -1,3 +1,4 @@
+import styled from "styled-components";
 import Footer from "../footer/footer";
 import logo from '../images/Group 972.svg'
 import prj1 from '../images/prj1.png'
@@ -422,22 +423,31 @@ function EleventhProject(){
         marginLeft:'11px'
     }
 
-    const imgStyle={
-        width: '332px',
-        height: '188px',
-        flexShrink: '0',
-        borderRadius:'8px',
-        marginTop:'63px',
-        marginLeft:'43px'
+    const Img=styled.img`
+    width: 332px;
+    height: 188px;
+    flex-shrink: 0;
+    border-radius:8px;
+    margin-top:63px;
+    margin-left:43px;
+    @media (max-width: 428px) {
+        margin-left:30px;
+        width: 300px;
+        height: 180px;
     }
+    `;
 
-    const pageStyle={
-        display: 'flex',
-        gap: '13px',
-        alignItems:'center',
-        marginTop:'18px',
-        marginLeft:'330px'
+    const Page=styled.div`
+    display: flex;
+    gap: 13px;
+    align-items:center;
+    margin-top:18px;
+    margin-left:330px;
+    @media (max-width: 428px) {
+        margin-left: 280px;
+        gap: 10px;
     }
+    `;
 
     const pageFontStyle={
         color: '#7F85A3',
@@ -455,38 +465,46 @@ function EleventhProject(){
         cursor: 'pointer'
     }
 
-    const projectTitleStyle={
-        color: '#FFF',
-        fontFamily: 'Pretendard',
-        fontSize: '16px',
-        fontStyle: 'normal',
-        fontWeight: '700',
-        lineHeight: 'normal',
-        marginTop:'24px',
-        marginLeft:'48px',
+    const ProjectTitle=styled.div`
+        color: #FFF;
+        font-family: Pretendard;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        margin-top:24px;
+        margin-left:48px;
+        @media (max-width: 428px) {
+            margin-left: 30px;
+        }
+    `;
+    const Subtitle=styled.div`
+    color: #BFC4D8;
+    font-family: Pretendard;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-left:48px;
+    margin-top:8px;
+    @media (max-width: 428px) {
+        margin-left: 30px;
     }
+    `;
 
-    const subtitleStyle={
-        color: '#BFC4D8',
-        fontFamily: 'Pretendard',
-        fontSize: '14px',
-        fontStyle: 'normal',
-        fontWeight: '700',
-        lineHeight: 'normal',
-        marginLeft:'48px',
-        marginTop:'8px'
-    }
-
-    const explainStyle={
-        color: '#7F85A3',
-        fontFamily: 'Pretendard',
-        fontSize: '12px',
-        fontStyle: 'normal',
-        fontWeight: '500',
-        lineHeight: '170%',
-        marginLeft:'48px',
-        marginTop:'8px'
-    }
+    const Explain=styled.div`
+    color: #7F85A3;
+        font-family: Pretendard;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 170%;
+        margin-left:48px;
+        margin-top:8px;
+        @media (max-width: 428px) {
+            margin-left: 30px;
+        }
+    `;
 
     const exStyle={
         color: '#7F85A3',
@@ -574,19 +592,19 @@ function EleventhProject(){
             <div style={titleStyle}>11기 프로젝트</div>
         </div>
 
-        <div><img src={projectData[currentIndex].image} style={imgStyle}/></div>
+        <div><Img src={projectData[currentIndex].image} /></div>
         
-        <div style={pageStyle}>
+        <Page>
             <img src={left} style={arrowStyle} onClick={handlePrev}/>
             <div style={pageFontStyle}>{page}</div>
             <img src={right} style={arrowStyle} onClick={handleNext}/>
-        </div>
+        </Page>
 
-        <div style={projectTitleStyle}>{projectData[currentIndex].title}</div>
-        <div style={subtitleStyle}>{projectData[currentIndex].subtitle}</div>
-        <div style={explainStyle}>
+        <ProjectTitle>{projectData[currentIndex].title}</ProjectTitle>
+        <Subtitle>{projectData[currentIndex].subtitle}</Subtitle>
+        <Explain>
         {projectData[currentIndex].explanation}
-        </div>
+        </Explain>
         <div style={exStyle}>참가자 : {projectData[currentIndex].participants}</div>
         <div style={exStyle}>사용 툴 : {projectData[currentIndex].tools}</div>
         <div style={exStyle}>웹 링크 : {projectData[currentIndex].webLink}</div>
