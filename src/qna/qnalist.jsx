@@ -194,69 +194,83 @@ const StyledLink = styled(Link)`
   }
 `;
 
+const QnaLayout = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+`;
+
+const ContentContainer = styled.div`
+  flex-grow: 1;
+`;
+
 function Qnalist({ questions }) {
   const [currentPage, setCurrentPage] = useState(1);
   const pageNumbers = [1, 2, 3];
 
   return (
     <>
-      <IntroContainer>
-        <InContainer>
-          <img src={Hsulogo} alt="한성로고" style={{ width: '8%' }} />
-          <IntroP>Q&A</IntroP>
-        </InContainer>
-      </IntroContainer>
-      <AskContainer>
-        <Pcontainer>
-          <AskP>
-            한성대학교 멋쟁이사자처럼에게
-            <br />
-            <span>무엇이든 물어보세요!</span>
-          </AskP>
-        </Pcontainer>
-        <StyledLink to="/question">질문하기</StyledLink>
-      </AskContainer>
-      <QuestionListContainer>
-        {questions.map((question) => (
-          <div key={question.id}>
-            <Link to={`/Qnacontent/${question.id}`}>
-              <QuestionItem>
-                <AuthorContainer>
-                  <Graycircle
-                    src={GrayCircle}
-                    alt="Gray Circle"
-                    style={{ marginRight: '7px' }}
-                  />
-                  <ItemContent>{question.author}</ItemContent>
-                </AuthorContainer>
-                <ItemContent>{question.title}</ItemContent>
-                <ItemContent>{question.date}</ItemContent>
-                <Reply status={question.status}>{question.status}</Reply>
-              </QuestionItem>
-            </Link>
-          </div>
-        ))}
-      </QuestionListContainer>
+      <QnaLayout>
+        <ContentContainer>
+          <IntroContainer>
+            <InContainer>
+              <img src={Hsulogo} alt="한성로고" style={{ width: '8%' }} />
+              <IntroP>Q&A</IntroP>
+            </InContainer>
+          </IntroContainer>
+          <AskContainer>
+            <Pcontainer>
+              <AskP>
+                한성대학교 멋쟁이사자처럼에게
+                <br />
+                <span>무엇이든 물어보세요!</span>
+              </AskP>
+            </Pcontainer>
+            <StyledLink to="/question">질문하기</StyledLink>
+          </AskContainer>
+          <QuestionListContainer>
+            {questions.map((question) => (
+              <div key={question.id}>
+                <Link to={`/Qnacontent/${question.id}`}>
+                  <QuestionItem>
+                    <AuthorContainer>
+                      <Graycircle
+                        src={GrayCircle}
+                        alt="Gray Circle"
+                        style={{ marginRight: '7px' }}
+                      />
+                      <ItemContent>{question.author}</ItemContent>
+                    </AuthorContainer>
+                    <ItemContent>{question.title}</ItemContent>
+                    <ItemContent>{question.date}</ItemContent>
+                    <Reply status={question.status}>{question.status}</Reply>
+                  </QuestionItem>
+                </Link>
+              </div>
+            ))}
+          </QuestionListContainer>
+        </ContentContainer>
 
-      <PaginationContainer>
-        {pageNumbers.map((number, index) => (
-          <React.Fragment key={number}>
-            <PageNumber
-              onClick={() => handlePageClick(number)}
-              style={
-                currentPage === number
-                  ? { color: 'var(--White, #FFF)', fontWeight: 700 }
-                  : {}
-              }
-            >
-              {number}
-            </PageNumber>
-            {index < pageNumbers.length - 1 && <Divider />}{' '}
-          </React.Fragment>
-        ))}
-      </PaginationContainer>
+        <PaginationContainer>
+          {pageNumbers.map((number, index) => (
+            <React.Fragment key={number}>
+              <PageNumber
+                onClick={() => handlePageClick(number)}
+                style={
+                  currentPage === number
+                    ? { color: 'var(--White, #FFF)', fontWeight: 700 }
+                    : {}
+                }
+              >
+                {number}
+              </PageNumber>
+              {index < pageNumbers.length - 1 && <Divider />}
+            </React.Fragment>
+          ))}
+        </PaginationContainer>
 
-      <Footer />
+        <Footer />
+      </QnaLayout>
     </>
   );
 }
