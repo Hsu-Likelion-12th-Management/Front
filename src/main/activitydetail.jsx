@@ -4,15 +4,12 @@ function ActivityDetail(props){
 
 
     const Container=styled.div`
-    width: 388px;
     height: 120px;
     flex-shrink: 0;
     border-radius: 12px;
     background: #FFF;
-    margin-left:20px;
     margin-bottom: 12px;
     @media (max-width: 428px) {
-        width: 320px;
         height: 100px;
     }
     `;
@@ -42,7 +39,7 @@ function ActivityDetail(props){
         fontStyle: 'normal',
         fontWeight: '700',
         lineHeight: 'normal',
-        marginTop: '18px',
+        marginTop: '15px',
         marginBottom:'8px',
         
     }
@@ -68,7 +65,7 @@ function ActivityDetail(props){
     }
 
     const descStyle={
-        marginLeft:'15px'
+        marginLeft:'7px'
     }
 
 

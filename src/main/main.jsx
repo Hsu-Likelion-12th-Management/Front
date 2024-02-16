@@ -118,12 +118,9 @@ margin-top: 13px;
   const StateContainer=styled.div`
     display:flex;
     margin-top : 24px;
-    gap: 18px;
-    margin-left: 20px;
-    @media (max-width: 428px) {
-      gap:10px;
-
-    }
+    padding-left: 20px;
+    padding-right: 20px;
+    justify-content: space-between;
     `;
 
   const Extra=styled.div`

@@ -19,15 +19,17 @@ function ActivityMain(){
     }
 
     const comContainerStyle={
-        marginBottom: '80px'
+        marginBottom: '80px',
+        paddingLeft: '20px',
+        paddingRight:'20px'
     }
 
     const activities = [
         {
             image: detail1,
             title: "팀 별 스터디",
-            description: "기획, 디자인, 프론트엔드, 백엔드 4개의 팀으로",
-            description2: "주 1회 세션을 진행합니다."
+            description: "기획, 디자인, 프론트엔드, 백엔드 4개의",
+            description2: " 팀으로 주 1회 세션을 진행합니다."
         },
         {
             image: detail2,

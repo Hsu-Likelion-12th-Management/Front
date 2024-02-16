@@ -36,20 +36,20 @@ function HansungLion(){
         `;
 
     const GroupImg=styled.img`
-        width: 388px;
         height: 219px;
+        width: 100%;
         flex-shrink: 0;
         border-radius: 8px;
-        background: lightgray 50% / cover no-repeat;
         @media (max-width: 428px) {
-            width:310px;
             height: 200px;
         }
         `
 
     const imgDivStyle={
-        marginLeft: '20px',
-        marginTop:'16px'
+        paddingLeft: '20px',
+        paddingRight: '20px',
+        marginTop:'16px',
+
     }
 
     const subTitleStyle={
@@ -82,13 +82,11 @@ function HansungLion(){
 
     const IntroStyle=styled.div`
         display:flex;
-        margin-left:20px;
-        gap: 15px;
+        padding-left:20px;
+        padding-right: 20px;
+        justify-content: space-between;
         margin-top: 16px;
-        @media (max-width: 428px) {
-            gap:10px;
-        }`;
-
+        `;
     const lineStyle={
         color: '#FFF',
         fontFamily: 'Pretendard',
