@@ -21,7 +21,7 @@ import Qnacontent from './qna/qnacontent';
 import EleventhProject from './eleventhproject/eleventhproject';
 import Overlay from './overlay/Overlay';
 import { useState, useEffect } from 'react';
-
+import Footer from './footer/footer';
 const Wrapper = styled.div`
   margin: 0 auto;
   width: 100%;
@@ -32,7 +32,6 @@ const Wrapper = styled.div`
   min-width: 428px;
   background-color: black;
   position: relative;
-
   @media (max-width: 428px) {
     min-width: 60%;
   }
