@@ -423,16 +423,16 @@ function EleventhProject(){
         marginLeft:'11px'
     }
 
+    const ImgContainer=styled.div`
+        padding-left: 30px;
+    `;
+
     const Img=styled.img`
-    width: 332px;
     height: 188px;
     flex-shrink: 0;
     border-radius:8px;
     margin-top:63px;
-    margin-left:43px;
     @media (max-width: 428px) {
-        margin-left:30px;
-        width: 300px;
         height: 180px;
     }
     `;
@@ -614,7 +614,7 @@ function EleventhProject(){
             <div style={titleStyle}>11기 프로젝트</div>
         </div>
 
-        <div><Img src={projectData[currentIndex].image} /></div>
+        <ImgContainer><Img src={projectData[currentIndex].image} /></ImgContainer>
         
         <Page>
             <img src={left} style={arrowStyle} onClick={handlePrev}/>
