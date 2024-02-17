@@ -409,7 +409,7 @@ function EleventhProject(){
         flexShrink: '0',
         background: 'linear-gradient(270deg, #191B24 86%, #FF7710 100%)',
         display:'flex',
-        paddingLeft: '20px'
+        paddingLeft: '1.25rem'
     }
 
     const titleStyle={
@@ -420,15 +420,17 @@ function EleventhProject(){
         fontWeight: '700',
         lineHeight: 'normal',
         marginTop:'26px',
-        marginLeft:'11px'
+        marginLeft:'0.73rem'
     }
 
     const ImgContainer=styled.div`
         padding-left: 30px;
+        padding-right: 30px;
     `;
 
     const Img=styled.img`
     height: 188px;
+    width: 100%;
     flex-shrink: 0;
     border-radius:8px;
     margin-top:63px;
@@ -442,9 +444,8 @@ function EleventhProject(){
     gap: 13px;
     align-items:center;
     margin-top:18px;
-    margin-left:330px;
+    margin-left: 80%;
     @media (max-width: 428px) {
-        margin-left: 280px;
         gap: 10px;
     }
     `;
@@ -456,6 +457,13 @@ function EleventhProject(){
         fontStyle: 'normal',
         fontWeight: '600',
         lineHeight: 'normal'
+    }
+
+    const logoStyle={
+        width: '2.27206rem',
+        height: '1.8125rem',
+        flexShrink: '0',
+        marginTop: '1.62rem'
     }
 
     const arrowStyle={
@@ -473,7 +481,7 @@ function EleventhProject(){
         font-weight: 700;
         line-height: normal;
         margin-top:24px;
-        margin-left:48px;
+        margin-left:30px;
         @media (max-width: 428px) {
             margin-left: 30px;
         }
@@ -485,7 +493,7 @@ function EleventhProject(){
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-    margin-left:48px;
+    margin-left:30px;
     margin-top:8px;
     @media (max-width: 428px) {
         margin-left: 30px;
@@ -499,7 +507,7 @@ function EleventhProject(){
         font-style: normal;
         font-weight: 500;
         line-height: 170%;
-        margin-left:48px;
+        margin-left:30px;
         margin-top:8px;
         @media (max-width: 428px) {
             margin-left: 30px;
@@ -514,7 +522,7 @@ function EleventhProject(){
     font-style: normal;
     font-weight: 500;
     line-height: 170%;
-    margin-left:48px;
+    margin-left:30px;
     margin-top:12px;
     @media (max-width: 428px) {
         margin-left: 30px;
@@ -523,13 +531,12 @@ function EleventhProject(){
     `;
 
     const InterviewContainer=styled.div`
-    width: 332px;
+    width: 100%;
     height: 132px;
     flex-shrink: 0;
     border-radius: 8px;
     background: #2A2A3A;
     @media (max-width: 428px) {
-        width:300px;
         height:95px;
     }
     `;
@@ -538,12 +545,10 @@ function EleventhProject(){
     display:flex;
     flex-direction:column;
     margin-top:56px;
-    margin-left:48px;
+    padding-left:30px;
+    padding-right:30px;
     gap:8px;
     margin-bottom:100px;
-    @media (max-width: 428px) {
-        margin-left: 30px;
-    }
     `;
 
     const InterviewName=styled.div`
@@ -610,7 +615,7 @@ function EleventhProject(){
         <>
         
         <div style={logoContainerStyle}>
-            <img src={logo}/>
+            <img src={logo} style={logoStyle}/>
             <div style={titleStyle}>11기 프로젝트</div>
         </div>
 
