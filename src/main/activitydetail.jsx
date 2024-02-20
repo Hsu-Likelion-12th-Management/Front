@@ -15,7 +15,7 @@ function ActivityDetail(props){
     `;
 
     const Img = styled.img`
-    width: 120px;
+    width: 130px;
     height: 100px;
     flex-shrink: 0;
     border-radius: 10px;
@@ -53,7 +53,7 @@ function ActivityDetail(props){
     line-height: 170%;
 
     @media (max-width: 428px){
-        font-size: 10px;
+        font-size: 9.5px;
     }
     `;
 
@@ -64,20 +64,24 @@ function ActivityDetail(props){
 
     }
 
-    const descStyle={
-        marginLeft:'7px'
-    }
+    const Desc=styled.div`
+        margin-left: 12px;
+
+        @media (max-width: 428px){
+            margin-left: 8px;
+        }
+    `;
 
 
     return(
         <>
             <Container>
                 <div style={contentContainerStyle}>
-                    <div style={descStyle}>
+                    <Desc>
                         <div style={titleStyle}>{props.title}</div>
                         <Explain>{props.description}</Explain>
                         <Explain>{props.description2}</Explain>
-                    </div>
+                    </Desc>
                     <Img src={props.image} alt="activity"/>
                 </div>
             </Container>

@@ -40,7 +40,7 @@ function ActivityMain(){
         {
             image: detail3,
             title: "무박해커톤",
-            description: "여름방학, 약 한 달간의 프로젝트 과정을 거쳐 ",
+            description: "약 한 달간의 프로젝트 과정을 거쳐 ",
             description2: "무박으로 개발을 마무리하는 해커톤입니다."
         },
         {
