@@ -151,7 +151,7 @@ function Activity() {
               개발을 마무리하는 해커톤입니다.
             </HackP>
             <PicContainer>
-              {midImages.map((image, idx) => (
+              {ideaImages.map((image, idx) => (
                 <StyledImage
                   key={idx}
                   src={image}
@@ -166,7 +166,7 @@ function Activity() {
               타 대학과 자체적으로 연합하여 개최하는 해커톤입니다.{' '}
             </ContentP>
             <PicContainer>
-              {midImages.map((image, idx) => (
+              {ideaImages.map((image, idx) => (
                 <StyledImage
                   key={idx}
                   src={image}
