@@ -15,7 +15,7 @@ function ActivityDetail(props){
     `;
 
     const Img = styled.img`
-    width: 108px;
+    width: 120px;
     height: 100px;
     flex-shrink: 0;
     border-radius: 10px;
@@ -26,7 +26,7 @@ function ActivityDetail(props){
     @media (max-width: 428px){
         right: 5px;
         margin-top: 5px;
-        width: 90px;
+        width: 110px;
         height: 90px;
     }
 `;

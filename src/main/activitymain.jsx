@@ -34,13 +34,13 @@ function ActivityMain(){
         {
             image: detail2,
             title: "아이디어톤",
-            description: "아이디어를 발제하고, 디자인하는 과정을 거쳐",
-            description2: "타 대학과 경쟁합니다."
+            description: "아이디어를 발제하고, 디자인하는",
+            description2: "과정을 거쳐 타 대학과 경쟁합니다."
         },
         {
             image: detail3,
             title: "무박해커톤",
-            description: "여름방학, 약 한 달간의 프로젝트 과정을 거쳐",
+            description: "여름방학, 약 한 달간의 프로젝트 과정을 거쳐 ",
             description2: "무박으로 개발을 마무리하는 해커톤입니다."
         },
         {
