@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import Hsulogo from '../images/hsulogo.png';
 import Footer from '../footer/footer';
 import Lionlogo from '../images/Layer_1.png';
+import { useState } from 'react';
+import axios from 'axios';
 
 const AskContainer = styled.div`
   padding-left: 20px;
@@ -21,6 +23,7 @@ const InputField = styled.input`
   flex-shrink: 0;
   border-radius: 4px;
   background: var(--Gray6, #191b24);
+  color: white;
 `;
 
 const RequireP = styled.p`
@@ -64,6 +67,33 @@ const ButtonContainer = styled.div`
 `;
 
 function Login() {
+  const [id, setId] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post(
+        'http://127.0.0.1:8080/api/admin/login',
+        {
+          id,
+          password,
+        }
+      );
+
+      if (response.status == 200) {
+        console.log('가입 성공');
+        console.log(response.data);
+      } else {
+        console.log('가입 실패');
+        console.log(response.data);
+      }
+    } catch (error) {
+      console.error('가입 중 오류 발생: ', error);
+    }
+  };
+
   return (
     <>
       <AskContainer>
@@ -74,9 +104,11 @@ function Login() {
         />
 
         <BothContainer style={{ marginTop: '79px' }}>
-          <RequireP>이메일</RequireP>
+          <RequireP>아이디</RequireP>
           <InputField
-            placeholder="이메일을 입력해주세요."
+            placeholder="아이디를 입력해주세요."
+            value={id}
+            onChange={(e) => setId(e.target.value)}
             style={{ marginTop: '8px', width: '100%' }}
           ></InputField>
         </BothContainer>
@@ -84,13 +116,15 @@ function Login() {
         <BothContainer>
           <RequireP style={{ marginTop: '24px' }}>비밀번호</RequireP>
           <InputField
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             placeholder="비밀번호을 입력해주세요."
             style={{ marginTop: '8px', width: '100%' }}
           ></InputField>
         </BothContainer>
 
         <ButtonContainer>
-          <SubmitButton>로그인하기</SubmitButton>
+          <SubmitButton onClick={handleSubmit}>로그인하기</SubmitButton>
         </ButtonContainer>
       </AskContainer>
 
