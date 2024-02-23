@@ -4,6 +4,7 @@ import Footer from '../footer/footer';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import css from 'styled-components';
+import axios from 'axios';
 
 const IntroContainer = styled.div`
   width: 100%;
@@ -127,37 +128,31 @@ const ButtonContainer = styled.div`
 
 function Question({ addQuestion }) {
   const navigate = useNavigate();
-  const [name, setName] = useState('');
+  const [postedUserName, setName] = useState('');
   const [password, setPassword] = useState('');
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [error, setError] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const newQuestion = {
-      id: Date.now(), // ID 생성
-      author: name, // 이름
-      title: title, //제목
-      content: content,
-      date: new Date().toLocaleDateString(), // 현재 날짜
-      status: '답변 중',
-    };
+    try {
+      const response = await axios.post('http://127.0.0.1:8080/api/post', {
+        postedUserName,
+        password,
+        title,
+        content,
+      });
 
-    addQuestion(newQuestion);
-
-    // 모든 필드가 채워져 있는지 검사
-    if (!name || !password || !title || !content) {
-      setError('모든 필드를 채워주세요.');
-      return;
+      console.log('게시글 작성 성공', response.data);
+      navigate('/Qnalist');
+    } catch (error) {
+      console.error(
+        '작성 중 오류 발생: ',
+        error.response ? error.response.data : error
+      );
     }
-
-    setError('');
-    console.log('제출됨:', { name, password, title, content });
-
-    // 폼 제출이 성공적으로 처리된 후, Q&A 목록 페이지로 이동
-    navigate('/Qnalist');
   };
 
   return (
@@ -178,8 +173,8 @@ function Question({ addQuestion }) {
           <BothContainer>
             <FieldContainer>
               <InputField
-                placeholder="이름을 입력해주세요."
-                value={name}
+                placeholder="닉네임을 입력해주세요."
+                value={postedUserName}
                 onChange={(e) => setName(e.target.value)}
               />
               <InputField

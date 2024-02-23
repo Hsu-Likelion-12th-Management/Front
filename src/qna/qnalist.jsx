@@ -5,6 +5,8 @@ import GrayCircle from '../images/graycircle.png';
 import React from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import axios from 'axios';
 
 const QuestionContainer = styled.div`
   width: 100%;
@@ -204,9 +206,37 @@ const ContentContainer = styled.div`
   flex-grow: 1;
 `;
 
-function Qnalist({ questions }) {
+function Qnalist() {
   const [currentPage, setCurrentPage] = useState(1);
   const pageNumbers = [1, 2, 3];
+  const [questions, setQuestions] = useState([]);
+
+  useEffect(() => {
+    const fetchQuestions = async () => {
+      try {
+        const response = await axios.get('http://127.0.0.1:8080/api/posts');
+        console.log(response.data.data.posts);
+        setQuestions(response.data.data.posts || []);
+      } catch (error) {
+        console.error('게시글 목록을 가져오는 데 실패했습니다:', error);
+        setQuestions([]);
+      }
+    };
+
+    fetchQuestions();
+  }, []);
+
+  const formatDate = (dateString) => {
+    //updatedAt 년 월 일
+    const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+    return new Intl.DateTimeFormat('ko-KR', options).format(
+      new Date(dateString)
+    );
+  };
+
+  const updatedAt = '2024-02-20T19:44:06.979468';
+  const formattedDate = formatDate(updatedAt);
+  console.log(formattedDate);
 
   return (
     <>
@@ -230,8 +260,8 @@ function Qnalist({ questions }) {
           </AskContainer>
           <QuestionListContainer>
             {questions.map((question) => (
-              <div key={question.id}>
-                <Link to={`/Qnacontent/${question.id}`}>
+              <div key={questions.id}>
+                <Link to={`/Qnacontent/${question.postId}`}>
                   <QuestionItem>
                     <AuthorContainer>
                       <Graycircle
@@ -239,11 +269,11 @@ function Qnalist({ questions }) {
                         alt="Gray Circle"
                         style={{ marginRight: '7px' }}
                       />
-                      <ItemContent>{question.author}</ItemContent>
+                      <ItemContent>{question.postedUserName}</ItemContent>
                     </AuthorContainer>
                     <ItemContent>{question.title}</ItemContent>
-                    <ItemContent>{question.date}</ItemContent>
-                    <Reply status={question.status}>{question.status}</Reply>
+                    <ItemContent>{formatDate(question.updatedAt)}</ItemContent>
+                    <Reply status="답변 중">답변 중</Reply>
                   </QuestionItem>
                 </Link>
               </div>

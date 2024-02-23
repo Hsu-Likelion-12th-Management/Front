@@ -7,6 +7,8 @@ import { useState } from 'react';
 import IdentityVerification from '../IdentityVerification/IdentityVerification';
 import Overlay from '../overlay/Overlay';
 import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import axios from 'axios';
 
 const IntroContainer = styled.div`
   width: 100%;
@@ -206,8 +208,8 @@ const EditIcon = styled.img`
 `;
 
 function Qnacontent({ questions }) {
-  const { id } = useParams(); // URL에서 id 가져오기
-  const question = questions.find((q) => q.id === parseInt(id));
+  const { postId } = useParams();
+  const [post, setPosts] = useState(null);
 
   const renderTextWithLineBreaks = (text) => {
     return text.split('\n').map((line, index) => (
@@ -233,9 +235,24 @@ function Qnacontent({ questions }) {
     setShowIV(false);
   };
 
+  useEffect(() => {
+    const fetchPostDetails = async () => {
+      try {
+        const response = await axios.get(
+          `http://127.0.0.1:8080/api/post?postId=${postId}`
+        );
+        setPosts(response.data.data);
+      } catch (error) {
+        console.error('게시글 목록을 가져오는 데 실패했습니다:', error);
+      }
+    };
+
+    fetchPostDetails();
+  }, [postId]);
+
   return (
     <>
-      <IntroContainer>
+      {/* <IntroContainer>
         <InContainer>
           <img src={Hsulogo} alt="한성로고" style={{ width: '8%' }} />
           <IntroP>Q&A</IntroP>
@@ -248,21 +265,23 @@ function Qnacontent({ questions }) {
       <Contentcontainer>
         <AuthorContainer>
           <Graycircle src={GrayCircle} alt="Gray Circle" />
-          <ItemContent>{question.author}</ItemContent>
+          <ItemContent>{post.postedUserName}</ItemContent>
         </AuthorContainer>
         <Rowcontainer>
-          <TitleP>{question.title}</TitleP>
-          <Reply>{question.status}</Reply>
+          <TitleP>{post.title}</TitleP>
+          <Reply>응답중</Reply>
         </Rowcontainer>
         <ContentField>
           <ContentFlexContainer>
-            <div>{question.content}</div>
+            <div>{post.content}</div>
             <EditIcon src={Edit} alt="수정" onClick={showIVHandler} />
           </ContentFlexContainer>
         </ContentField>
-      </Contentcontainer>
+      </Contentcontainer> */}
 
-      {/* <AnswerContainer> 응답부분 지우지마세요 ~
+      {/* <AnswerContainer>
+        {' '}
+        응답부분 지우지마세요 ~
         {contents.map((content, index) => (
           <AnswerField key={index}>
             <InfoContainer>
