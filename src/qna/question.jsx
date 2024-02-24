@@ -176,6 +176,7 @@ function Question({ addQuestion }) {
                 placeholder="닉네임을 입력해주세요."
                 value={postedUserName}
                 onChange={(e) => setName(e.target.value)}
+                maxLength={5}
               />
               <InputField
                 placeholder="비밀번호를 입력해주세요."
@@ -184,6 +185,9 @@ function Question({ addQuestion }) {
               />
             </FieldContainer>
             <RequireP>*질문 게시 후 수정 또는 삭제에 사용됩니다.</RequireP>
+            <RequireP style={{ marginTop: '5px' }}>
+              *닉네임은 최대 5자까지 가능합니다.
+            </RequireP>
           </BothContainer>
 
           <BothContainer>
@@ -192,9 +196,9 @@ function Question({ addQuestion }) {
               style={{ marginTop: '24px', width: '100%' }}
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              maxLength={11}
+              maxLength={10}
             />
-            <RequireP>*최대 11자까지 입력 가능합니다.</RequireP>
+            <RequireP>*최대 10자까지 입력 가능합니다.</RequireP>
           </BothContainer>
 
           <BothContainer style={{ marginBottom: '24px' }}>

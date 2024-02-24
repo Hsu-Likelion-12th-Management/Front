@@ -86,10 +86,7 @@ function App() {
           />
           <Route path="/Login" element={<Login />} />
           <Route path="/Qnalist" element={<Qnalist questions={questions} />} />
-          <Route
-            path="/Qnacontent/:id"
-            element={<Qnacontent questions={questions} />}
-          />
+          <Route path="/Qnacontent/:postId" element={<Qnacontent />} />
           <Route path="/Eleven" element={<EleventhProject />} />
         </Routes>
         <LocationWatcher setShowMenu={setShowMenu} />

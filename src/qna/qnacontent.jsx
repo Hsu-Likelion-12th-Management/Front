@@ -194,6 +194,7 @@ function Qnacontent({ questions }) {
           `http://127.0.0.1:8080/api/post?postId=${postId}`
         );
         setPosts(response.data.data);
+        console.log(response.data);
       } catch (error) {
         console.error('게시글 목록을 가져오는 데 실패했습니다:', error);
       }
@@ -204,7 +205,7 @@ function Qnacontent({ questions }) {
 
   return (
     <>
-      {/* <IntroContainer>
+      <IntroContainer>
         <InContainer>
           <img src={Hsulogo} alt="한성로고" style={{ width: '8%' }} />
           <IntroP>Q&A</IntroP>
@@ -215,21 +216,25 @@ function Qnacontent({ questions }) {
       {showIV && <Overlay showIV={showIV} />}
 
       <Contentcontainer>
-        <AuthorContainer>
-          <Graycircle src={GrayCircle} alt="Gray Circle" />
-          <ItemContent>{post.postedUserName}</ItemContent>
-        </AuthorContainer>
-        <Rowcontainer>
-          <TitleP>{post.title}</TitleP>
-          <Reply>응답중</Reply>
-        </Rowcontainer>
-        <ContentField>
-          <ContentFlexContainer>
-            <div>{post.content}</div>
-            <EditIcon src={Edit} alt="수정" onClick={showIVHandler} />
-          </ContentFlexContainer>
-        </ContentField>
-      </Contentcontainer> */}
+        {post && (
+          <>
+            <AuthorContainer>
+              <Graycircle src={GrayCircle} alt="Gray Circle" />
+              <ItemContent>{post.postedUserName}</ItemContent>
+            </AuthorContainer>
+            <Rowcontainer>
+              <TitleP>{post.title}</TitleP>
+              <Reply>응답중</Reply>
+            </Rowcontainer>
+            <ContentField>
+              <ContentFlexContainer>
+                <div>{post.content}</div>
+                <EditIcon src={Edit} alt="수정" onClick={showIVHandler} />
+              </ContentFlexContainer>
+            </ContentField>
+          </>
+        )}
+      </Contentcontainer>
 
       {/* 댓글부분 */}
       <Comment />
