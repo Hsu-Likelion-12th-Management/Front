@@ -237,7 +237,7 @@ function Qnacontent({ questions }) {
       </Contentcontainer>
 
       {/* 댓글부분 */}
-      <Comment />
+      <Comment postId={postId} />
 
       <Footer />
     </>

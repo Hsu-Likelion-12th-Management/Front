@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 import GrayCircle from '../images/graycircle.png';
 
 const AnswerContainer = styled.div`
@@ -191,8 +192,25 @@ const ContentFlexContainer = styled.div`
   height: 100%;
 `;
 
-function Comment() {
-  const [contents, setContents] = useState('');
+function Comment({postId}) {
+  const [contents, setContents] = useState([]);
+  const [executive,setExecutive] = useState('');
+
+  useEffect(() => {
+    fetchPostId();
+  }, [postId])
+
+  const  fetchPostId = async () => {
+    try {
+      const response = await axios.get( `http://127.0.0.1:8080/api/post/${postId}/comments` );
+      const comments = response.data.data.comments;
+      console.log(comments);
+      setContents(comments);
+    }
+    catch (error) {
+      console.error('게시글 목록을 가져오는 데 실패했습니다:', error);
+    }
+  }
 
   const renderTextWithLineBreaks = (text) => {
     return text.split('\n').map((line, index) => (
@@ -205,18 +223,18 @@ function Comment() {
   return (
     <>
       <AnswerContainer>
-        {/* {contents.map((content, index) => (
+        {contents.map((content, index) => (
         <AnswerField key={index}>
           <InfoContainer>
             <AuthorContainer>
               <Graycircle src={GrayCircle} alt="Gray Circle" />
-              <ItemContent>운영진</ItemContent>
+              <ItemContent>{content.name}</ItemContent>
             </AuthorContainer>
-            <Minutes>시간</Minutes>
+            <Minutes>{new Date(content.updatedAt).toLocaleString()}</Minutes>
           </InfoContainer>
-          응답
+          {content.content}
         </AnswerField>
-      ))} */}
+      ))}
       </AnswerContainer>
     </>
   );
