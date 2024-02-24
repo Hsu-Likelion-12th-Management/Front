@@ -161,6 +161,37 @@ const EditIcon = styled.img`
   cursor: pointer;
 `;
 
+const SubmitButton = styled.button`
+  width: 40px;
+  height: 24px;
+  flex-shrink: 0;
+  border-radius: 4px;
+  background: #7f85a3;
+  color: #2a2a3a;
+  font-family: Pretendard;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin-top: 10px;
+  align-self: flex-end;
+  cursor: pointer;
+
+  &:hover {
+    width: 40px;
+    height: 24px;
+    flex-shrink: 0;
+    border-radius: 4px;
+    background: #ff7710;
+    color: #fff;
+    font-family: Pretendard;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+`;
+
 const ContentFlexContainer = styled.div`
   display: flex; // Stack children vertically
   justify-content: space-between;
@@ -169,9 +200,44 @@ const ContentFlexContainer = styled.div`
   height: 100%;
 `;
 
-function Qnacontent({ questions }) {
+const EditInputField = styled.input`
+  width: calc(50% - 8px);
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  border: 1px solid var(--Gray5, #2a2a3a);
+  background: var(--Black, #0f1015);
+  padding-left: 17px;
+  color: #fff;
+`;
+
+const EditTextAreaField = styled.textarea`
+  width: 100%;
+  height: 200px; // 높이 조정
+  flex-shrink: 0;
+  border-radius: 8px;
+  border: 1px solid var(--Gray5, #2a2a3a);
+  background: var(--Black, #0f1015);
+  padding: 12px 17px;
+  resize: none;
+
+  font-family: Pretendard;
+  font-size: 14px;
+  color: #fff;
+
+  &:focus {
+    outline: none;
+  }
+
+  &::placeholder {
+    color: var(--Gray2, #7f85a3);
+  }
+`;
+
+function Qnacontent() {
   const { postId } = useParams();
   const [post, setPosts] = useState(null);
+  const [isVerified, setIsVerified] = useState(false);
 
   const renderTextWithLineBreaks = (text) => {
     return text.split('\n').map((line, index) => (
@@ -213,6 +279,28 @@ function Qnacontent({ questions }) {
     fetchPostDetails();
   }, [postId]);
 
+  const EditPost = async () => {
+    try {
+      const response = await axios.put(
+        `http://127.0.0.1:8080/api/post/${postId}`,
+        {
+          postedUserName: post.postedUserName,
+          title: post.title,
+          content: post.content,
+        }
+      );
+
+      if (response.status === 200) {
+        console.log('게시글 업데이트 성공', response.data);
+        setPosts(response.data);
+      } else {
+        console.log('게시글 업데이트 실패', response.data);
+      }
+    } catch (error) {
+      console.error('게시글 업데이트 중 오류 발생:', error);
+    }
+  };
+
   return (
     <>
       <IntroContainer>
@@ -222,7 +310,13 @@ function Qnacontent({ questions }) {
         </InContainer>
       </IntroContainer>
 
-      {showIV && <IdentityVerification closeIVHandler={closeIVHandler} />}
+      {showIV && (
+        <IdentityVerification
+          closeIVHandler={closeIVHandler}
+          postId={postId}
+          onVerifySuccess={() => setIsVerified(true)}
+        />
+      )}
       {showIV && <Overlay showIV={showIV} />}
 
       <Contentcontainer>
@@ -232,16 +326,41 @@ function Qnacontent({ questions }) {
               <Graycircle src={GrayCircle} alt="Gray Circle" />
               <ItemContent>{post.postedUserName}</ItemContent>
             </AuthorContainer>
-            <Rowcontainer>
-              <TitleP>{post.title}</TitleP>
-              <Reply>응답중</Reply>
-            </Rowcontainer>
-            <ContentField>
-              <ContentFlexContainer>
-                <div>{post.content}</div>
-                <EditIcon src={Edit} alt="수정" onClick={showIVHandler} />
-              </ContentFlexContainer>
-            </ContentField>
+
+            {isVerified ? ( //인증되면
+              <>
+                <Rowcontainer>
+                  <EditInputField
+                    type="text"
+                    value={post ? post.title : ''}
+                    onChange={(e) => {
+                      setPosts({ ...post, title: e.target.value });
+                    }}
+                  />
+                  <Reply>응답중</Reply>
+                </Rowcontainer>
+                <EditTextAreaField
+                  value={post ? post.content : ''}
+                  onChange={(e) => {
+                    setPosts({ ...post, content: e.target.value });
+                  }}
+                />
+                <SubmitButton onClick={EditPost}>등록</SubmitButton>
+              </>
+            ) : (
+              <>
+                <Rowcontainer>
+                  <TitleP>{post.title}</TitleP>
+                  <Reply>응답중</Reply>
+                </Rowcontainer>
+                <ContentField>
+                  <ContentFlexContainer>
+                    <StyledParagraph>{post.content}</StyledParagraph>
+                    <EditIcon src={Edit} alt="수정" onClick={showIVHandler} />
+                  </ContentFlexContainer>
+                </ContentField>
+              </>
+            )}
           </>
         )}
       </Contentcontainer>
