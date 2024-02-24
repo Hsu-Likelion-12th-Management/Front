@@ -1,15 +1,16 @@
 import styled from 'styled-components';
-import Hsulogo from '../images/hsulogo.png';
-import Footer from '../footer/footer';
-import GrayCircle from '../images/graycircle.png';
-import Edit from '../images/editpencil.png';
 import { useState } from 'react';
-import IdentityVerification from '../IdentityVerification/IdentityVerification';
-import Overlay from '../overlay/Overlay';
-import { useParams } from 'react-router-dom';
-import { useEffect } from 'react';
-import axios from 'axios';
-import Comment from './comment';
+import GrayCircle from '../images/graycircle.png';
+
+const AnswerContainer = styled.div`
+  width: 100%;
+  background: var(--Black, #0f1015);
+  padding-top: 26px;
+  height: 298px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 const IntroContainer = styled.div`
   width: 100%;
@@ -143,12 +144,43 @@ const AnswerText = styled.p`
   line-height: 170%;
 `;
 
-const EditIcon = styled.img`
-  width: 20px;
-  height: 20px;
-  margin-top: auto;
-  align-self: flex-end;
-  cursor: pointer;
+const AnswerField = styled.div`
+  display: flex;
+  text-align: left;
+  flex-direction: column;
+  padding-top: 17px;
+  padding-left: 16px;
+  padding-right: 14px;
+  width: 90%;
+  height: 99px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  border: 1px solid var(--Gray5, #2a2a3a);
+  background: var(--Gray6, #191b24);
+`;
+
+const Minutes = styled.p`
+  color: var(--Gray3, #626682);
+  text-align: center;
+  /* detail/detail_medium_12 */
+  font-family: Pretendard;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+`;
+
+const InfoContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 8px;
+`;
+
+const AnswerContent = styled.div`
+  margin-top: 8px;
 `;
 
 const ContentFlexContainer = styled.div`
@@ -159,9 +191,8 @@ const ContentFlexContainer = styled.div`
   height: 100%;
 `;
 
-function Qnacontent({ questions }) {
-  const { postId } = useParams();
-  const [post, setPosts] = useState(null);
+function Comment() {
+  const [contents, setContents] = useState('');
 
   const renderTextWithLineBreaks = (text) => {
     return text.split('\n').map((line, index) => (
@@ -171,72 +202,24 @@ function Qnacontent({ questions }) {
     ));
   };
 
-  const renderAnswerWithLineBreaks = (text) => {
-    return text
-      .split('\n')
-      .map((line, index) => <AnswerText key={index}>{line}</AnswerText>);
-  };
-
-  const [showIV, setShowIV] = useState(false);
-
-  const showIVHandler = () => {
-    setShowIV(true);
-  };
-
-  const closeIVHandler = () => {
-    setShowIV(false);
-  };
-
-  useEffect(() => {
-    const fetchPostDetails = async () => {
-      try {
-        const response = await axios.get(
-          `http://127.0.0.1:8080/api/post?postId=${postId}`
-        );
-        setPosts(response.data.data);
-      } catch (error) {
-        console.error('게시글 목록을 가져오는 데 실패했습니다:', error);
-      }
-    };
-
-    fetchPostDetails();
-  }, [postId]);
-
   return (
     <>
-      {/* <IntroContainer>
-        <InContainer>
-          <img src={Hsulogo} alt="한성로고" style={{ width: '8%' }} />
-          <IntroP>Q&A</IntroP>
-        </InContainer>
-      </IntroContainer>
-
-      {showIV && <IdentityVerification closeIVHandler={closeIVHandler} />}
-      {showIV && <Overlay showIV={showIV} />}
-
-      <Contentcontainer>
-        <AuthorContainer>
-          <Graycircle src={GrayCircle} alt="Gray Circle" />
-          <ItemContent>{post.postedUserName}</ItemContent>
-        </AuthorContainer>
-        <Rowcontainer>
-          <TitleP>{post.title}</TitleP>
-          <Reply>응답중</Reply>
-        </Rowcontainer>
-        <ContentField>
-          <ContentFlexContainer>
-            <div>{post.content}</div>
-            <EditIcon src={Edit} alt="수정" onClick={showIVHandler} />
-          </ContentFlexContainer>
-        </ContentField>
-      </Contentcontainer> */}
-
-      {/* 댓글부분 */}
-      <Comment />
-
-      <Footer />
+      {/* <AnswerContainer>
+      {contents.map((content, index) => (
+        <AnswerField key={index}>
+          <InfoContainer>
+            <AuthorContainer>
+              <Graycircle src={GrayCircle} alt="Gray Circle" />
+              <ItemContent>운영진</ItemContent>
+            </AuthorContainer>
+            <Minutes>시간</Minutes>
+          </InfoContainer>
+          응답
+        </AnswerField>
+      ))}
+    </AnswerContainer> */}
     </>
   );
 }
 
-export default Qnacontent;
+export default Comment;
