@@ -7,7 +7,6 @@ const AnswerContainer = styled.div`
   width: 100%;
   background: var(--Black, #0f1015);
   padding-top: 26px;
-  height: 298px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -146,6 +145,7 @@ const AnswerText = styled.p`
 `;
 
 const AnswerField = styled.div`
+  margin-bottom: 10px;
   display: flex;
   text-align: left;
   flex-direction: column;
@@ -192,25 +192,26 @@ const ContentFlexContainer = styled.div`
   height: 100%;
 `;
 
-function Comment({postId}) {
+function Comment({ postId }) {
   const [contents, setContents] = useState([]);
-  const [executive,setExecutive] = useState('');
+  const [executive, setExecutive] = useState('');
 
   useEffect(() => {
     fetchPostId();
-  }, [postId])
+  }, [postId]);
 
-  const  fetchPostId = async () => {
+  const fetchPostId = async () => {
     try {
-      const response = await axios.get( `http://127.0.0.1:8080/api/post/${postId}/comments` );
+      const response = await axios.get(
+        `http://127.0.0.1:8080/api/post/${postId}/comments`
+      );
       const comments = response.data.data.comments;
       console.log(comments);
       setContents(comments);
-    }
-    catch (error) {
+    } catch (error) {
       console.error('게시글 목록을 가져오는 데 실패했습니다:', error);
     }
-  }
+  };
 
   const renderTextWithLineBreaks = (text) => {
     return text.split('\n').map((line, index) => (
@@ -224,17 +225,17 @@ function Comment({postId}) {
     <>
       <AnswerContainer>
         {contents.map((content, index) => (
-        <AnswerField key={index}>
-          <InfoContainer>
-            <AuthorContainer>
-              <Graycircle src={GrayCircle} alt="Gray Circle" />
-              <ItemContent>{content.name}</ItemContent>
-            </AuthorContainer>
-            <Minutes>{new Date(content.updatedAt).toLocaleString()}</Minutes>
-          </InfoContainer>
-          {content.content}
-        </AnswerField>
-      ))}
+          <AnswerField key={index}>
+            <InfoContainer>
+              <AuthorContainer>
+                <Graycircle src={GrayCircle} alt="Gray Circle" />
+                <ItemContent>{content.name}</ItemContent>
+              </AuthorContainer>
+              <Minutes>{new Date(content.updatedAt).toLocaleString()}</Minutes>
+            </InfoContainer>
+            {content.content}
+          </AnswerField>
+        ))}
       </AnswerContainer>
     </>
   );
