@@ -204,8 +204,8 @@ function Comment() {
 
   return (
     <>
-      {/* <AnswerContainer>
-      {contents.map((content, index) => (
+      <AnswerContainer>
+        {/* {contents.map((content, index) => (
         <AnswerField key={index}>
           <InfoContainer>
             <AuthorContainer>
@@ -216,8 +216,8 @@ function Comment() {
           </InfoContainer>
           응답
         </AnswerField>
-      ))}
-    </AnswerContainer> */}
+      ))} */}
+      </AnswerContainer>
     </>
   );
 }
