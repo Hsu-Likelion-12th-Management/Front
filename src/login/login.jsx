@@ -4,6 +4,7 @@ import Footer from '../footer/footer';
 import Lionlogo from '../images/Layer_1.png';
 import { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const AskContainer = styled.div`
   padding-left: 20px;
@@ -70,6 +71,8 @@ function Login() {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
 
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -85,6 +88,7 @@ function Login() {
       if (response.status == 200) {
         console.log('가입 성공');
         console.log(response.data);
+        console.log(response.data.data.name);
       } else {
         console.log('가입 실패');
         console.log(response.data);
@@ -92,6 +96,7 @@ function Login() {
     } catch (error) {
       console.error('가입 중 오류 발생: ', error);
     }
+    navigate("/Qnalist");
   };
 
   return (

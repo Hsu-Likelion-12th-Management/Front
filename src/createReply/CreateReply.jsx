@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import GrayCircle from "../images/graycircle.png";
@@ -8,22 +8,20 @@ const RegisterContainer = styled.div`
   height: 6.25rem;
   flex-shrink: 0;
   border-radius: 0.5rem;
-  border: 1px solid var(--Gray5, #2a2a3a);
+  border: 1px solid ${({activeBorder}) => activeBorder ? "#7F85A3" : "var(--Gray5, #2a2a3a)"};
   background: #2a2a3a;
   margin: 0 auto;
 `;
 
-const ExecutiveField = styled.input`
+const ExecutiveField = styled.p`
   color: var(--White, #FFF);
   font-family: Pretendard;
   font-size: 0.875rem;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+  margin: 0;
   margin-left: 0.5rem;
-  // &::placeholder {
-  //   color: white;
-  // }
 `
 
 const SubmitButton = styled.button`
@@ -58,17 +56,26 @@ export default function CreateReply({ postId }) {
   const [executive, setExecutive] = useState("user");
   const [border, setBorder] = useState(false);
 
-  // const handleActive = () =>  {
-  //   setBorder
-  // }
+  const handleActive = () =>  {
+    setBorder(true);
+  }
 
   const handleReply = (e) => {
     setReply(e.target.value);
   };
 
-  const handleExecutive = (e) => {
-    setExecutive(e.target.value);
-  };
+  useEffect(() => {
+    getName();
+  },[])
+
+  const getName = async () => {
+    try {
+      const response = await axios.get('http://127.0.0.1:8080/api/admin/login');
+      console.log(response.data);
+    } catch (error) {
+      console.error("오류", error)
+    }
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -78,7 +85,7 @@ export default function CreateReply({ postId }) {
         `http://127.0.0.1:8080/api/post/${postId}/comments`,
         {
           id: "test",
-          name: executive,
+          name: "테스트",
           content: reply,
         }
       );
@@ -96,14 +103,14 @@ export default function CreateReply({ postId }) {
   };
 
   return (
-    <RegisterContainer>
+    <RegisterContainer activeBorder={border}>
       <form>
         <div style={{display: "flex", alignItems: "center", marginTop: "1.06rem", position: "relative"}}>
           <img src={GrayCircle} alt="graycircleImg" style={{marginLeft: "1rem"}} />
-          <ExecutiveField type="text" placeholder="이름" onChange={handleExecutive} />
+          <ExecutiveField>{executive}</ExecutiveField>
           <SubmitButton onClick={handleSubmit}>등록</SubmitButton>
         </div>
-        <ReplyField type="text" placeholder="댓글을 남겨보세요" onChange={handleReply} />
+        <ReplyField type="text" placeholder="댓글을 남겨보세요" onChange={handleReply} onFocus={handleActive} />
       </form>
     </RegisterContainer>
   );
