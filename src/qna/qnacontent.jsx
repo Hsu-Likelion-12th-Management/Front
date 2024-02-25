@@ -10,6 +10,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import axios from 'axios';
 import Comment from './comment';
+import CreateReply from '../createReply/CreateReply';
 
 const PageLayout = styled.div`
   display: flex;
@@ -366,6 +367,7 @@ function Qnacontent() {
       </Contentcontainer>
 
       {/* 댓글부분 */}
+      <CreateReply postId={postId} />
       <Comment postId={postId} />
       <Footer />
     </>

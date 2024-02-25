@@ -206,7 +206,7 @@ function Comment({ postId }) {
         `http://127.0.0.1:8080/api/post/${postId}/comments`
       );
       const comments = response.data.data.comments;
-      console.log(comments);
+      // console.log(comments);
       setContents(comments);
     } catch (error) {
       console.error('게시글 목록을 가져오는 데 실패했습니다:', error);
