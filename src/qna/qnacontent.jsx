@@ -242,7 +242,9 @@ function Qnacontent() {
   const [editMode, setEditMode] = useState(false);
 
   const location = useLocation();
-  const { executiveName, id } = location.state || {};
+
+  const executiveName = localStorage.getItem('executiveName');
+  const id = localStorage.getItem('id');
 
   const renderTextWithLineBreaks = (text) => {
     return text.split('\n').map((line, index) => (
@@ -282,6 +284,8 @@ function Qnacontent() {
 
   useEffect(() => {
     fetchPostDetails();
+    console.log(executiveName);
+    console.log(id);
   }, [postId]);
 
   const EditPost = async () => {
@@ -392,7 +396,11 @@ function Qnacontent() {
       </Contentcontainer>
 
       {/* 댓글부분 */}
-      <CreateReply postId={postId} executiveName={executiveName} executiveId={id} />
+      <CreateReply
+        postId={postId}
+        executiveName={executiveName}
+        executiveId={id}
+      />
       <Comment postId={postId} />
       <Footer />
     </>

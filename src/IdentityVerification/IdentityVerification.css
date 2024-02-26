@@ -79,15 +79,14 @@
 }
 
 .errorMessage.show {
-  visibility: visible; /* 메시지가 있을 때는 표시합니다. */
+  visibility: visible;
 }
 
 .confirmButtonContainer {
-  position: relative; /* 확인 버튼을 위한 상대적 위치 컨테이너 */
+  position: relative;
 }
 
 .confirmButton {
-  position: absolute; /* 절대 위치 설정 */
-  bottom: 24px; /* 컨테이너 하단으로부터의 거리 */
-  /* 나머지 스타일... */
+  position: absolute;
+  bottom: 24px;
 }

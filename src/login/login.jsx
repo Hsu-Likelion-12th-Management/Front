@@ -79,13 +79,10 @@ function Login() {
     e.preventDefault();
 
     try {
-      const response = await axios.post(
-        'http://3.38.108.41/api/admin/login',
-        {
-          id,
-          password,
-        }
-      );
+      const response = await axios.post('http://3.38.108.41/api/admin/login', {
+        id,
+        password,
+      });
 
       if (response.status == 200) {
         console.log('가입 성공');
@@ -100,7 +97,9 @@ function Login() {
     } catch (error) {
       console.error('가입 중 오류 발생: ', error);
     }
-    navigate("/Qnalist", {state: {executiveName, id}});
+    localStorage.setItem('id', id);
+    localStorage.setItem('executiveName', executiveName);
+    navigate('/Qnalist');
   };
 
   return (
