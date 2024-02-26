@@ -211,14 +211,11 @@ function Qnalist() {
   const pageNumbers = [1, 2, 3];
   const [questions, setQuestions] = useState([]);
 
-  // 페이징
   const questionsPerPage = 10;
 
-  // 전체 페이지 수 계산 (예: totalQuestions는 API에서 가져온 전체 질문 수입니다)
   const totalQuestions = questions.length;
   const totalPages = Math.ceil(totalQuestions / questionsPerPage);
 
-  // 현재 페이지에 표시할 질문들 계산
   const indexOfLastQuestion = currentPage * questionsPerPage;
   const indexOfFirstQuestion = indexOfLastQuestion - questionsPerPage;
   const currentQuestions = questions.slice(
@@ -226,7 +223,6 @@ function Qnalist() {
     indexOfLastQuestion
   );
 
-  // 페이지 클릭 핸들러
   const handlePageClick = (number) => {
     setCurrentPage(number);
   };
@@ -236,7 +232,8 @@ function Qnalist() {
       try {
         const response = await axios.get('http://127.0.0.1:8080/api/post/all');
         console.log(response.data.data.posts);
-        setQuestions(response.data.data.posts || []);
+        const reversedData = [...response.data.data.posts].reverse();
+        setQuestions(reversedData || []);
       } catch (error) {
         console.error('게시글 목록을 가져오는 데 실패했습니다:', error);
         setQuestions([]);
@@ -303,10 +300,7 @@ function Qnalist() {
 
         <PaginationContainer>
           {Array.from({ length: totalPages }, (_, index) => index + 1).map(
-            (
-              number,
-              index // 여기서 index를 추가해야 합니다.
-            ) => (
+            (number, index) => (
               <React.Fragment key={number}>
                 <PageNumber
                   onClick={() => handlePageClick(number)}
