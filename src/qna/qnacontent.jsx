@@ -6,7 +6,7 @@ import Edit from '../images/editpencil.png';
 import { useState } from 'react';
 import IdentityVerification from '../IdentityVerification/IdentityVerification';
 import Overlay from '../overlay/Overlay';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import axios from 'axios';
 import Comment from './comment';
@@ -241,6 +241,9 @@ function Qnacontent() {
   const [isVerified, setIsVerified] = useState(false);
   const [editMode, setEditMode] = useState(false);
 
+  const location = useLocation();
+  const { executiveName, id } = location.state || {};
+
   const renderTextWithLineBreaks = (text) => {
     return text.split('\n').map((line, index) => (
       <StyledParagraph key={index} style={{ margin: 0 }}>
@@ -389,7 +392,7 @@ function Qnacontent() {
       </Contentcontainer>
 
       {/* 댓글부분 */}
-      <CreateReply postId={postId} />
+      <CreateReply postId={postId} executiveName={executiveName} executiveId={id} />
       <Comment postId={postId} />
       <Footer />
     </>

@@ -3,6 +3,8 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import GrayCircle from '../images/graycircle.png';
 
+const url = `http://3.38.108.41/`;
+
 const AnswerContainer = styled.div`
   width: 100%;
   background: var(--Black, #0f1015);
@@ -203,10 +205,10 @@ function Comment({ postId }) {
   const fetchPostId = async () => {
     try {
       const response = await axios.get(
-        `http://127.0.0.1:8080/api/post/${postId}/comments`
+        `http://3.38.108.41/api/post/${postId}/comments`
       );
       const comments = response.data.data.comments;
-      // console.log(comments);
+      console.log("댓글 조회 성공");
       setContents(comments);
     } catch (error) {
       console.error('게시글 목록을 가져오는 데 실패했습니다:', error);

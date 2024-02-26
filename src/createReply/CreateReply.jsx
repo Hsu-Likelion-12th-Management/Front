@@ -3,6 +3,8 @@ import axios from "axios";
 import styled from "styled-components";
 import GrayCircle from "../images/graycircle.png";
 
+const url = `http://3.38.108.41/`;
+
 const RegisterContainer = styled.div`
   width: 90%;
   height: 6.25rem;
@@ -51,7 +53,7 @@ const ReplyField = styled.input`
   line-height: 170%; /* 1.275rem */
 `
 
-export default function CreateReply({ postId }) {
+export default function CreateReply({ postId, executiveName, executiveId }) {
   const [reply, setReply] = useState("");
   const [executive, setExecutive] = useState("user");
   const [border, setBorder] = useState(false);
@@ -65,24 +67,26 @@ export default function CreateReply({ postId }) {
   };
 
   useEffect(() => {
-    getName();
-  },[])
+    setExecutive(executiveName);
+    console.log(executiveName);
+    console.log(executiveId);
+  },[executive])
 
-  const getName = async () => {
-    try {
-      const response = await axios.get('http://127.0.0.1:8080/api/admin/login');
-      console.log(response.data);
-    } catch (error) {
-      console.error("오류", error)
-    }
-  }
+  // const getName = async () => {
+  //   try {
+  //     const response = await axios.get('http://3.38.108.41/api/admin/login');
+  //     console.log(response.data);
+  //   } catch (error) {
+  //     console.error("오류", error)
+  //   }
+  // }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       const response = await axios.post(
-        `http://127.0.0.1:8080/api/post/${postId}/comments`,
+        `http://3.38.108.41/api/post/${postId}/comments`,
         {
           id: "test",
           name: "테스트",
@@ -91,7 +95,7 @@ export default function CreateReply({ postId }) {
       );
 
       if (response.status === 200) {
-        console.log("댓글 작성");
+        console.log("댓글 작성 성공");
         console.log(response.data);
       } else {
         console.log("작성 실패");

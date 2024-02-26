@@ -71,6 +71,8 @@ function Login() {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
 
+  let executiveName;
+
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -78,7 +80,7 @@ function Login() {
 
     try {
       const response = await axios.post(
-        'http://127.0.0.1:8080/api/admin/login',
+        'http://3.38.108.41/api/admin/login',
         {
           id,
           password,
@@ -88,7 +90,9 @@ function Login() {
       if (response.status == 200) {
         console.log('가입 성공');
         console.log(response.data);
+        console.log(id);
         console.log(response.data.data.name);
+        executiveName = response.data.data.name;
       } else {
         console.log('가입 실패');
         console.log(response.data);
@@ -96,7 +100,7 @@ function Login() {
     } catch (error) {
       console.error('가입 중 오류 발생: ', error);
     }
-    navigate("/Qnalist");
+    navigate("/Qnalist", {state: {executiveName, id}});
   };
 
   return (

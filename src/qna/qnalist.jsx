@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import axios from 'axios';
+import { useLocation } from 'react-router-dom';
 
 const QuestionContainer = styled.div`
   width: 100%;
@@ -211,6 +212,9 @@ function Qnalist() {
   const pageNumbers = [1, 2, 3];
   const [questions, setQuestions] = useState([]);
 
+  const location = useLocation();
+  const { executiveName, id } = location.state || {};
+
   const questionsPerPage = 10;
 
   const totalQuestions = questions.length;
@@ -241,6 +245,9 @@ function Qnalist() {
     };
 
     fetchQuestions();
+
+    console.log(executiveName);
+    console.log(id);
   }, []);
 
   const formatDate = (dateString) => {
@@ -278,7 +285,7 @@ function Qnalist() {
           <QuestionListContainer>
             {currentQuestions.map((question) => (
               <div key={question.postId}>
-                <Link to={`/Qnacontent/${question.postId}`}>
+                <Link to={{pathname: `/Qnacontent/${question.postId}`, state: { executiveName, id }}}>
                   <QuestionItem>
                     <AuthorContainer>
                       <Graycircle
