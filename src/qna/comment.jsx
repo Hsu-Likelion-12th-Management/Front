@@ -171,15 +171,17 @@ const Minutes = styled.p`
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+  margin-left: 0.5rem;
 `;
 
 const InfoContainer = styled.div`
   display: flex;
-  justify-content: space-between;
+  // justify-content: space-between;
   align-items: center;
   text-align: center;
   width: 100%;
   margin-bottom: 8px;
+  position: relative;
 `;
 
 const AnswerContent = styled.div`
@@ -193,6 +195,26 @@ const ContentFlexContainer = styled.div`
   padding-bottom: 12px;
   height: 100%;
 `;
+
+const ButtonStyle = `
+color: var(--Gray3, #626682);
+font-family: Pretendard;
+font-size: 0.625rem;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+background: inherit;
+border: none;
+`
+
+const ModifyButton = styled.button`
+  ${ButtonStyle};
+  margin-right: 0.5rem;
+`
+
+const DeleteButton = styled.button`
+  ${ButtonStyle};
+`
 
 function Comment({ postId }) {
   const [contents, setContents] = useState([]);
@@ -233,7 +255,11 @@ function Comment({ postId }) {
                 <Graycircle src={GrayCircle} alt="Gray Circle" />
                 <ItemContent>{content.name}</ItemContent>
               </AuthorContainer>
-              <Minutes>{new Date(content.updatedAt).toLocaleString()}</Minutes>
+              <Minutes>N분시간전</Minutes>
+              <div style={{position: 'absolute', right: "0.75rem"}}>
+                <ModifyButton>수정</ModifyButton>
+                <DeleteButton>삭제</DeleteButton>
+              </div>
             </InfoContainer>
             {content.content}
           </AnswerField>
