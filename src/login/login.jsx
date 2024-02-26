@@ -90,6 +90,9 @@ function Login() {
         console.log(id);
         console.log(response.data.data.name);
         executiveName = response.data.data.name;
+        localStorage.setItem('id', id);
+        localStorage.setItem('executiveName', executiveName);
+        navigate('/Qnalist');
       } else {
         console.log('가입 실패');
         console.log(response.data);
@@ -97,9 +100,6 @@ function Login() {
     } catch (error) {
       console.error('가입 중 오류 발생: ', error);
     }
-    localStorage.setItem('id', id);
-    localStorage.setItem('executiveName', executiveName);
-    navigate('/Qnalist');
   };
 
   return (

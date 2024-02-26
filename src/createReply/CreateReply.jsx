@@ -53,9 +53,10 @@ const ReplyField = styled.input`
   line-height: 170%; /* 1.275rem */
 `
 
-export default function CreateReply({ postId, executiveName, executiveId }) {
+export default function CreateReply({ postId, executiveName, id }) {
   const [reply, setReply] = useState("");
   const [executive, setExecutive] = useState("user");
+  const [executiveId, setExecutiveId] = useState("id");
   const [border, setBorder] = useState(false);
 
   const handleActive = () =>  {
@@ -68,6 +69,7 @@ export default function CreateReply({ postId, executiveName, executiveId }) {
 
   useEffect(() => {
     setExecutive(executiveName);
+    setExecutiveId(id);
     console.log(executiveName);
     console.log(executiveId);
   },[executive])
@@ -82,13 +84,13 @@ export default function CreateReply({ postId, executiveName, executiveId }) {
   // }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
 
     try {
       const response = await axios.post(
         `http://3.38.108.41/api/post/${postId}/comments`,
         {
-          id: "test",
+          id: executiveId,
           name: "테스트",
           content: reply,
         }
@@ -97,6 +99,9 @@ export default function CreateReply({ postId, executiveName, executiveId }) {
       if (response.status === 200) {
         console.log("댓글 작성 성공");
         console.log(response.data);
+        const commentText = await axios.get(`http://3.38.108.41/api/post/${postId}/comments`);
+        const commentId = commentText.data.data.commentsId;
+        localStorage.setItem("commentsId", commentId);
       } else {
         console.log("작성 실패");
         console.log(response.data);

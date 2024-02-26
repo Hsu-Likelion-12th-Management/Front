@@ -220,6 +220,8 @@ function Comment({ postId }) {
   const [contents, setContents] = useState([]);
   const [executive, setExecutive] = useState('');
 
+  const commentsId = localStorage.getItem("commentsId");
+
   useEffect(() => {
     fetchPostId();
   }, [postId]);

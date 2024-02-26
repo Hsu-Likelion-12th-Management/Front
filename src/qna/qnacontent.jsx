@@ -399,7 +399,7 @@ function Qnacontent() {
       <CreateReply
         postId={postId}
         executiveName={executiveName}
-        executiveId={id}
+        id={id}
       />
       <Comment postId={postId} />
       <Footer />
