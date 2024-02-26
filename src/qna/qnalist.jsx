@@ -211,6 +211,26 @@ function Qnalist() {
   const pageNumbers = [1, 2, 3];
   const [questions, setQuestions] = useState([]);
 
+  // 페이징
+  const questionsPerPage = 10;
+
+  // 전체 페이지 수 계산 (예: totalQuestions는 API에서 가져온 전체 질문 수입니다)
+  const totalQuestions = questions.length;
+  const totalPages = Math.ceil(totalQuestions / questionsPerPage);
+
+  // 현재 페이지에 표시할 질문들 계산
+  const indexOfLastQuestion = currentPage * questionsPerPage;
+  const indexOfFirstQuestion = indexOfLastQuestion - questionsPerPage;
+  const currentQuestions = questions.slice(
+    indexOfFirstQuestion,
+    indexOfLastQuestion
+  );
+
+  // 페이지 클릭 핸들러
+  const handlePageClick = (number) => {
+    setCurrentPage(number);
+  };
+
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
@@ -259,8 +279,8 @@ function Qnalist() {
             <StyledLink to="/question">질문하기</StyledLink>
           </AskContainer>
           <QuestionListContainer>
-            {questions.map((question) => (
-              <div key={questions.id}>
+            {currentQuestions.map((question) => (
+              <div key={question.postId}>
                 <Link to={`/Qnacontent/${question.postId}`}>
                   <QuestionItem>
                     <AuthorContainer>
@@ -282,21 +302,26 @@ function Qnalist() {
         </ContentContainer>
 
         <PaginationContainer>
-          {pageNumbers.map((number, index) => (
-            <React.Fragment key={number}>
-              <PageNumber
-                onClick={() => handlePageClick(number)}
-                style={
-                  currentPage === number
-                    ? { color: 'var(--White, #FFF)', fontWeight: 700 }
-                    : {}
-                }
-              >
-                {number}
-              </PageNumber>
-              {index < pageNumbers.length - 1 && <Divider />}
-            </React.Fragment>
-          ))}
+          {Array.from({ length: totalPages }, (_, index) => index + 1).map(
+            (
+              number,
+              index // 여기서 index를 추가해야 합니다.
+            ) => (
+              <React.Fragment key={number}>
+                <PageNumber
+                  onClick={() => handlePageClick(number)}
+                  style={
+                    currentPage === number
+                      ? { color: 'var(--White, #FFF)', fontWeight: 700 }
+                      : {}
+                  }
+                >
+                  {number}
+                </PageNumber>
+                {index < totalPages - 1 && <Divider />}
+              </React.Fragment>
+            )
+          )}
         </PaginationContainer>
 
         <Footer />
