@@ -213,7 +213,6 @@ function Qnalist() {
   const [questions, setQuestions] = useState([]);
 
   const location = useLocation();
-  const { executiveName, id } = location.state || {};
 
   const questionsPerPage = 10;
 
@@ -246,8 +245,8 @@ function Qnalist() {
 
     fetchQuestions();
 
-    console.log(executiveName);
-    console.log(id);
+    // console.log(executiveName);
+    // console.log(id);
   }, []);
 
   const formatDate = (dateString) => {
@@ -285,7 +284,7 @@ function Qnalist() {
           <QuestionListContainer>
             {currentQuestions.map((question) => (
               <div key={question.postId}>
-                <Link to={{pathname: `/Qnacontent/${question.postId}`, state: { executiveName, id }}}>
+                <Link to={{ pathname: `/Qnacontent/${question.postId}` }}>
                   <QuestionItem>
                     <AuthorContainer>
                       <Graycircle
