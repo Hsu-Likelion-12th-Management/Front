@@ -239,6 +239,7 @@ function Qnacontent() {
   const { postId } = useParams();
   const [post, setPosts] = useState(null);
   const [isVerified, setIsVerified] = useState(false);
+  const [editMode, setEditMode] = useState(false);
 
   const renderTextWithLineBreaks = (text) => {
     return text.split('\n').map((line, index) => (
@@ -264,19 +265,19 @@ function Qnacontent() {
     setShowIV(false);
   };
 
-  useEffect(() => {
-    const fetchPostDetails = async () => {
-      try {
-        const response = await axios.get(
-          `http://127.0.0.1:8080/api/post?postId=${postId}`
-        );
-        setPosts(response.data.data);
-        console.log(response.data);
-      } catch (error) {
-        console.error('게시글 목록을 가져오는 데 실패했습니다:', error);
-      }
-    };
+  const fetchPostDetails = async () => {
+    try {
+      const response = await axios.get(
+        `http://127.0.0.1:8080/api/post?postId=${postId}`
+      );
+      setPosts(response.data.data);
+      console.log(response.data);
+    } catch (error) {
+      console.error('게시글 상세 정보를 가져오는 데 실패했습니다:', error);
+    }
+  };
 
+  useEffect(() => {
     fetchPostDetails();
   }, [postId]);
 
@@ -293,12 +294,28 @@ function Qnacontent() {
 
       if (response.status === 200) {
         console.log('게시글 업데이트 성공', response.data);
-        setPosts(response.data);
+        fetchPostDetails();
+        setEditMode(false);
       } else {
         console.log('게시글 업데이트 실패', response.data);
       }
     } catch (error) {
       console.error('게시글 업데이트 중 오류 발생:', error);
+    }
+  };
+
+  const onVerifySuccess = () => {
+    //본인 인증 성공 후
+    setIsVerified(true);
+    setEditMode(true);
+    setShowIV(false);
+  };
+
+  const EditIconClickHandler = () => {
+    if (isVerified) {
+      setEditMode(true); // 이미 인증되었다면 바로 수정 모드로
+    } else {
+      showIVHandler(); // 인증되지 않았다면 본인 인증 모달 표시
     }
   };
 
@@ -315,7 +332,7 @@ function Qnacontent() {
         <IdentityVerification
           closeIVHandler={closeIVHandler}
           postId={postId}
-          onVerifySuccess={() => setIsVerified(true)}
+          onVerifySuccess={onVerifySuccess}
         />
       )}
       {showIV && <Overlay showIV={showIV} />}
@@ -328,7 +345,7 @@ function Qnacontent() {
               <ItemContent>{post.postedUserName}</ItemContent>
             </AuthorContainer>
 
-            {isVerified ? ( //인증되면
+            {isVerified && editMode ? ( //인증되고 수정모드
               <>
                 <Rowcontainer>
                   <EditInputField
@@ -349,6 +366,7 @@ function Qnacontent() {
                 <SubmitButton onClick={EditPost}>등록</SubmitButton>
               </>
             ) : (
+              //인증이지만 수정모드 x
               <>
                 <Rowcontainer>
                   <TitleP>{post.title}</TitleP>
@@ -357,7 +375,11 @@ function Qnacontent() {
                 <ContentField>
                   <ContentFlexContainer>
                     <StyledParagraph>{post.content}</StyledParagraph>
-                    <EditIcon src={Edit} alt="수정" onClick={showIVHandler} />
+                    <EditIcon
+                      src={Edit}
+                      alt="수정"
+                      onClick={EditIconClickHandler}
+                    />
                   </ContentFlexContainer>
                 </ContentField>
               </>

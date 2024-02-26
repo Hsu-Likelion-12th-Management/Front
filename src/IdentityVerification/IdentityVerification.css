@@ -3,7 +3,7 @@
   height: 19.5625rem;
   flex-shrink: 0;
   border-radius: 0.5rem;
-  background: var(--White, #FFF);
+  background: var(--White, #fff);
   position: absolute;
   top: 40%;
   left: 50%;
@@ -21,7 +21,7 @@
 }
 
 .ivText {
-  color: var(--Black, #0F1015);
+  color: var(--Black, #0f1015);
   font-family: Pretendard;
   font-size: 1rem;
   font-style: normal;
@@ -34,7 +34,6 @@
   margin-top: 2.25rem;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
 }
 
 .inputContainer input {
@@ -42,11 +41,11 @@
   height: 2.5rem;
   flex-shrink: 0;
   border-radius: 0.25rem;
-  background: #F0F1F9;
+  background: #f0f1f9;
   padding-left: 0.81rem;
 }
 .inputContainer input::placeholder {
-  color: var(--Gray1, #BFC4D8);
+  color: var(--Gray1, #bfc4d8);
   font-family: Pretendard;
   font-size: 0.875rem;
   font-style: normal;
@@ -60,11 +59,35 @@
   height: 2.5rem;
   flex-shrink: 0;
   border-radius: 0.25rem;
-  background: var(--Gray5, #2A2A3A);
-  color: var(--White, #FFF);
+  background: var(--Gray5, #2a2a3a);
+  color: var(--White, #fff);
   font-family: Pretendard;
   font-size: 1rem;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+}
+
+.errorMessage {
+  color: #f44;
+  visibility: hidden;
+  font-family: Pretendard;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.errorMessage.show {
+  visibility: visible; /* 메시지가 있을 때는 표시합니다. */
+}
+
+.confirmButtonContainer {
+  position: relative; /* 확인 버튼을 위한 상대적 위치 컨테이너 */
+}
+
+.confirmButton {
+  position: absolute; /* 절대 위치 설정 */
+  bottom: 24px; /* 컨테이너 하단으로부터의 거리 */
+  /* 나머지 스타일... */
 }

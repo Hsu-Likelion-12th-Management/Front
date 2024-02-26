@@ -211,12 +211,29 @@ function Qnalist() {
   const pageNumbers = [1, 2, 3];
   const [questions, setQuestions] = useState([]);
 
+  const questionsPerPage = 10;
+
+  const totalQuestions = questions.length;
+  const totalPages = Math.ceil(totalQuestions / questionsPerPage);
+
+  const indexOfLastQuestion = currentPage * questionsPerPage;
+  const indexOfFirstQuestion = indexOfLastQuestion - questionsPerPage;
+  const currentQuestions = questions.slice(
+    indexOfFirstQuestion,
+    indexOfLastQuestion
+  );
+
+  const handlePageClick = (number) => {
+    setCurrentPage(number);
+  };
+
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
         const response = await axios.get('http://127.0.0.1:8080/api/post/all');
         console.log(response.data.data.posts);
-        setQuestions(response.data.data.posts || []);
+        const reversedData = [...response.data.data.posts].reverse();
+        setQuestions(reversedData || []);
       } catch (error) {
         console.error('게시글 목록을 가져오는 데 실패했습니다:', error);
         setQuestions([]);
@@ -259,8 +276,8 @@ function Qnalist() {
             <StyledLink to="/question">질문하기</StyledLink>
           </AskContainer>
           <QuestionListContainer>
-            {questions.map((question) => (
-              <div key={questions.id}>
+            {currentQuestions.map((question) => (
+              <div key={question.postId}>
                 <Link to={`/Qnacontent/${question.postId}`}>
                   <QuestionItem>
                     <AuthorContainer>
@@ -282,21 +299,23 @@ function Qnalist() {
         </ContentContainer>
 
         <PaginationContainer>
-          {pageNumbers.map((number, index) => (
-            <React.Fragment key={number}>
-              <PageNumber
-                onClick={() => handlePageClick(number)}
-                style={
-                  currentPage === number
-                    ? { color: 'var(--White, #FFF)', fontWeight: 700 }
-                    : {}
-                }
-              >
-                {number}
-              </PageNumber>
-              {index < pageNumbers.length - 1 && <Divider />}
-            </React.Fragment>
-          ))}
+          {Array.from({ length: totalPages }, (_, index) => index + 1).map(
+            (number, index) => (
+              <React.Fragment key={number}>
+                <PageNumber
+                  onClick={() => handlePageClick(number)}
+                  style={
+                    currentPage === number
+                      ? { color: 'var(--White, #FFF)', fontWeight: 700 }
+                      : {}
+                  }
+                >
+                  {number}
+                </PageNumber>
+                {index < totalPages - 1 && <Divider />}
+              </React.Fragment>
+            )
+          )}
         </PaginationContainer>
 
         <Footer />
