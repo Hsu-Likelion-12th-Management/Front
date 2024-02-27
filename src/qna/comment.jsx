@@ -217,21 +217,18 @@ const DeleteButton = styled.button`
   ${ButtonStyle};
 `;
 
-function Comment({ postId, executiveName, id, updateCommentsCount }) {
-
+function Comment({ postId, executiveName, id }) {
   const [contents, setContents] = useState([]);
   const [executive, setExecutive] = useState("");
   const [reply, setReply] = useState("");
   const [executiveId, setExecutiveId] = useState("id");
   const [isActive, setIsActive] = useState(false);
+  const [editMode, setEditMode] = useState(false);
+  const [selectedContent, setSelectedContent] = useState(null);
 
-  const handleActive = () =>  {
+  const handleActive = () => {
     setIsActive(true);
-  }
-
-  const hasComments = contents.length > 0;
-
-  const commentsId = localStorage.getItem('commentsId');
+  };
 
   useEffect(() => {
     fetchPostId();
@@ -243,9 +240,8 @@ function Comment({ postId, executiveName, id, updateCommentsCount }) {
         `http://3.38.108.41/api/post/${postId}/comments`
       );
       const comments = response.data.data.comments;
-      console.log('댓글 조회 성공');
+      console.log("댓글 조회 성공");
       setContents(comments);
-      updateCommentsCount(comments.length);
     } catch (error) {
       console.error("게시글 목록을 가져오는 데 실패했습니다:", error);
     }
@@ -272,13 +268,14 @@ function Comment({ postId, executiveName, id, updateCommentsCount }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(postId);
 
     try {
       const response = await axios.post(
         `http://3.38.108.41/api/post/${postId}/comments`,
         {
           id: executiveId,
-          name: "테스트",
+          name: executiveName,
           content: reply,
         }
       );
@@ -288,7 +285,6 @@ function Comment({ postId, executiveName, id, updateCommentsCount }) {
         console.log(response.data);
         const commentId = response.data.data.commentsId;
         console.log(commentId);
-        // localStorage.setItem("commentsId", commentId);
         setReply("");
         fetchPostId();
         setIsActive(false);
@@ -298,23 +294,108 @@ function Comment({ postId, executiveName, id, updateCommentsCount }) {
       }
     } catch (error) {
       console.error("오류", error);
+      alert("접근 권한이 없습니다.");
+    }
+  };
+
+  const handleVerify = async (selectedContent) => {
+    try {
+      const response = await axios.post(
+        `http://3.38.108.41/api/comments/${selectedContent.commentsId}`,
+        {
+          id: executiveId,
+        }
+      );
+
+      if (response.status === 200) {
+        console.log("인증 완료");
+        setEditMode(true);
+        setReply(selectedContent.content);
+        setSelectedContent(selectedContent);
+      } else {
+        setEditMode(false);
+      }
+    } catch (error) {
+      console.error("오류", error);
+      alert("접근 권한이 없습니다.");
+    }
+  };
+
+  const handleModify = async (selectedContent) => {
+    // e.preventDefault();
+    console.log(selectedContent);
+    try {
+      const response = await axios.put(
+        `http://3.38.108.41/api/comments/${selectedContent.commentsId}`,
+        {
+          id: executiveId,
+          content: reply,
+        }
+      );
+      if (response.status === 200) {
+        console.log("수정 완료");
+        fetchPostId();
+        setEditMode(false);
+        setReply("");
+      } else {
+        console.log("수정 실패");
+      }
+    } catch (error) {
+      console.log("오류", error);
+    }
+  };
+
+  const handleDelete = async (selectedContent) => {
+    console.log(selectedContent);
+    console.log(executiveId);
+
+    try {
+      const response = await axios.delete(
+        `http://3.38.108.41/api/comments/${selectedContent.commentsId}`,
+        {
+          data: {
+            id: executiveId
+          }
+        }
+      );
+      if (response.status === 200) {
+        console.log("삭제 완료");
+        fetchPostId();
+      } else {
+        console.log("실패");
+      }
+    } catch (error) {
+      console.error("오류", error);
+      alert("접근 권한이 없습니다.");
     }
   };
 
   return (
     <>
-      <CreateReply
-        postId={postId}
-        executiveName={executiveName}
-        id={id}
-        handleSubmit={handleSubmit}
-        handleReply={handleReply}
-        executive={executive}
-        reply={reply}
-        isActive={isActive}
-        setIsActive={setIsActive}
-        handleActive={handleActive}
-      />
+      {editMode ? (
+        <CreateReply
+          handleSubmit={handleSubmit}
+          handleReply={handleReply}
+          executive={executive}
+          reply={reply}
+          isActive={isActive}
+          setIsActive={setIsActive}
+          handleActive={handleActive}
+          handleModify={handleModify}
+          editMode={editMode}
+          selectedContent={selectedContent}
+        />
+      ) : (
+        <CreateReply
+          handleSubmit={handleSubmit}
+          handleReply={handleReply}
+          executive={executive}
+          reply={reply}
+          isActive={isActive}
+          setIsActive={setIsActive}
+          handleActive={handleActive}
+        />
+      )}
       <AnswerContainer>
         {contents.map((content) => (
           <AnswerField key={content.commentsId}>
@@ -324,9 +405,13 @@ function Comment({ postId, executiveName, id, updateCommentsCount }) {
                 <ItemContent>{content.name}</ItemContent>
               </AuthorContainer>
               <Minutes>N분시간전</Minutes>
-              <div style={{ position: 'absolute', right: '0.75rem' }}>
-                <ModifyButton>수정</ModifyButton>
-                <DeleteButton>삭제</DeleteButton>
+              <div style={{ position: "absolute", right: "0.75rem" }}>
+                <ModifyButton onClick={() => handleVerify(content)}>
+                  수정
+                </ModifyButton>
+                <DeleteButton onClick={() => handleDelete(content)}>
+                  삭제
+                </DeleteButton>
               </div>
             </InfoContainer>
             {content.content}
