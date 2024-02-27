@@ -279,7 +279,7 @@ function Qnacontent() {
   const fetchPostDetails = async () => {
     try {
       const response = await axios.get(
-        `http://127.0.0.1:8080/api/post?postId=${postId}`
+        `http://3.38.108.41/api/post?postId=${postId}`
       );
       setPosts(response.data.data);
       console.log(response.data);
@@ -297,7 +297,7 @@ function Qnacontent() {
   const EditPost = async () => {
     try {
       const response = await axios.put(
-        `http://127.0.0.1:8080/api/post/${postId}`,
+        `http://3.38.108.41/api/post/${postId}`,
         {
           postedUserName: post.postedUserName,
           title: post.title,
@@ -414,7 +414,12 @@ function Qnacontent() {
         executiveName={executiveName}
         id={id}
       /> */}
-      <Comment postId={postId} executiveName={executiveName} id={id} updateCommentsCount={updateCommentsCount} />
+      <Comment
+        postId={postId}
+        executiveName={executiveName}
+        id={id}
+        updateCommentsCount={updateCommentsCount}
+      />
       <Footer />
     </>
   );
