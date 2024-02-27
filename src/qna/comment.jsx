@@ -1,7 +1,8 @@
-import styled from 'styled-components';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import GrayCircle from '../images/graycircle.png';
+import styled from "styled-components";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import GrayCircle from "../images/graycircle.png";
+import CreateReply from "../createReply/CreateReply";
 
 const url = `http://3.38.108.41/`;
 
@@ -35,7 +36,7 @@ const IntroP = styled.p`
   font-size: 24px;
   font-weight: bold;
   margin-left: 16px;
-  color: ${(props) => props.color || 'white'};
+  color: ${(props) => props.color || "white"};
 `;
 
 const AuthorContainer = styled.div`
@@ -105,13 +106,13 @@ const Reply = styled.div`
   line-height: normal;
   border: 2px solid
     ${(props) =>
-      props.status === '답변 중'
-        ? 'var(--Sub-color, #FF7710)'
-        : 'var(--Gray2, #7f85a3)'};
+      props.status === "답변 중"
+        ? "var(--Sub-color, #FF7710)"
+        : "var(--Gray2, #7f85a3)"};
   color: ${(props) =>
-    props.status === '답변 중'
-      ? 'var(--Sub-color, #FF7710)'
-      : 'var(--Gray2, #7f85a3)'};
+    props.status === "답변 중"
+      ? "var(--Sub-color, #FF7710)"
+      : "var(--Gray2, #7f85a3)"};
 `;
 
 const ContentField = styled.div`
@@ -205,20 +206,27 @@ font-weight: 600;
 line-height: normal;
 background: inherit;
 border: none;
-`
+`;
 
 const ModifyButton = styled.button`
   ${ButtonStyle};
   margin-right: 0.5rem;
-`
+`;
 
 const DeleteButton = styled.button`
   ${ButtonStyle};
-`
+`;
 
-function Comment({ postId }) {
+function Comment({ postId, executiveName, id }) {
   const [contents, setContents] = useState([]);
-  const [executive, setExecutive] = useState('');
+  const [executive, setExecutive] = useState("");
+  const [reply, setReply] = useState("");
+  const [executiveId, setExecutiveId] = useState("id");
+  const [isActive, setIsActive] = useState(false);
+
+  const handleActive = () =>  {
+    setIsActive(true);
+  }
 
   const commentsId = localStorage.getItem("commentsId");
 
@@ -235,30 +243,84 @@ function Comment({ postId }) {
       console.log("댓글 조회 성공");
       setContents(comments);
     } catch (error) {
-      console.error('게시글 목록을 가져오는 데 실패했습니다:', error);
+      console.error("게시글 목록을 가져오는 데 실패했습니다:", error);
     }
   };
 
   const renderTextWithLineBreaks = (text) => {
-    return text.split('\n').map((line, index) => (
+    return text.split("\n").map((line, index) => (
       <StyledParagraph key={index} style={{ margin: 0 }}>
         {line}
       </StyledParagraph>
     ));
   };
 
+  const handleReply = (e) => {
+    setReply(e.target.value);
+  };
+
+  useEffect(() => {
+    setExecutive(executiveName);
+    setExecutiveId(id);
+    console.log(executiveName);
+    console.log(executiveId);
+  }, [executive]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post(
+        `http://3.38.108.41/api/post/${postId}/comments`,
+        {
+          id: executiveId,
+          name: "테스트",
+          content: reply,
+        }
+      );
+
+      if (response.status === 200) {
+        console.log("댓글 작성 성공");
+        console.log(response.data);
+        const commentId = response.data.data.commentsId;
+        console.log(commentId);
+        // localStorage.setItem("commentsId", commentId);
+        setReply("");
+        fetchPostId();
+        setIsActive(false);
+      } else {
+        console.log("작성 실패");
+        console.log(response.data);
+      }
+    } catch (error) {
+      console.error("오류", error);
+    }
+  };
+
   return (
     <>
+      <CreateReply
+        postId={postId}
+        executiveName={executiveName}
+        id={id}
+        handleSubmit={handleSubmit}
+        handleReply={handleReply}
+        executive={executive}
+        reply={reply}
+        isActive={isActive}
+        setIsActive={setIsActive}
+        handleActive={handleActive}
+      />
       <AnswerContainer>
-        {contents.map((content, index) => (
-          <AnswerField key={index}>
+        {contents.map((content) => (
+          <AnswerField key={content.commentsId}>
             <InfoContainer>
               <AuthorContainer>
                 <Graycircle src={GrayCircle} alt="Gray Circle" />
                 <ItemContent>{content.name}</ItemContent>
               </AuthorContainer>
               <Minutes>N분시간전</Minutes>
-              <div style={{position: 'absolute', right: "0.75rem"}}>
+              <div style={{ position: "absolute", right: "0.75rem" }}>
                 <ModifyButton>수정</ModifyButton>
                 <DeleteButton>삭제</DeleteButton>
               </div>
