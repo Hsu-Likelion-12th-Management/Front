@@ -208,6 +208,12 @@ const ContentContainer = styled.div`
 `;
 
 function Qnalist() {
+  const [commentsCount, setCommentsCount] = useState(0);
+
+  const updateCommentsCount = (count) => {
+    setCommentsCount(count);
+  };
+
   const [currentPage, setCurrentPage] = useState(1);
   const pageNumbers = [1, 2, 3];
   const [questions, setQuestions] = useState([]);
@@ -235,6 +241,12 @@ function Qnalist() {
       try {
         const response = await axios.get('http://127.0.0.1:8080/api/post/all');
         console.log(response.data.data.posts);
+
+        const questionsData = response.data.data.posts.map((post) => ({
+          ...post,
+          isAnswered: post.commentsCount > 0,
+        }));
+
         const reversedData = [...response.data.data.posts].reverse();
         setQuestions(reversedData || []);
       } catch (error) {
@@ -296,7 +308,11 @@ function Qnalist() {
                     </AuthorContainer>
                     <ItemContent>{question.title}</ItemContent>
                     <ItemContent>{formatDate(question.updatedAt)}</ItemContent>
-                    <Reply status="답변 중">답변 중</Reply>
+                    <Reply
+                      status={question.isAnswered ? '답변 완료' : '답변 중'}
+                    >
+                      {question.isAnswered ? '답변 완료' : '답변 중'}
+                    </Reply>
                   </QuestionItem>
                 </Link>
               </div>

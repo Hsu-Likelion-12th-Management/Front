@@ -16,7 +16,8 @@ export const GlobalStyle = createGlobalStyle`
 
   body, html {
     overflow-x: hidden; // 수평 스크롤 방지
-    
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
   
   html, body, div, span, applet, object, iframe,
