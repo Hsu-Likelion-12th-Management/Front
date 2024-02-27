@@ -1,4 +1,7 @@
 import styled from "styled-components"
+import React from 'react';
+import { motion, useAnimation } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 
 function ActivityDetail(props){
 
@@ -72,9 +75,26 @@ function ActivityDetail(props){
         }
     `;
 
+    const controls = useAnimation();
+    const [ref, inView] = useInView();
+
+    React.useEffect(() => {
+    if (inView) {
+        controls.start({ opacity: 1, y: 0 });
+    } else {
+        controls.start({ opacity: 0, y: 50 });
+    }
+    }, [controls, inView]);
+
 
     return(
         <>
+        <motion.div
+        ref={ref}
+        initial={{ opacity: 0, y: 50 }}
+        animate={controls}
+        transition={{ duration: 0.5 }}
+        >
             <Container>
                 <div style={contentContainerStyle}>
                     <Desc>
@@ -85,6 +105,7 @@ function ActivityDetail(props){
                     <Img src={props.image} alt="activity"/>
                 </div>
             </Container>
+            </motion.div>
         </>
     );
 }

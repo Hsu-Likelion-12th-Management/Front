@@ -1,6 +1,9 @@
 import logo from '../images/hslikelionlogo.svg';
 import group from '../images/groupimg.jpg';
 import styled from 'styled-components';
+import React from 'react';
+import { motion, useAnimation } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 
 function HansungLion(){
 
@@ -135,6 +138,17 @@ function HansungLion(){
         }
         `;
 
+        const controls = useAnimation();
+        const [ref, inView] = useInView();
+    
+        React.useEffect(() => {
+        if (inView) {
+            controls.start({ opacity: 1, y: 0 });
+        } else {
+            controls.start({ opacity: 0, y: 50 });
+        }
+        }, [controls, inView]);
+
     return(
     <>
     <Container>
@@ -153,6 +167,7 @@ function HansungLion(){
         전공에 상관없이 본인의 아이디어를 실현하고 싶은 학생들을<br/>
         모집하여 활동하였습니다.
         </Explain>
+
     </Container>
     </>
     );

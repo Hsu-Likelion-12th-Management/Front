@@ -82,7 +82,7 @@ function EleventhProject(){
             title: "소확행",
             subtitle: (
                 <>
-                    소소하지만 확실한 여행의 행복,<br/> 소도시 여행 큐레이션 서비스
+                    소소하지만 확실한 여행의 행복
                 </>
             ),
             explanation: (
