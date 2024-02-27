@@ -409,7 +409,12 @@ function Qnacontent() {
 
       {/* 댓글부분 */}
       <CreateReply postId={postId} executiveName={executiveName} id={id} />
-      <Comment postId={postId} updateCommentsCount={updateCommentsCount} />
+      {/* <CreateReply
+        postId={postId}
+        executiveName={executiveName}
+        id={id}
+      /> */}
+      <Comment postId={postId} executiveName={executiveName} id={id} updateCommentsCount={updateCommentsCount} />
       <Footer />
     </>
   );

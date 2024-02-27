@@ -31,8 +31,8 @@ const SubmitButton = styled.button`
   height: 1.5rem;
   flex-shrink: 0;
   border-radius: 0.25rem;
-  background: #7F85A3;
-  color: #2A2A3A;
+  background: ${({activeButton}) => activeButton ? "#FF7710" : "#7F85A3"};
+  color: ${({activeButton}) => activeButton ? "white" : "#2A2A3A"};
   font-family: Pretendard;
   font-size: 0.625rem;
   font-style: normal;
@@ -53,26 +53,26 @@ const ReplyField = styled.input`
   line-height: 170%; /* 1.275rem */
 `
 
-export default function CreateReply({ postId, executiveName, id }) {
-  const [reply, setReply] = useState("");
-  const [executive, setExecutive] = useState("user");
-  const [executiveId, setExecutiveId] = useState("id");
-  const [border, setBorder] = useState(false);
+export default function CreateReply({ executive, handleReply, handleSubmit, reply, isActive, handleActive, setIsActive }) {
+  // const [reply, setReply] = useState("");
+  // const [executive, setExecutive] = useState("user");
+  // const [executiveId, setExecutiveId] = useState("id");
+  // const [isActive, setIsActive] = useState(false);
 
-  const handleActive = () =>  {
-    setBorder(true);
-  }
+  // const handleActive = () =>  {
+  //   setIsActive(true);
+  // }
 
-  const handleReply = (e) => {
-    setReply(e.target.value);
-  };
+  // const handleReply = (e) => {
+  //   setReply(e.target.value);
+  // };
 
-  useEffect(() => {
-    setExecutive(executiveName);
-    setExecutiveId(id);
-    console.log(executiveName);
-    console.log(executiveId);
-  },[executive])
+  // useEffect(() => {
+  //   setExecutive(executiveName);
+  //   setExecutiveId(id);
+  //   console.log(executiveName);
+  //   console.log(executiveId);
+  // },[executive])
 
   // const getName = async () => {
   //   try {
@@ -83,43 +83,43 @@ export default function CreateReply({ postId, executiveName, id }) {
   //   }
   // }
 
-  const handleSubmit = async (e) => {
-    // e.preventDefault();
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
 
-    try {
-      const response = await axios.post(
-        `http://3.38.108.41/api/post/${postId}/comments`,
-        {
-          id: executiveId,
-          name: "테스트",
-          content: reply,
-        }
-      );
+  //   try {
+  //     const response = await axios.post(
+  //       `http://3.38.108.41/api/post/${postId}/comments`,
+  //       {
+  //         id: executiveId,
+  //         name: "테스트",
+  //         content: reply,
+  //       }
+  //     );
 
-      if (response.status === 200) {
-        console.log("댓글 작성 성공");
-        console.log(response.data);
-        const commentText = await axios.get(`http://3.38.108.41/api/post/${postId}/comments`);
-        const commentId = commentText.data.data.commentsId;
-        localStorage.setItem("commentsId", commentId);
-      } else {
-        console.log("작성 실패");
-        console.log(response.data);
-      }
-    } catch (error) {
-      console.error("오류", error);
-    }
-  };
+  //     if (response.status === 200) {
+  //       console.log("댓글 작성 성공");
+  //       console.log(response.data);
+  //       const commentText = await axios.get(`http://3.38.108.41/api/post/${postId}/comments`);
+  //       const commentId = commentText.data.data.commentsId;
+  //       localStorage.setItem("commentsId", commentId);
+  //     } else {
+  //       console.log("작성 실패");
+  //       console.log(response.data);
+  //     }
+  //   } catch (error) {
+  //     console.error("오류", error);
+  //   }
+  // };
 
   return (
-    <RegisterContainer activeBorder={border}>
+    <RegisterContainer activeBorder={isActive}>
       <form>
         <div style={{display: "flex", alignItems: "center", marginTop: "1.06rem", position: "relative"}}>
           <img src={GrayCircle} alt="graycircleImg" style={{marginLeft: "1rem"}} />
           <ExecutiveField>{executive}</ExecutiveField>
-          <SubmitButton onClick={handleSubmit}>등록</SubmitButton>
+          <SubmitButton onClick={handleSubmit} activeButton={isActive}>등록</SubmitButton>
         </div>
-        <ReplyField type="text" placeholder="댓글을 남겨보세요" onChange={handleReply} onFocus={handleActive} />
+        <ReplyField type="text" value={reply} placeholder="댓글을 남겨보세요" onChange={handleReply} onFocus={handleActive} />
       </form>
     </RegisterContainer>
   );
