@@ -138,7 +138,7 @@ function Question({ addQuestion }) {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://3.38.108.41/api/post', {
+      const response = await axios.post('http://127.0.0.1:8080/api/post', {
         postedUserName,
         password,
         title,
