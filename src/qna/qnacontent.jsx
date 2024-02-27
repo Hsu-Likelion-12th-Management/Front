@@ -241,6 +241,12 @@ function Qnacontent() {
   const [isVerified, setIsVerified] = useState(false);
   const [editMode, setEditMode] = useState(false);
 
+  const [commentsCount, setCommentsCount] = useState(0);
+
+  const updateCommentsCount = (count) => {
+    setCommentsCount(count);
+  };
+
   const location = useLocation();
 
   const executiveName = localStorage.getItem('executiveName');
@@ -361,14 +367,18 @@ function Qnacontent() {
                     onChange={(e) => {
                       setPosts({ ...post, title: e.target.value });
                     }}
+                    maxLength={10}
                   />
-                  <Reply>응답중</Reply>
+                  <Reply status={commentsCount > 0 ? '답변 완료' : '답변 중'}>
+                    {commentsCount > 0 ? '답변 완료' : '답변 중'}
+                  </Reply>
                 </Rowcontainer>
                 <EditTextAreaField
                   value={post ? post.content : ''}
                   onChange={(e) => {
                     setPosts({ ...post, content: e.target.value });
                   }}
+                  maxLength={100}
                 />
                 <SubmitButton onClick={EditPost}>등록</SubmitButton>
               </>
@@ -377,7 +387,9 @@ function Qnacontent() {
               <>
                 <Rowcontainer>
                   <TitleP>{post.title}</TitleP>
-                  <Reply>응답중</Reply>
+                  <Reply status={commentsCount > 0 ? '답변 완료' : '답변 중'}>
+                    {commentsCount > 0 ? '답변 완료' : '답변 중'}
+                  </Reply>
                 </Rowcontainer>
                 <ContentField>
                   <ContentFlexContainer>
@@ -396,12 +408,13 @@ function Qnacontent() {
       </Contentcontainer>
 
       {/* 댓글부분 */}
+      <CreateReply postId={postId} executiveName={executiveName} id={id} />
       {/* <CreateReply
         postId={postId}
         executiveName={executiveName}
         id={id}
       /> */}
-      <Comment postId={postId} executiveName={executiveName} id={id} />
+      <Comment postId={postId} executiveName={executiveName} id={id} updateCommentsCount={updateCommentsCount} />
       <Footer />
     </>
   );

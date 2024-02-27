@@ -217,7 +217,8 @@ const DeleteButton = styled.button`
   ${ButtonStyle};
 `;
 
-function Comment({ postId, executiveName, id }) {
+function Comment({ postId, executiveName, id, updateCommentsCount }) {
+
   const [contents, setContents] = useState([]);
   const [executive, setExecutive] = useState("");
   const [reply, setReply] = useState("");
@@ -228,7 +229,9 @@ function Comment({ postId, executiveName, id }) {
     setIsActive(true);
   }
 
-  const commentsId = localStorage.getItem("commentsId");
+  const hasComments = contents.length > 0;
+
+  const commentsId = localStorage.getItem('commentsId');
 
   useEffect(() => {
     fetchPostId();
@@ -240,8 +243,9 @@ function Comment({ postId, executiveName, id }) {
         `http://3.38.108.41/api/post/${postId}/comments`
       );
       const comments = response.data.data.comments;
-      console.log("댓글 조회 성공");
+      console.log('댓글 조회 성공');
       setContents(comments);
+      updateCommentsCount(comments.length);
     } catch (error) {
       console.error("게시글 목록을 가져오는 데 실패했습니다:", error);
     }
@@ -320,7 +324,7 @@ function Comment({ postId, executiveName, id }) {
                 <ItemContent>{content.name}</ItemContent>
               </AuthorContainer>
               <Minutes>N분시간전</Minutes>
-              <div style={{ position: "absolute", right: "0.75rem" }}>
+              <div style={{ position: 'absolute', right: '0.75rem' }}>
                 <ModifyButton>수정</ModifyButton>
                 <DeleteButton>삭제</DeleteButton>
               </div>
