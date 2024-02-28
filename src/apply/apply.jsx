@@ -1,19 +1,20 @@
-import Intro from '../Intro/Intro';
-import styled from 'styled-components';
-import Footer from '../footer/footer';
-import check from '../images/check.svg';
-import num1 from '../images/num1.png';
-import num2 from '../images/num2.png';
-import num3 from '../images/num3.png';
-import num4 from '../images/num4.png';
-import chart from '../images/chart.png';
+import Intro from "../Intro/Intro";
+import styled from "styled-components";
+import Footer from "../footer/footer";
+import check from "../images/check.svg";
+import num1 from "../images/num1.png";
+import num2 from "../images/num2.png";
+import num3 from "../images/num3.png";
+import num4 from "../images/num4.png";
+import chart from "../images/chart.png";
 
 const ApplyButton = styled.button`
   width: 8.75rem;
   height: 3.125rem;
-  flex-shrink: 0;border-radius: 0.5rem;
-  background: var(--Sub-color, #FF7710);
-  color: var(--White, #FFF);
+  flex-shrink: 0;
+  border-radius: 0.5rem;
+  background: var(--Sub-color, #ff7710);
+  color: var(--White, #fff);
   font-family: Pretendard;
   font-size: 1.25rem;
   font-style: normal;
@@ -198,13 +199,13 @@ function Apply() {
       <Intro>지원하기</Intro>
       <div
         style={{
-          display: 'flex',
-          justifyContent: 'center',
-          marginTop: '3.75rem',
-          marginBottom: '3.75rem',
-          flexDirection: 'column',
-          paddingLeft: '1.25rem',
-          paddingRight: '1.25rem',
+          display: "flex",
+          justifyContent: "center",
+          marginTop: "3.75rem",
+          marginBottom: "3.75rem",
+          flexDirection: "column",
+          paddingLeft: "1.25rem",
+          paddingRight: "1.25rem",
         }}
       >
         <Container>
@@ -329,7 +330,11 @@ function Apply() {
           <NumTitle>링크트리 &#62; 12기 아기사자 지원 구글폼</NumTitle>
         </Container3>
         <Container>
-          <ApplyButton>지원하기</ApplyButton>
+          <ApplyButton
+            onClick={() => window.open("https://forms.gle/5FGCuurc6E1km3sMA")}
+          >
+            지원하기
+          </ApplyButton>
         </Container>
       </div>
       <Footer />
