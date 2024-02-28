@@ -239,7 +239,7 @@ function Qnalist() {
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        const response = await axios.get('https://3.38.108.41/api/post/all');
+        const response = await axios.get('https://www.hsu-like-lion.com/api/post/all');
         console.log(response.data.data.posts);
 
         const questionsData = response.data.data.posts.map((post) => ({
