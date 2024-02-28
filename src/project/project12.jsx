@@ -14,12 +14,16 @@ const IntroduceText = styled.p`
   margin-bottom: 26rem;
 `
 
+const containerStyle={
+  maxWidth : '428px'
+}
+
 function Project12() {
-  return <>
+  return <div style={containerStyle}>
     <Intro>12기 프로젝트</Intro>
     <IntroduceText>당신의 아이디어를 실현할 수 있는 기회,<br></br> 바로 <span style={{color: "var(--Sub-color, #FF7710)"}}>지금</span>입니다!</IntroduceText>
     <Footer></Footer>
-  </>;
+  </div>;
 }
 
 export default Project12;
