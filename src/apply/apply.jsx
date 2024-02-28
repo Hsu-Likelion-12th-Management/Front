@@ -261,7 +261,7 @@ function Apply() {
         <NumTitle>링크트리 	&#62; 12기 아기사자 지원 구글폼</NumTitle>
       </Container3>
       <Container>     
-      <ApplyButton>지원하기</ApplyButton>
+      <ApplyButton onClick={() => window.open("https://forms.gle/5FGCuurc6E1km3sMA")}>지원하기</ApplyButton>
       </Container> 
     </div>
     <Footer />
