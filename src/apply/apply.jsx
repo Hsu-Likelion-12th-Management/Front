@@ -9,14 +9,13 @@ import num4 from '../images/num4.png';
 import chart from '../images/chart.png';
 
 const ApplyButton = styled.button`
-  width: 12.5rem;
-  height: 4.375rem;
-  flex-shrink: 0;
-  border-radius: 0.5rem;
-  background: var(--Sub-color, #ff7710);
-  color: var(--White, #fff);
+  width: 8.75rem;
+  height: 3.125rem;
+  flex-shrink: 0;border-radius: 0.5rem;
+  background: var(--Sub-color, #FF7710);
+  color: var(--White, #FFF);
   font-family: Pretendard;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
