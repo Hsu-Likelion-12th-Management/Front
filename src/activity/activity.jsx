@@ -20,6 +20,11 @@ const StyledImage = styled.img`
     width: 166.59px;
     height: 113px;
   }
+
+  @media (max-width: 360px) {
+    width: 153.4px;
+    height: 113px;
+  }
 `;
 
 const IntroContainer = styled.div`
