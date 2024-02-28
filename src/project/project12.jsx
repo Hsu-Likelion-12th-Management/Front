@@ -10,8 +10,8 @@ const IntroduceText = styled.p`
   font-style: normal;
   font-weight: 700;
   line-height: 170%;
-  margin-top: 2rem;
-  margin-bottom: 26rem;
+  margin-top: 8rem;
+  margin-bottom: 20rem;
 `
 
 const containerStyle={
