@@ -38,6 +38,12 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0;
 
   }
+  @font-face {
+        font-family: 'Pretendard-Regular';
+        src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+        font-weight: 400;
+        font-style: normal;
+    }
 
   article, aside, details, figcaption, figure,
   footer, header, hgroup, main, menu, nav, section {
