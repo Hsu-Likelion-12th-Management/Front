@@ -1,14 +1,16 @@
 import Hsulogo from '../images/hsulogo.png';
 import styled from 'styled-components';
-import study1 from '../images/study1.png';
-import study2 from '../images/study2.png';
+import study1 from '../images/study1.jpeg';
+import study2 from '../images/study2.jpeg';
 import study3 from '../images/study3.png';
 import study4 from '../images/study4.png';
 import idea1 from '../images/idea1.jpeg';
 import idea2 from '../images/idea2.jpeg';
-import mid1 from '../images/midton1.jpeg';
+import mid1 from '../images/detail3.jpg';
 import mid2 from '../images/midton2.jpeg';
 import Footer from '../footer/footer';
+import yun1 from '../images/detail4.png';
+import yun2 from '../images/yun1.jpeg';
 
 const StyledImage = styled.img`
   width: 186px;
@@ -95,16 +97,15 @@ const ActivityContainer = styled.div`
 `;
 
 function Activity() {
-  const studyImages = [study1, study2, study3, study4];
   const groupedImages = [];
-  for (let i = 0; i < studyImages.length; i += 2) {
-    groupedImages.push(studyImages.slice(i, i + 2));
-  }
+  // for (let i = 0; i < studyImages.length; i += 2) {
+  //   groupedImages.push(studyImages.slice(i, i + 2));
+  // }
 
   const ideaImages = [idea1, idea2];
-
   const midImages = [mid1, mid2];
-
+  const studyImages = [study1, study2];
+  const yunImages = [yun1, yun2];
   return (
     <>
       <ActivityContainer>
@@ -122,7 +123,7 @@ function Activity() {
               진행합니다.
             </ContentP>
             <PicContainer>
-              {ideaImages.map((image, idx) => (
+              {studyImages.map((image, idx) => (
                 <StyledImage
                   key={idx}
                   src={image}
@@ -151,7 +152,7 @@ function Activity() {
               개발을 마무리하는 해커톤입니다.
             </HackP>
             <PicContainer>
-              {ideaImages.map((image, idx) => (
+              {midImages.map((image, idx) => (
                 <StyledImage
                   key={idx}
                   src={image}
@@ -166,7 +167,7 @@ function Activity() {
               타 대학과 자체적으로 연합하여 개최하는 해커톤입니다.{' '}
             </ContentP>
             <PicContainer>
-              {ideaImages.map((image, idx) => (
+              {yunImages.map((image, idx) => (
                 <StyledImage
                   key={idx}
                   src={image}

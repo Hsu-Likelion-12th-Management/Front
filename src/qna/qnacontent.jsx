@@ -240,6 +240,7 @@ function Qnacontent() {
   const [post, setPosts] = useState(null);
   const [isVerified, setIsVerified] = useState(false);
   const [editMode, setEditMode] = useState(false);
+  const [status, setStatus] = useState('');
 
   const [commentsCount, setCommentsCount] = useState(0);
 
@@ -332,6 +333,10 @@ function Qnacontent() {
     }
   };
 
+  const handleStatusUpdate = (newStatus) => {
+    setStatus(newStatus); // 상태 업데이트
+  };
+
   return (
     <>
       <IntroContainer>
@@ -369,8 +374,8 @@ function Qnacontent() {
                     }}
                     maxLength={10}
                   />
-                  <Reply status={commentsCount > 0 ? '답변 완료' : '답변 중'}>
-                    {commentsCount > 0 ? '답변 완료' : '답변 중'}
+                  <Reply status={status === 'DONE' ? '답변 완료' : '답변 중'}>
+                    {status === 'DONE' ? '답변 완료' : '답변 중'}
                   </Reply>
                 </Rowcontainer>
                 <EditTextAreaField
@@ -387,8 +392,8 @@ function Qnacontent() {
               <>
                 <Rowcontainer>
                   <TitleP>{post.title}</TitleP>
-                  <Reply status={commentsCount > 0 ? '답변 완료' : '답변 중'}>
-                    {commentsCount > 0 ? '답변 완료' : '답변 중'}
+                  <Reply status={status === 'DONE' ? '답변 완료' : '답변 중'}>
+                    {status === 'DONE' ? '답변 완료' : '답변 중'}
                   </Reply>
                 </Rowcontainer>
                 <ContentField>
@@ -419,6 +424,7 @@ function Qnacontent() {
         executiveName={executiveName}
         id={id}
         updateCommentsCount={updateCommentsCount}
+        onStatusUpdate={handleStatusUpdate}
       />
       <Footer />
     </>
