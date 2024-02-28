@@ -192,7 +192,7 @@ margin-bottom : 1.06rem;
 function Apply() {
   return <>
     <Intro>지원하기</Intro>
-    <div style={{display: "flex", justifyContent: "center", marginTop: "5rem", marginBottom: "22.5rem", flexDirection : "column", paddingLeft:"1.25rem", paddingRight : "1.25rem"}}>
+    <div style={{display: "flex", justifyContent: "center", marginTop: "5rem", marginBottom: "3.75rem", flexDirection : "column", paddingLeft:"1.25rem", paddingRight : "1.25rem"}}>
       <Container>
       <Title>🦁 멋쟁이사자처럼 한성대학교 12기 🦁</Title>
       <SubTitle>한성대학교 멋쟁이 사자처럼에서 아기사자를 모집합니다!</SubTitle>
