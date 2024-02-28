@@ -95,6 +95,7 @@ function Login() {
         executiveName = response.data.data.name;
         localStorage.setItem('id', id);
         localStorage.setItem('executiveName', executiveName);
+        localStorage.setItem("isAdmin", "true");
         navigate('/Qnalist');
       } else {
         console.log('가입 실패');

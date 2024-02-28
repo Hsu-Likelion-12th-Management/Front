@@ -225,7 +225,7 @@ function Comment({ postId, executiveName, id, onStatusUpdate }) {
   const [isActive, setIsActive] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [selectedContent, setSelectedContent] = useState(null);
-  const [writedTime, setWritedTime] = useState("");
+  const admin = localStorage.getItem("isAdmin") === "true";
 
   const handleActive = () => {
     setIsActive(true);
@@ -305,13 +305,10 @@ function Comment({ postId, executiveName, id, onStatusUpdate }) {
         console.log("댓글 작성 성공");
         console.log(response.data);
         const commentId = response.data.data.commentsId;
-        const updatedTime = response.data.data.updatedAt;
         console.log(commentId);
-        console.log(updatedTime);
         setReply("");
         fetchPostId();
         setIsActive(false);
-        setWritedTime(updatedTime);
       } else {
         console.log("작성 실패");
         console.log(response.data);
@@ -432,7 +429,7 @@ function Comment({ postId, executiveName, id, onStatusUpdate }) {
   return (
     <>
       <AnswerContainer>
-        {editMode ? (
+        {admin && (
           <CreateReply
             handleSubmit={handleSubmit}
             handleReply={handleReply}
@@ -444,16 +441,6 @@ function Comment({ postId, executiveName, id, onStatusUpdate }) {
             handleModify={handleModify}
             editMode={editMode}
             selectedContent={selectedContent}
-          />
-        ) : (
-          <CreateReply
-            handleSubmit={handleSubmit}
-            handleReply={handleReply}
-            executive={executive}
-            reply={reply}
-            isActive={isActive}
-            setIsActive={setIsActive}
-            handleActive={handleActive}
           />
         )}
         {contents.map((content) => (
