@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import GrayCircle from '../images/graycircle.png';
 import CreateReply from '../createReply/CreateReply';
-const url = `http://3.38.108.41/`;
+const url = `https://3.38.108.41/`;
 
 const AnswerContainer = styled.div`
   width: 100%;
@@ -236,7 +236,7 @@ function Comment({ postId, executiveName, id, onStatusUpdate }) {
   const fetchPostId = async () => {
     try {
       const response = await axios.get(
-        `http://3.38.108.41/api/post/${postId}/comments`
+        `https://3.38.108.41/api/post/${postId}/comments`
       );
       const comments = response.data.data.comments;
       console.log('댓글 조회 성공');
@@ -262,7 +262,7 @@ function Comment({ postId, executiveName, id, onStatusUpdate }) {
     console.log(postId);
     try {
       const response = await axios.post(
-        `http://3.38.108.41/api/post/${postId}/status`,
+        `https://3.38.108.41/api/post/${postId}/status`,
         status
       );
 
@@ -291,7 +291,7 @@ function Comment({ postId, executiveName, id, onStatusUpdate }) {
 
     try {
       const response = await axios.post(
-        `http://3.38.108.41/api/post/${postId}/comments`,
+        `https://3.38.108.41/api/post/${postId}/comments`,
         {
           id: executiveId,
           name: executiveName,
@@ -325,7 +325,7 @@ function Comment({ postId, executiveName, id, onStatusUpdate }) {
   const handleVerify = async (selectedContent) => {
     try {
       const response = await axios.post(
-        `http://3.38.108.41/api/comments/${selectedContent.commentsId}`,
+        `https://3.38.108.41/api/comments/${selectedContent.commentsId}`,
         {
           id: executiveId,
         }
@@ -350,7 +350,7 @@ function Comment({ postId, executiveName, id, onStatusUpdate }) {
     console.log(selectedContent);
     try {
       const response = await axios.put(
-        `http://3.38.108.41/api/comments/${selectedContent.commentsId}`,
+        `https://3.38.108.41/api/comments/${selectedContent.commentsId}`,
         {
           id: executiveId,
           content: reply,
@@ -375,7 +375,7 @@ function Comment({ postId, executiveName, id, onStatusUpdate }) {
 
     try {
       const response = await axios.delete(
-        `http://3.38.108.41/api/comments/${selectedContent.commentsId}`,
+        `https://3.38.108.41/api/comments/${selectedContent.commentsId}`,
         {
           data: {
             id: executiveId,
