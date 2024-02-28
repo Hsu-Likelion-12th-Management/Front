@@ -43,6 +43,11 @@ const MoreButton = styled.button`
   right: 1rem;
 `;
 
+const containerStyle={
+  maxWidth : '428px'
+}
+
+
 function Project() {
   const projectImg = [life, happiness, moah];
   const moreProjectImg = [bear, book, lisa];
@@ -53,7 +58,7 @@ function Project() {
   };
 
   return (
-    <>
+    <div style={containerStyle}>
       <Intro>활동 소개</Intro>
 
       <HexagonBox class="topImgBox" img={plan} text="기획" />
@@ -108,7 +113,7 @@ function Project() {
       </div>
 
       <Footer></Footer>
-    </>
+    </div>
   );
 }
 
