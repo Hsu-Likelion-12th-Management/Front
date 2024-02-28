@@ -17,7 +17,7 @@ const StyledImage = styled.img`
   border-radius: 8px;
   object-fit: cover;
   @media (max-width: 428px) {
-    width: 153.4px;
+    width: 166.59px;
     height: 113px;
   }
 `;

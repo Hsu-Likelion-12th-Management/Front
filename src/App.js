@@ -23,18 +23,13 @@ import Overlay from './overlay/Overlay';
 import { useState, useEffect } from 'react';
 import Footer from './footer/footer';
 const Wrapper = styled.div`
-  margin: 0 auto;
-  width: 100%;
+  margin: 0 auto; /* 가운데 정렬 */
+  min-width: 100%; /* 전체 너비 */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-
-  min-width: 428px;
   background-color: black;
   position: relative;
-  @media (max-width: 428px) {
-    min-width: 60%;
-  }
 `;
 
 // const Overlay = styled.div`
