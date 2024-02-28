@@ -3,7 +3,6 @@ import Hsu from '../images/hsulion.png';
 import Insta from '../images/lioninsta.png';
 
 const FooterContainer = styled.div`
-  width: 100%;
   height: 160px;
   background: var(--Gray6, #191b24);
   display: flex;
@@ -14,7 +13,7 @@ const HsuLogo = styled.img`
   width: 75px; // 기본 너비
   height: 42px; // 기본 높이
 
-  @media (max-width: 768px) {
+  @media (max-width: 428px) {
     width: 55px;
     height: 28px; // 화면 너비가 768px 이하일 때 높이 조정
   }
@@ -28,6 +27,9 @@ const ContentContainer = styled.div`
   display: flex;
   flex-direction: row;
   gap: 24px;
+  @media (max-width: 428px) {
+    gap : 10px;
+  }
 `;
 
 const ContentPContainer = styled.div`
@@ -36,7 +38,7 @@ const ContentPContainer = styled.div`
   margin-left: 4px;
   margin-right: 44px;
 
-  @media (max-width: 768px) {
+  @media (max-width: 428px) {
     margin-right: 25px;
   }
   gap: 4px;
