@@ -97,7 +97,8 @@ const Line=styled.div`
   display: flex;
   gap : 0.5rem;
   color: var(--White, #FFF);
-  padding-left : 1.19rem;
+  padding-left : 1rem;
+  padding-right: 1rem;
 
 /* detail/detail_medium_14 */
 font-family: Pretendard;
@@ -105,6 +106,10 @@ font-size: 0.875rem;
 font-style: normal;
 font-weight: 500;
 line-height: normal;
+
+  @media (max-width: 391px) {
+    font-size: 0.84rem;
+  }
 `
 
 const Img=styled.img`
@@ -192,7 +197,7 @@ margin-bottom : 1.06rem;
 function Apply() {
   return <>
     <Intro>지원하기</Intro>
-    <div style={{display: "flex", justifyContent: "center", marginTop: "5rem", marginBottom: "3.75rem", flexDirection : "column", paddingLeft:"1.25rem", paddingRight : "1.25rem"}}>
+    <div style={{display: "flex", justifyContent: "center", marginTop: "3.75rem", marginBottom: "3.75rem", flexDirection : "column", paddingLeft:"1.25rem", paddingRight : "1.25rem"}}>
       <Container>
       <Title>🦁 멋쟁이사자처럼 한성대학교 12기 🦁</Title>
       <SubTitle>한성대학교 멋쟁이 사자처럼에서 아기사자를 모집합니다!</SubTitle>
@@ -202,7 +207,7 @@ function Apply() {
       <DivTitle>지원 대상</DivTitle>
       <ApplyContainer>
       <Line><Img src={check}/>IT 창업에 대한 열정이 있는 한성대학교 재학생 및 휴학생</Line>
-      <Line><Img src={check}/>서비스 기획, UXUI 디자인, 개발에 도전해보고 싶은<br/>한성대학교 재학생 및 휴학생</Line>
+      <Line><Img src={check}/>서비스 기획, UXUI 디자인, 개발에 도전해보고 싶은 한성대학교 재학생 및 휴학생</Line>
       <Line><Img src={check}/>배움에 대한 열정, 의지를 가진 한성대학교 재학생 및 휴학생</Line>
       </ApplyContainer>
       <Explain>* 졸업생 및 졸업예정자는 지원이 불가능합니다.</Explain>
