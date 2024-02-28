@@ -280,7 +280,7 @@ function Qnacontent() {
   const fetchPostDetails = async () => {
     try {
       const response = await axios.get(
-        `https://3.38.108.41/api/post?postId=${postId}`
+        `https://www.hsu-like-lion.com/api/post?postId=${postId}`
       );
       setPosts(response.data.data);
       console.log(response.data);
@@ -298,7 +298,7 @@ function Qnacontent() {
   const EditPost = async () => {
     try {
       const response = await axios.put(
-        `https://3.38.108.41/api/post/${postId}`,
+        `https://www.hsu-like-lion.com/api/post/${postId}`,
         {
           postedUserName: post.postedUserName,
           title: post.title,

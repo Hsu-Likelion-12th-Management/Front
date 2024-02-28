@@ -3,7 +3,7 @@ import axios from "axios";
 import styled from "styled-components";
 import GrayCircle from "../images/graycircle.png";
 
-const url = `http://3.38.108.41/`;
+const url = `https://www.hsu-like-lion.com`;
 
 const RegisterContainer = styled.div`
   width: 90%;
