@@ -1,5 +1,5 @@
 [[redirects]]
-from = "/api/*"
-to = "https://www.hsu-like-lion.com/api/:splat"
-status = 200
-force = true
+  from = "/proxy/*"
+  to = "https://www.hsu-like-lion.com/:splat"
+  status = 200
+  force = true
