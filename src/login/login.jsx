@@ -79,10 +79,13 @@ function Login() {
     e.preventDefault();
 
     try {
-      const response = await axios.post('https://www.hsu-like-lion.com/api/admin/login', {
-        id,
-        password,
-      });
+      const response = await axios.post(
+        'https://www.hsu-like-lion.com/api/admin/login',
+        {
+          id,
+          password,
+        }
+      );
 
       if (response.status == 200) {
         console.log('가입 성공');

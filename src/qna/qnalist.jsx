@@ -137,7 +137,7 @@ const Reply = styled.div`
     props.status === '답변 중'
       ? 'var(--Sub-color, #FF7710)'
       : 'var(--Gray2, #7f85a3)'};
-  margin-left: auto; // 답변 상태를 오른쪽으로 정렬
+  margin-left: auto;
 `;
 
 const PaginationContainer = styled.div`
@@ -244,10 +244,10 @@ function Qnalist() {
 
         const questionsData = response.data.data.posts.map((post) => ({
           ...post,
-          isAnswered: post.commentsCount > 0,
+          replyStatus: post.status === 'DONE' ? '답변 완료' : '답변 중', // status 값에 따라 replyStatus 설정
         }));
 
-        const reversedData = [...response.data.data.posts].reverse();
+        const reversedData = [...questionsData].reverse();
         setQuestions(reversedData || []);
       } catch (error) {
         console.error('게시글 목록을 가져오는 데 실패했습니다:', error);
@@ -260,6 +260,10 @@ function Qnalist() {
     // console.log(executiveName);
     // console.log(id);
   }, []);
+
+  const getReplyStatusClassName = (status) => {
+    return status === 'DONE' ? '답변 완료' : '답변 중';
+  };
 
   const formatDate = (dateString) => {
     //updatedAt 년 월 일
@@ -308,10 +312,9 @@ function Qnalist() {
                     </AuthorContainer>
                     <ItemContent>{question.title}</ItemContent>
                     <ItemContent>{formatDate(question.updatedAt)}</ItemContent>
-                    <Reply
-                      status={question.isAnswered ? '답변 완료' : '답변 중'}
-                    >
-                      {question.isAnswered ? '답변 완료' : '답변 중'}
+                    <Reply status={getReplyStatusClassName(question.status)}>
+                      {getReplyStatusClassName(question.status)}{' '}
+                      {/* 상태에 따른 CSS 클래스 추가 */}
                     </Reply>
                   </QuestionItem>
                 </Link>
