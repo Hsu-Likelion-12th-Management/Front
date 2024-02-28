@@ -205,6 +205,7 @@ const QnaLayout = styled.div`
 
 const ContentContainer = styled.div`
   flex-grow: 1;
+  min-height: calc(100vh - 80px - 100px - 50px);
 `;
 
 function Qnalist() {
@@ -239,7 +240,9 @@ function Qnalist() {
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        const response = await axios.get('https://www.hsu-like-lion.com/api/post/all');
+        const response = await axios.get(
+          'https://www.hsu-like-lion.com/api/post/all'
+        );
         console.log(response.data.data.posts);
 
         const questionsData = response.data.data.posts.map((post) => ({
