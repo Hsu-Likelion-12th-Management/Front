@@ -7,6 +7,7 @@ import Roadmap from './roadmap';
 import Footer from '../footer/footer';
 import HansungLion from './hansunglion';
 import ActivityMain from './activitymain';
+import { motion } from 'framer-motion';
 
 function Main() {
 
@@ -137,18 +138,24 @@ margin-top: 13px;
     `;
 
   return <>
-    <div style = {logoContainer}>
-      <img src={lionImg} style={logoStyle}/>
-    </div>
+    <motion.div
+      initial={{ opacity: 0, y: -20 }} // 초기 상태: 투명도 0, y축으로 -20px
+      animate={{ opacity: 1, y: 0 }}   // 애니메이션 종료 상태: 투명도 1, y축으로 0px
+      transition={{ duration: 0.5 }}   // 애니메이션 지속 시간 0.5초
+    >
+      <div style={{ marginTop: '22px', marginLeft: '20px' }}>
+        <img src={lionImg} alt="Logo" style={{ width: '93px', height: '80px', flexShrink: '0' }} />
+      </div>
 
-    <Title>“내 아이디어를 내 손으로 실현하자!”</Title>
+      <Title>“내 아이디어를 내 손으로 실현하자!”</Title>
 
-    <Explain>
-    멋쟁이사자처럼 대학 [LIKELION UNIV]은<br/> 
-    2013년 서울대학교 1기로 시작해 <br/>
-    현재 총 61개 대학, 약 2,000여명이 활동하고 있는<br/> 
-    전국 최대 규모 IT 연합 창업 동아리입니다.<br/>
-    </Explain>
+      <Explain>
+        멋쟁이사자처럼 대학 [LIKELION UNIV]은<br />
+        2013년 서울대학교 1기로 시작해 <br />
+        현재 총 61개 대학, 약 2,000여명이 활동하고 있는<br />
+        전국 최대 규모 IT 연합 창업 동아리입니다.
+      </Explain>
+    
 
     <StateContainer>
       <ExplainContainer>
@@ -164,8 +171,8 @@ margin-top: 13px;
         <NowExplain>약 2,000여명</NowExplain>
       </ExplainContainer>
     </StateContainer>
-
     <Extra>&#40;2023년 11기 기준&#41;</Extra>
+    </motion.div>
 
     <div><Roadmap/></div>
     <div><HansungLion/></div>

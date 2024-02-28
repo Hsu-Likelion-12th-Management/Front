@@ -4,6 +4,9 @@ import logo2 from '../images/logo2.png';
 import logo3 from '../images/logo3.png';
 import logo4 from '../images/logo4.png';
 import logo5 from '../images/logo5.png';
+import React from 'react';
+import { motion, useAnimation } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 
 function Roadmap(){
 
@@ -54,8 +57,25 @@ function Roadmap(){
         }
         `;
 
+    const controls = useAnimation();
+    const [ref, inView] = useInView();
+
+    React.useEffect(() => {
+    if (inView) {
+        controls.start({ opacity: 1, y: 0 });
+    } else {
+        controls.start({ opacity: 0, y: 50 });
+    }
+    }, [controls, inView]);
+
     return(
         <>
+        <motion.div
+        ref={ref}
+        initial={{ opacity: 0, y: 50 }}
+        animate={controls}
+        transition={{ duration: 0.5 }}
+        >
             <Container>
                 <div style={titleStyle}>멋쟁이 사자처럼의 흔적</div>
                 <div style={logoContainerStyle}>
@@ -71,6 +91,7 @@ function Roadmap(){
                     대학생 연합이기도 합니다!
                 </LikeLion>
             </Container>
+            </motion.div>
         </>
     );
 }

@@ -42,6 +42,22 @@ const SubmitButton = styled.button`
   right: 0.75rem;
 `
 
+const ModifyButton = styled.button`
+  width: 2.5rem;
+  height: 1.5rem;
+  flex-shrink: 0;
+  border-radius: 0.25rem;
+  background: #FF7710;
+  color: white;
+  font-family: Pretendard;
+  font-size: 0.625rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  position: absolute;
+  right: 0.75rem;
+`
+
 const ReplyField = styled.input`
   margin-top: 0.5rem;
   margin-left: 1rem;
@@ -53,63 +69,7 @@ const ReplyField = styled.input`
   line-height: 170%; /* 1.275rem */
 `
 
-export default function CreateReply({ executive, handleReply, handleSubmit, reply, isActive, handleActive, setIsActive }) {
-  // const [reply, setReply] = useState("");
-  // const [executive, setExecutive] = useState("user");
-  // const [executiveId, setExecutiveId] = useState("id");
-  // const [isActive, setIsActive] = useState(false);
-
-  // const handleActive = () =>  {
-  //   setIsActive(true);
-  // }
-
-  // const handleReply = (e) => {
-  //   setReply(e.target.value);
-  // };
-
-  // useEffect(() => {
-  //   setExecutive(executiveName);
-  //   setExecutiveId(id);
-  //   console.log(executiveName);
-  //   console.log(executiveId);
-  // },[executive])
-
-  // const getName = async () => {
-  //   try {
-  //     const response = await axios.get('http://3.38.108.41/api/admin/login');
-  //     console.log(response.data);
-  //   } catch (error) {
-  //     console.error("오류", error)
-  //   }
-  // }
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   try {
-  //     const response = await axios.post(
-  //       `http://3.38.108.41/api/post/${postId}/comments`,
-  //       {
-  //         id: executiveId,
-  //         name: "테스트",
-  //         content: reply,
-  //       }
-  //     );
-
-  //     if (response.status === 200) {
-  //       console.log("댓글 작성 성공");
-  //       console.log(response.data);
-  //       const commentText = await axios.get(`http://3.38.108.41/api/post/${postId}/comments`);
-  //       const commentId = commentText.data.data.commentsId;
-  //       localStorage.setItem("commentsId", commentId);
-  //     } else {
-  //       console.log("작성 실패");
-  //       console.log(response.data);
-  //     }
-  //   } catch (error) {
-  //     console.error("오류", error);
-  //   }
-  // };
+export default function CreateReply({ executive, handleReply, handleSubmit, reply, isActive, handleActive, handleModify, editMode, selectedContent}) {
 
   return (
     <RegisterContainer activeBorder={isActive}>
@@ -117,7 +77,7 @@ export default function CreateReply({ executive, handleReply, handleSubmit, repl
         <div style={{display: "flex", alignItems: "center", marginTop: "1.06rem", position: "relative"}}>
           <img src={GrayCircle} alt="graycircleImg" style={{marginLeft: "1rem"}} />
           <ExecutiveField>{executive}</ExecutiveField>
-          <SubmitButton onClick={handleSubmit} activeButton={isActive}>등록</SubmitButton>
+          {editMode ? <ModifyButton onClick={() => handleModify(selectedContent)}>수정</ModifyButton> : <SubmitButton onClick={ handleSubmit} activeButton={isActive}>등록</SubmitButton>}
         </div>
         <ReplyField type="text" value={reply} placeholder="댓글을 남겨보세요" onChange={handleReply} onFocus={handleActive} />
       </form>
