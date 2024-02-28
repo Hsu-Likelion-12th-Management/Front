@@ -284,6 +284,7 @@ function Qnacontent() {
       );
       setPosts(response.data.data);
       console.log(response.data);
+      setStatus(response.data.data.status == 'DONE' ? '답변 완료' : '답변 중');
     } catch (error) {
       console.error('게시글 상세 정보를 가져오는 데 실패했습니다:', error);
     }
@@ -374,9 +375,7 @@ function Qnacontent() {
                     }}
                     maxLength={10}
                   />
-                  <Reply status={status === 'DONE' ? '답변 완료' : '답변 중'}>
-                    {status === 'DONE' ? '답변 완료' : '답변 중'}
-                  </Reply>
+                  <Reply status={status}>{status}</Reply>
                 </Rowcontainer>
                 <EditTextAreaField
                   value={post ? post.content : ''}
@@ -392,9 +391,7 @@ function Qnacontent() {
               <>
                 <Rowcontainer>
                   <TitleP>{post.title}</TitleP>
-                  <Reply status={status === 'DONE' ? '답변 완료' : '답변 중'}>
-                    {status === 'DONE' ? '답변 완료' : '답변 중'}
-                  </Reply>
+                  <Reply status={status}>{status}</Reply>
                 </Rowcontainer>
                 <ContentField>
                   <ContentFlexContainer>
