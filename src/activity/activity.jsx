@@ -17,8 +17,8 @@ const StyledImage = styled.img`
   border-radius: 8px;
   object-fit: cover;
   @media (max-width: 428px) {
-    width: 163px;
-    height: 100px;
+    width: 153.4px;
+    height: 113px;
   }
 `;
 
@@ -86,7 +86,6 @@ const PicContainer = styled(motion.div)`
   gap: 10px;
   margin-bottom: 12px;
   justify-content: center;
-  width: 100%;
 `;
 
 const WholeContainer = styled.div`
