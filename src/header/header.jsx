@@ -8,7 +8,7 @@ const HeaderContainer = styled.div`
   padding-left: 24px;
   width: 100%;
   height: 90px;
-  max-width: 428px;
+  /* max-width: 428px; */
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -24,8 +24,7 @@ const HeaderP = styled.p`
   color: ${(props) => props.color || 'white'};
 `;
 
-function Header({showMenu, setShowMenu}) {
-
+function Header({ showMenu, setShowMenu }) {
   const showMenuHandler = () => {
     setShowMenu(!showMenu);
   };
