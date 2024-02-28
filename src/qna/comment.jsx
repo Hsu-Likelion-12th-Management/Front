@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import GrayCircle from '../images/graycircle.png';
 import CreateReply from '../createReply/CreateReply';
-const url = `http://3.38.108.41/`;
+const url = `https://3.38.108.41/`;
 
 const AnswerContainer = styled.div`
   width: 100%;
