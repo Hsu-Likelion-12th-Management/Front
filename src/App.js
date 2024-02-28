@@ -69,7 +69,7 @@ function App() {
       <Wrapper>
         <Header showMenu={showMenu} setShowMenu={setShowMenu} />
         <Routes>
-          <Route path="/" element={<Main />} />
+          <Route path="/Main" element={<Main />} />
           <Route path="/Activity" element={<Activity />} />
           <Route path="/Project" element={<Project />} />
           <Route path="/Project11" element={<Project11 />} />
