@@ -2,12 +2,10 @@ import Hsulogo from '../images/hsulogo.png';
 import styled from 'styled-components';
 import study1 from '../images/study1.jpeg';
 import study2 from '../images/study2.jpeg';
-import study3 from '../images/study3.png';
-import study4 from '../images/study4.png';
 import idea1 from '../images/idea1.jpeg';
 import idea2 from '../images/idea2.jpeg';
 import mid1 from '../images/detail3.jpg';
-import mid2 from '../images/midton2.jpeg';
+import mid2 from '../images/mid2.jpeg';
 import Footer from '../footer/footer';
 import yun1 from '../images/detail4.png';
 import yun2 from '../images/yun1.jpeg';
@@ -83,6 +81,7 @@ const PicContainer = styled.div`
   gap: 10px;
   margin-bottom: 12px;
   justify-content: center;
+  width: 100%;
 `;
 
 const WholeContainer = styled.div`
@@ -102,9 +101,9 @@ function Activity() {
   //   groupedImages.push(studyImages.slice(i, i + 2));
   // }
 
+  const studyImages = [study1, study2];
   const ideaImages = [idea1, idea2];
   const midImages = [mid1, mid2];
-  const studyImages = [study1, study2];
   const yunImages = [yun1, yun2];
   return (
     <>
@@ -132,6 +131,7 @@ function Activity() {
               ))}
             </PicContainer>
           </StudyContainer>
+
           <StudyContainer>
             <TitleP>아이디어톤</TitleP>
             <ContentP>타 학교 멋사와 연합하여 해커톤을 진행했습니다.</ContentP>
@@ -145,6 +145,7 @@ function Activity() {
               ))}
             </PicContainer>
           </StudyContainer>
+
           <StudyContainer>
             <TitleP>중앙해커톤</TitleP>
             <HackP>
@@ -161,6 +162,7 @@ function Activity() {
               ))}
             </PicContainer>
           </StudyContainer>
+
           <StudyContainer style={{ paddingBottom: '60px' }}>
             <TitleP>연합해커톤</TitleP>
             <ContentP>

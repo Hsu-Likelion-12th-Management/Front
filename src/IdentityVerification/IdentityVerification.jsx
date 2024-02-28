@@ -15,7 +15,7 @@ export default function IdentityVerification({
   const Identity = async (e) => {
     try {
       const response = await axios.post(
-        `http://127.0.0.1:8080/api/post/${postId}`,
+        `https://www.hsu-like-lion.com/api/post/${postId}`,
         {
           postedUserName,
           password,
