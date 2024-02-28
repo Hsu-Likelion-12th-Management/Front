@@ -3,6 +3,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import GrayCircle from "../images/graycircle.png";
 import CreateReply from "../createReply/CreateReply";
+import moment from "moment";
 const url = `https://www.hsu-like-lion.com/`;
 
 const AnswerContainer = styled.div`
@@ -224,6 +225,7 @@ function Comment({ postId, executiveName, id, onStatusUpdate }) {
   const [isActive, setIsActive] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [selectedContent, setSelectedContent] = useState(null);
+  const [writedTime, setWritedTime] = useState("");
 
   const handleActive = () => {
     setIsActive(true);
@@ -303,10 +305,13 @@ function Comment({ postId, executiveName, id, onStatusUpdate }) {
         console.log("댓글 작성 성공");
         console.log(response.data);
         const commentId = response.data.data.commentsId;
+        const updatedTime = response.data.data.updatedAt;
         console.log(commentId);
+        console.log(updatedTime);
         setReply("");
         fetchPostId();
         setIsActive(false);
+        setWritedTime(updatedTime);
       } else {
         console.log("작성 실패");
         console.log(response.data);
@@ -399,32 +404,33 @@ function Comment({ postId, executiveName, id, onStatusUpdate }) {
     }
   };
 
+  function formattingTime(updatedAt) {
+    const today = moment.utc().local();
+    const postingDate = moment.utc(updatedAt).local();
+    const dayDiff = postingDate.diff(today, "days");
+    const hourDiff = postingDate.diff(today, "hours");
+    const minuteDiff = postingDate.diff(today, "minutes");
+
+    if (dayDiff === 0 && hourDiff === 0 && minuteDiff === 0) {
+      return "방금 전";
+    }
+
+    if (dayDiff === 0 && hourDiff === 0) { 
+      const minutes = Math.ceil(-minuteDiff);
+      return minutes + '분 전';		
+    }
+  
+    if (dayDiff === 0 && hourDiff <= 24) { 
+      const hour = Math.ceil(-hourDiff);
+      return hour + '시간 전';		
+    }
+  
+    return -dayDiff + '일 전';
+  };
+
+
   return (
     <>
-      {/* {editMode ? (
-        <CreateReply
-          handleSubmit={handleSubmit}
-          handleReply={handleReply}
-          executive={executive}
-          reply={reply}
-          isActive={isActive}
-          setIsActive={setIsActive}
-          handleActive={handleActive}
-          handleModify={handleModify}
-          editMode={editMode}
-          selectedContent={selectedContent}
-        />
-      ) : (
-        <CreateReply
-          handleSubmit={handleSubmit}
-          handleReply={handleReply}
-          executive={executive}
-          reply={reply}
-          isActive={isActive}
-          setIsActive={setIsActive}
-          handleActive={handleActive}
-        />
-      )} */}
       <AnswerContainer>
         {editMode ? (
           <CreateReply
@@ -457,7 +463,7 @@ function Comment({ postId, executiveName, id, onStatusUpdate }) {
                 <Graycircle src={GrayCircle} alt="Gray Circle" />
                 <ItemContent>{content.name}</ItemContent>
               </AuthorContainer>
-              <Minutes>N분시간전</Minutes>
+              <Minutes>{formattingTime(content.updatedAt)}</Minutes>
               <div style={{ position: "absolute", right: "0.75rem" }}>
                 <ModifyButton onClick={() => handleVerify(content)}>
                   수정

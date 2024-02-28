@@ -160,7 +160,7 @@ margin-top: 13px;
     <StateContainer>
       <ExplainContainer>
         <div style={firstLineContainerStyle}><Arrow src={arrow}/><StateExplain>운영 상태</StateExplain></div>
-        <NowExplain>11기 운영 종료</NowExplain>
+        <NowExplain>12기 모집 중</NowExplain>
       </ExplainContainer>
       <ExplainContainer>
         <div style={firstLineContainerStyle}><Arrow src={building}/><StateExplain>대학 수</StateExplain></div>
@@ -171,7 +171,7 @@ margin-top: 13px;
         <NowExplain>약 2,000여명</NowExplain>
       </ExplainContainer>
     </StateContainer>
-    <Extra>&#40;2023년 11기 기준&#41;</Extra>
+    <Extra>&#40;2024년 12기 기준&#41;</Extra>
     </motion.div>
 
     <div><Roadmap/></div>
