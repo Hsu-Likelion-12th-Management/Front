@@ -9,6 +9,7 @@ import mid2 from '../images/mid2.jpeg';
 import Footer from '../footer/footer';
 import yun1 from '../images/detail4.png';
 import yun2 from '../images/yun1.jpeg';
+import { motion } from "framer-motion";
 
 const StyledImage = styled.img`
   width: 186px;
@@ -78,7 +79,7 @@ const HackP = styled.p`
   margin-top: 8px;
 `;
 
-const PicContainer = styled.div`
+const PicContainer = styled(motion.div)`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -86,7 +87,6 @@ const PicContainer = styled.div`
   margin-bottom: 12px;
   justify-content: center;
   width: 100%;
-
 `;
 
 const WholeContainer = styled.div`
@@ -126,29 +126,37 @@ function Activity() {
               기획,디자인,프론트엔드,백엔드 4개의 팀으로 주 1회 세션을
               진행합니다.
             </ContentP>
-            <PicContainer>
-              {studyImages.map((image, idx) => (
-                <StyledImage
-                  key={idx}
-                  src={image}
-                  alt={`Idea Image ${idx + 1}`}
-                />
-              ))}
-            </PicContainer>
+            <PicContainer
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ delay: 0.5, duration: 1 }}
+>
+  {studyImages.map((image, idx) => (
+    <StyledImage
+      key={idx}
+      src={image}
+      alt={`Idea Image ${idx + 1}`}
+    />
+  ))}
+</PicContainer>
           </StudyContainer>
 
           <StudyContainer>
             <TitleP>아이디어톤</TitleP>
             <ContentP>타 학교 멋사와 연합하여 해커톤을 진행했습니다.</ContentP>
-            <PicContainer>
-              {ideaImages.map((image, idx) => (
-                <StyledImage
-                  key={idx}
-                  src={image}
-                  alt={`Idea Image ${idx + 1}`}
-                />
-              ))}
-            </PicContainer>
+            <PicContainer
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ delay: 0.5, duration: 1 }}
+>
+  {ideaImages.map((image, idx) => (
+    <StyledImage
+      key={idx}
+      src={image}
+      alt={`Idea Image ${idx + 1}`}
+    />
+  ))}
+</PicContainer>
           </StudyContainer>
 
           <StudyContainer>
@@ -157,15 +165,19 @@ function Activity() {
               여름방학, 약 한 달간의 프로젝트 과정을 거쳐 무박으로 <br />
               개발을 마무리하는 해커톤입니다.
             </HackP>
-            <PicContainer>
-              {midImages.map((image, idx) => (
-                <StyledImage
-                  key={idx}
-                  src={image}
-                  alt={`Mid Image ${idx + 1}`}
-                />
-              ))}
-            </PicContainer>
+            <PicContainer
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ delay: 0.5, duration: 1 }}
+>
+  {midImages.map((image, idx) => (
+    <StyledImage
+      key={idx}
+      src={image}
+      alt={`Mid Image ${idx + 1}`}
+    />
+  ))}
+</PicContainer>
           </StudyContainer>
 
           <StudyContainer style={{ paddingBottom: '60px' }}>
@@ -173,15 +185,19 @@ function Activity() {
             <ContentP>
               타 대학과 자체적으로 연합하여 개최하는 해커톤입니다.{' '}
             </ContentP>
-            <PicContainer>
-              {yunImages.map((image, idx) => (
-                <StyledImage
-                  key={idx}
-                  src={image}
-                  alt={`Mid Image ${idx + 1}`}
-                />
-              ))}
-            </PicContainer>
+            <PicContainer
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ delay: 0.5, duration: 1 }}
+>
+  {yunImages.map((image, idx) => (
+    <StyledImage
+      key={idx}
+      src={image}
+      alt={`Mid Image ${idx + 1}`}
+    />
+  ))}
+</PicContainer>
           </StudyContainer>
         </WholeContainer>
         <Footer />
