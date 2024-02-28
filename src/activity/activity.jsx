@@ -15,6 +15,10 @@ const StyledImage = styled.img`
   height: 113px;
   border-radius: 8px;
   object-fit: cover;
+  @media (max-width: 428px) {
+    width : 163px;
+    height: 100px;
+}
 `;
 
 const IntroContainer = styled.div`
@@ -82,6 +86,7 @@ const PicContainer = styled.div`
   margin-bottom: 12px;
   justify-content: center;
   width: 100%;
+
 `;
 
 const WholeContainer = styled.div`

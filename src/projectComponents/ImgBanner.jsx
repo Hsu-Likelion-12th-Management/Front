@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 import leftButton from "../images/leftButton.svg";
 import rightButton from "../images/rightButton.svg";
 import life from "../images/life.png";
@@ -23,6 +24,7 @@ export default function ImgBanner() {
       return ((prevIndex-1 + projectImg.length) % projectImg.length);
     })
   }
+
   return (
     <div className="bannerBox">
       <div className="buttonBox">
@@ -31,7 +33,15 @@ export default function ImgBanner() {
         </button>
       </div>
       <div className="bannerImg">
-        <img src={projectImg[currentIndex]} alt="life" style={{ width: "20.75rem", height: "11.625rem", borderRadius: "0.5rem" }}/>
+        <motion.img 
+          key={projectImg[currentIndex]} 
+          src={projectImg[currentIndex]} 
+          alt="life" 
+          style={{ width: "20.75rem", height: "11.625rem", borderRadius: "0.5rem" }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        />
       </div>
       <div className="buttonBox">
         <button className="rigthButton" onClick={moveRight}>
