@@ -9,7 +9,7 @@ const url = `https://www.hsu-like-lion.com/`;
 const AnswerContainer = styled.div`
   width: 100%;
   background: var(--Black, #0f1015);
-  padding-top: 26px;
+  // padding-top: 26px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -149,6 +149,7 @@ const AnswerText = styled.p`
 
 const AnswerField = styled.div`
   margin-bottom: 10px;
+  // margin-top: 1.63rem;
   display: flex;
   text-align: left;
   flex-direction: column;
@@ -443,8 +444,8 @@ function Comment({ postId, executiveName, id, onStatusUpdate }) {
             selectedContent={selectedContent}
           />
         )}
-        {contents.map((content) => (
-          <AnswerField key={content.commentsId}>
+        {contents.map((content, index) => (
+          <AnswerField key={content.commentsId} style={index === 0 ? {marginTop: "1.63rem"} : {}}>
             <InfoContainer>
               <AuthorContainer>
                 <Graycircle src={GrayCircle} alt="Gray Circle" />

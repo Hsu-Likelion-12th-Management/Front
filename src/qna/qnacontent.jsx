@@ -416,6 +416,13 @@ function Qnacontent() {
         executiveName={executiveName}
         id={id}
       /> */}
+      {/* {commentsCount !== 0 && <Comment
+        postId={postId}
+        executiveName={executiveName}
+        id={id}
+        updateCommentsCount={updateCommentsCount}
+        onStatusUpdate={handleStatusUpdate}
+      />} */}
       <Comment
         postId={postId}
         executiveName={executiveName}
@@ -423,7 +430,9 @@ function Qnacontent() {
         updateCommentsCount={updateCommentsCount}
         onStatusUpdate={handleStatusUpdate}
       />
-      <Footer />
+      <div style={{marginTop: "10rem"}}>
+        <Footer />
+      </div>
     </>
   );
 }

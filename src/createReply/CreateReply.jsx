@@ -13,7 +13,8 @@ const RegisterContainer = styled.div`
   border: 1px solid ${({activeBorder}) => activeBorder ? "#7F85A3" : "var(--Gray5, #2a2a3a)"};
   background: #2a2a3a;
   margin: 0 auto;
-  margin-bottom: 2rem;
+  margin-bottom: 0.4rem;
+  margin-top: 1.63rem;
 `;
 
 const ExecutiveField = styled.p`
