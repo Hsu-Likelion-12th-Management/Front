@@ -163,6 +163,7 @@ const AnswerField = styled.div`
   border-radius: 8px;
   border: 1px solid var(--Gray5, #2a2a3a);
   background: var(--Gray6, #191b24);
+  line-height: 170%;
 `;
 
 const Minutes = styled.p`

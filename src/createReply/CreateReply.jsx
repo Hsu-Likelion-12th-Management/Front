@@ -60,7 +60,7 @@ const ModifyButton = styled.button`
   right: 0.75rem;
 `
 
-const ReplyField = styled.input`
+const ReplyField = styled.textarea`
   margin-top: 0.5rem;
   margin-left: 1rem;
   color: white;
@@ -70,6 +70,12 @@ const ReplyField = styled.input`
   font-weight: 500;
   line-height: 170%; /* 1.275rem */
   width: 90%;
+  background: #2A2A3A;
+  border: none;
+  resize: none;
+  &:focus {
+    outline: none;
+  }
 `
 
 export default function CreateReply({ executive, handleReply, handleSubmit, reply, isActive, handleActive, handleModify, editMode, selectedContent}) {
@@ -82,7 +88,7 @@ export default function CreateReply({ executive, handleReply, handleSubmit, repl
           <ExecutiveField>{executive}</ExecutiveField>
           {editMode ? <ModifyButton onClick={() => handleModify(selectedContent)}>수정</ModifyButton> : <SubmitButton onClick={ handleSubmit} activeButton={isActive}>등록</SubmitButton>}
         </div>
-        <ReplyField type="text" value={reply} placeholder="댓글을 남겨보세요" onChange={handleReply} onFocus={handleActive} />
+        <ReplyField cols="30" value={reply} placeholder="댓글을 남겨보세요" onChange={handleReply} onFocus={handleActive} />
       </form>
     </RegisterContainer>
   );
