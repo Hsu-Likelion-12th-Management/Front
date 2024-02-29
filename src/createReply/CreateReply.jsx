@@ -69,6 +69,7 @@ const ReplyField = styled.input`
   font-style: normal;
   font-weight: 500;
   line-height: 170%; /* 1.275rem */
+  width: 90%;
 `
 
 export default function CreateReply({ executive, handleReply, handleSubmit, reply, isActive, handleActive, handleModify, editMode, selectedContent}) {
