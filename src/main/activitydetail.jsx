@@ -18,8 +18,8 @@ function ActivityDetail(props){
     `;
 
     const Img = styled.img`
-    width: 130px;
-    height: 100px;
+    height: 6.5rem;
+    width: 8.6875rem;
     flex-shrink: 0;
     border-radius: 10px;
     margin-top: 8px;
@@ -29,7 +29,6 @@ function ActivityDetail(props){
     @media (max-width: 428px){
         right: 5px;
         margin-top: 5px;
-        width: 110px;
         height: 90px;
     }
 `;
@@ -63,7 +62,8 @@ function ActivityDetail(props){
     const contentContainerStyle={
         display:'flex',
         flexDirection:'row',
-        position:'relative'
+        position:'relative',
+        gap : '10px'
 
     }
 
@@ -74,7 +74,6 @@ function ActivityDetail(props){
             margin-left: 8px;
         }
     `;
-
     const controls = useAnimation();
     const [ref, inView] = useInView();
 
