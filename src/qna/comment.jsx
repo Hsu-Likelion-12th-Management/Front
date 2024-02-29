@@ -156,8 +156,9 @@ const AnswerField = styled.div`
   padding-top: 17px;
   padding-left: 16px;
   padding-right: 14px;
+  padding-bottom: 12px;
   width: 90%;
-  height: 99px;
+  // height: 99px;
   flex-shrink: 0;
   border-radius: 8px;
   border: 1px solid var(--Gray5, #2a2a3a);
