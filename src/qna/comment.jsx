@@ -1,9 +1,9 @@
-import styled from "styled-components";
-import axios from "axios";
-import { useEffect, useState } from "react";
-import GrayCircle from "../images/graycircle.png";
-import CreateReply from "../createReply/CreateReply";
-import moment from "moment";
+import styled from 'styled-components';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import GrayCircle from '../images/graycircle.png';
+import CreateReply from '../createReply/CreateReply';
+import moment from 'moment';
 const url = `https://www.hsu-like-lion.com/`;
 
 const AnswerContainer = styled.div`
@@ -36,7 +36,7 @@ const IntroP = styled.p`
   font-size: 24px;
   font-weight: bold;
   margin-left: 16px;
-  color: ${(props) => props.color || "white"};
+  color: ${(props) => props.color || 'white'};
 `;
 
 const AuthorContainer = styled.div`
@@ -106,13 +106,13 @@ const Reply = styled.div`
   line-height: normal;
   border: 2px solid
     ${(props) =>
-      props.status === "답변 중"
-        ? "var(--Sub-color, #FF7710)"
-        : "var(--Gray2, #7f85a3)"};
+      props.status === '답변 중'
+        ? 'var(--Sub-color, #FF7710)'
+        : 'var(--Gray2, #7f85a3)'};
   color: ${(props) =>
-    props.status === "답변 중"
-      ? "var(--Sub-color, #FF7710)"
-      : "var(--Gray2, #7f85a3)"};
+    props.status === '답변 중'
+      ? 'var(--Sub-color, #FF7710)'
+      : 'var(--Gray2, #7f85a3)'};
 `;
 
 const ContentField = styled.div`
@@ -222,13 +222,13 @@ const DeleteButton = styled.button`
 
 function Comment({ postId, executiveName, id, onStatusUpdate }) {
   const [contents, setContents] = useState([]);
-  const [executive, setExecutive] = useState("");
-  const [reply, setReply] = useState("");
-  const [executiveId, setExecutiveId] = useState("id");
+  const [executive, setExecutive] = useState('');
+  const [reply, setReply] = useState('');
+  const [executiveId, setExecutiveId] = useState('id');
   const [isActive, setIsActive] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [selectedContent, setSelectedContent] = useState(null);
-  const admin = localStorage.getItem("isAdmin") === "true";
+  const admin = localStorage.getItem('isAdmin') === 'true';
 
   const handleActive = () => {
     setIsActive(true);
@@ -244,15 +244,15 @@ function Comment({ postId, executiveName, id, onStatusUpdate }) {
         `https://www.hsu-like-lion.com/api/post/${postId}/comments`
       );
       const comments = response.data.data.comments;
-      console.log("댓글 조회 성공");
+      console.log('댓글 조회 성공');
       setContents(comments);
     } catch (error) {
-      console.error("게시글 목록을 가져오는 데 실패했습니다:", error);
+      console.error('게시글 목록을 가져오는 데 실패했습니다:', error);
     }
   };
 
   const renderTextWithLineBreaks = (text) => {
-    return text.split("\n").map((line, index) => (
+    return text.split('\n').map((line, index) => (
       <StyledParagraph key={index} style={{ margin: 0 }}>
         {line}
       </StyledParagraph>
@@ -272,14 +272,14 @@ function Comment({ postId, executiveName, id, onStatusUpdate }) {
       );
 
       if (response.status === 200) {
-        console.log("게시글 상태 업데이트 성공");
+        console.log('게시글 상태 업데이트 성공');
         const updatedStatus = response.data.data.status; // 업데이트된 상태
         onStatusUpdate(updatedStatus);
       } else {
-        console.log("게시글 상태 업데이트 실패", response.data);
+        console.log('게시글 상태 업데이트 실패', response.data);
       }
     } catch (error) {
-      console.error("게시글 상태 업데이트 중 오류 발생:", error);
+      console.error('게시글 상태 업데이트 중 오류 발생:', error);
     }
   };
 
@@ -305,25 +305,25 @@ function Comment({ postId, executiveName, id, onStatusUpdate }) {
       );
 
       if (response.status === 200) {
-        console.log("댓글 작성 성공");
+        console.log('댓글 작성 성공');
         console.log(response.data);
         const commentId = response.data.data.commentsId;
         console.log(commentId);
-        setReply("");
+        setReply('');
         fetchPostId();
         setIsActive(false);
       } else {
-        console.log("작성 실패");
+        console.log('작성 실패');
         console.log(response.data);
       }
     } catch (error) {
-      console.error("오류", error);
-      alert("접근 권한이 없습니다.");
+      console.error('오류', error);
+      alert('접근 권한이 없습니다.');
     }
 
     if (contents.length === 0) {
       // 댓글이 처음 추가된 경우
-      updatePostStatus(postId, "DONE"); // 상태를 '답변 완료'로 변경
+      updatePostStatus(postId, 'DONE'); // 상태를 '답변 완료'로 변경
     }
   };
 
@@ -337,7 +337,7 @@ function Comment({ postId, executiveName, id, onStatusUpdate }) {
       );
 
       if (response.status === 200) {
-        console.log("인증 완료");
+        console.log('인증 완료');
         setEditMode(true);
         setReply(selectedContent.content);
         setSelectedContent(selectedContent);
@@ -345,8 +345,8 @@ function Comment({ postId, executiveName, id, onStatusUpdate }) {
         setEditMode(false);
       }
     } catch (error) {
-      console.error("오류", error);
-      alert("접근 권한이 없습니다.");
+      console.error('오류', error);
+      alert('접근 권한이 없습니다.');
     }
   };
 
@@ -362,15 +362,15 @@ function Comment({ postId, executiveName, id, onStatusUpdate }) {
         }
       );
       if (response.status === 200) {
-        console.log("수정 완료");
+        console.log('수정 완료');
         fetchPostId();
         setEditMode(false);
-        setReply("");
+        setReply('');
       } else {
-        console.log("수정 실패");
+        console.log('수정 실패');
       }
     } catch (error) {
-      console.log("오류", error);
+      console.log('오류', error);
     }
   };
 
@@ -388,46 +388,45 @@ function Comment({ postId, executiveName, id, onStatusUpdate }) {
         }
       );
       if (response.status === 200) {
-        console.log("삭제 완료");
+        console.log('삭제 완료');
         fetchPostId();
       } else {
-        console.log("실패");
+        console.log('실패');
       }
     } catch (error) {
-      console.error("오류", error);
-      alert("접근 권한이 없습니다.");
+      console.error('오류', error);
+      alert('접근 권한이 없습니다.');
     }
 
     if (contents.length - 1 === 0) {
       // 마지막 댓글이 삭제된 경우
-      updatePostStatus(postId, "PROGRESS"); // 상태를 '답변 중'으로 변경
+      updatePostStatus(postId, 'PROGRESS'); // 상태를 '답변 중'으로 변경
     }
   };
 
   function formattingTime(updatedAt) {
     const today = moment.utc().local();
     const postingDate = moment.utc(updatedAt).local();
-    const dayDiff = postingDate.diff(today, "days");
-    const hourDiff = postingDate.diff(today, "hours");
-    const minuteDiff = postingDate.diff(today, "minutes");
+    const dayDiff = postingDate.diff(today, 'days');
+    const hourDiff = postingDate.diff(today, 'hours');
+    const minuteDiff = postingDate.diff(today, 'minutes');
 
     if (dayDiff === 0 && hourDiff === 0 && minuteDiff === 0) {
-      return "방금 전";
+      return '방금 전';
     }
 
-    if (dayDiff === 0 && hourDiff === 0) { 
+    if (dayDiff === 0 && hourDiff === 0) {
       const minutes = Math.ceil(-minuteDiff);
-      return minutes + '분 전';		
+      return minutes + '분 전';
     }
-  
-    if (dayDiff === 0 && hourDiff <= 24) { 
-      const hour = Math.ceil(-hourDiff);
-      return hour + '시간 전';		
-    }
-  
-    return -dayDiff + '일 전';
-  };
 
+    if (dayDiff === 0 && hourDiff <= 24) {
+      const hour = Math.ceil(-hourDiff);
+      return hour + '시간 전';
+    }
+
+    return -dayDiff + '일 전';
+  }
 
   return (
     <>
@@ -447,21 +446,26 @@ function Comment({ postId, executiveName, id, onStatusUpdate }) {
           />
         )}
         {contents.map((content, index) => (
-          <AnswerField key={content.commentsId} style={index === 0 ? {marginTop: "1.63rem"} : {}}>
+          <AnswerField
+            key={content.commentsId}
+            style={index === 0 ? { marginTop: '1.63rem' } : {}}
+          >
             <InfoContainer>
               <AuthorContainer>
                 <Graycircle src={GrayCircle} alt="Gray Circle" />
                 <ItemContent>{content.name}</ItemContent>
               </AuthorContainer>
               <Minutes>{formattingTime(content.updatedAt)}</Minutes>
-              <div style={{ position: "absolute", right: "0.75rem" }}>
-                <ModifyButton onClick={() => handleVerify(content)}>
-                  수정
-                </ModifyButton>
-                <DeleteButton onClick={() => handleDelete(content)}>
-                  삭제
-                </DeleteButton>
-              </div>
+              {admin && (
+                <div style={{ position: 'absolute', right: '0.75rem' }}>
+                  <ModifyButton onClick={() => handleVerify(content)}>
+                    수정
+                  </ModifyButton>
+                  <DeleteButton onClick={() => handleDelete(content)}>
+                    삭제
+                  </DeleteButton>
+                </div>
+              )}
             </InfoContainer>
             {content.content}
           </AnswerField>
