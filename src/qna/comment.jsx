@@ -449,7 +449,11 @@ function Comment({ postId, executiveName, id, onStatusUpdate }) {
         {contents.map((content, index) => (
           <AnswerField
             key={content.commentsId}
-            style={index === 0 ? { marginTop: '1.63rem' } : {}}
+            style={
+              index === 0
+                ? { marginTop: '1.63rem', marginBottom: '1.63rem' }
+                : {}
+            }
           >
             <InfoContainer>
               <AuthorContainer>

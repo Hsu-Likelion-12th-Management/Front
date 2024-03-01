@@ -268,16 +268,21 @@ function Qnalist() {
     return status === 'DONE' ? '답변 완료' : '답변 중';
   };
 
-  const formatDate = (dateString) => {
-    //updatedAt 년 월 일
+  const formatCreatedAt = (dateString) => {
     const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
     return new Intl.DateTimeFormat('ko-KR', options).format(
       new Date(dateString)
     );
   };
 
-  const updatedAt = '2024-02-20T19:44:06.979468';
-  const formattedDate = formatDate(updatedAt);
+  const formatDate = (createdAt, updatedAt) => {
+    const date = new Date(updatedAt || createdAt); // updatedAt가 존재하면 updatedAt를 사용하고, 그렇지 않으면 createdAt를 사용합니다.
+    const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+    return new Intl.DateTimeFormat('ko-KR', options).format(date);
+  };
+
+  const createdAt = '2024-02-20T19:44:06.979468';
+  const formattedDate = formatCreatedAt(createdAt);
   console.log(formattedDate);
 
   return (
@@ -314,7 +319,9 @@ function Qnalist() {
                       <ItemContent>{question.postedUserName}</ItemContent>
                     </AuthorContainer>
                     <ItemContent>{question.title}</ItemContent>
-                    <ItemContent>{formatDate(question.updatedAt)}</ItemContent>
+                    <ItemContent>
+                      {formatDate(question.createdAt, question.updatedAt)}
+                    </ItemContent>
                     <Reply status={getReplyStatusClassName(question.status)}>
                       {getReplyStatusClassName(question.status)}{' '}
                       {/* 상태에 따른 CSS 클래스 추가 */}

@@ -423,9 +423,9 @@ function Qnacontent() {
         updateCommentsCount={updateCommentsCount}
         onStatusUpdate={handleStatusUpdate}
       />
-      <div style={{marginTop: "10rem"}}>
-        <Footer />
-      </div>
+      {/* <div style={{marginTop: "10rem"}}> */}
+      <Footer />
+      {/* </div> */}
     </>
   );
 }
