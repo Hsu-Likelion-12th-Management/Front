@@ -148,8 +148,7 @@ const AnswerText = styled.p`
 `;
 
 const AnswerField = styled.div`
-  margin-bottom: 10px;
-  // margin-top: 1.63rem;
+  margin-bottom: 1.63rem;
   display: flex;
   text-align: left;
   flex-direction: column;
@@ -449,11 +448,7 @@ function Comment({ postId, executiveName, id, onStatusUpdate }) {
         {contents.map((content, index) => (
           <AnswerField
             key={content.commentsId}
-            style={
-              index === 0
-                ? { marginTop: '1.63rem', marginBottom: '1.63rem' }
-                : {}
-            }
+            style={index === 0 ? { marginTop: '1.63rem' } : {}}
           >
             <InfoContainer>
               <AuthorContainer>
