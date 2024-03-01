@@ -229,6 +229,7 @@ function Comment({ postId, executiveName, id, onStatusUpdate }) {
   const [editMode, setEditMode] = useState(false);
   const [selectedContent, setSelectedContent] = useState(null);
   const admin = localStorage.getItem('isAdmin') === 'true';
+  const loggedInUserId = localStorage.getItem('executiveName');
 
   const handleActive = () => {
     setIsActive(true);
@@ -456,7 +457,7 @@ function Comment({ postId, executiveName, id, onStatusUpdate }) {
                 <ItemContent>{content.name}</ItemContent>
               </AuthorContainer>
               <Minutes>{formattingTime(content.updatedAt)}</Minutes>
-              {admin && (
+              {loggedInUserId === content.name && (
                 <div style={{ position: 'absolute', right: '0.75rem' }}>
                   <ModifyButton onClick={() => handleVerify(content)}>
                     수정
