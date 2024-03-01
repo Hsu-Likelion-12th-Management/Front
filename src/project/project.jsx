@@ -58,7 +58,7 @@ function Project() {
 
   return (
     <div style={containerStyle}>
-      <Intro>활동 소개</Intro>
+      <Intro>프로젝트</Intro>
 
       <HexagonBox class="topImgBox" img={plan} text="기획" />
       <div className="bottomImgBox">

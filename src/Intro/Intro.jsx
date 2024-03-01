@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 import Hsulogo from '../images/hsulogo.png';
 
 const IntroContainer = styled.div`
@@ -22,13 +22,13 @@ const IntroP = styled.p`
   color: ${(props) => props.color || 'white'};
 `;
 
-export default function Intro({children}) {
+export default function Intro({ children }) {
   return (
     <>
       <IntroContainer>
-        <img src={Hsulogo} alt="한성로고" style={{ width: "8%" }} />
+        <img src={Hsulogo} alt="한성로고" />
         <IntroP>{children}</IntroP>
       </IntroContainer>
     </>
-  )
+  );
 }
