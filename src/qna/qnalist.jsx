@@ -286,7 +286,7 @@ function Qnalist() {
         <ContentContainer>
           <IntroContainer>
             <InContainer>
-              <img src={Hsulogo} alt="한성로고" style={{ width: '8%' }} />
+              <img src={Hsulogo} alt="한성로고" />
               <IntroP>Q&A</IntroP>
             </InContainer>
           </IntroContainer>
@@ -314,7 +314,7 @@ function Qnalist() {
                       <ItemContent>{question.postedUserName}</ItemContent>
                     </AuthorContainer>
                     <ItemContent>{question.title}</ItemContent>
-                    <ItemContent>{formatDate(question.updatedAt)}</ItemContent>
+                    <ItemContent>{formatDate(question.createdAt)}</ItemContent>
                     <Reply status={getReplyStatusClassName(question.status)}>
                       {getReplyStatusClassName(question.status)}{' '}
                       {/* 상태에 따른 CSS 클래스 추가 */}

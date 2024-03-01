@@ -119,7 +119,7 @@ function Activity() {
       <ActivityContainer>
         <IntroContainer>
           <InContainer>
-            <img src={Hsulogo} alt="한성로고" style={{ width: '8%' }} />
+            <img src={Hsulogo} alt="한성로고" />
             <IntroP>활동 소개</IntroP>
           </InContainer>
         </IntroContainer>

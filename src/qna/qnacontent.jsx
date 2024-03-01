@@ -342,7 +342,7 @@ function Qnacontent() {
     <>
       <IntroContainer>
         <InContainer>
-          <img src={Hsulogo} alt="한성로고" style={{ width: '8%' }} />
+          <img src={Hsulogo} alt="한성로고" />
           <IntroP>Q&A</IntroP>
         </InContainer>
       </IntroContainer>
