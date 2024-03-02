@@ -1,20 +1,20 @@
-import './project.css';
-import styled from 'styled-components';
-import Intro from '../Intro/Intro';
-import plan from '../images/plan.svg';
-import design from '../images/design.svg';
-import developer from '../images/developer.svg';
-import HexagonBox from '../projectComponents/HexagonBox';
-import IntroduceText from '../projectComponents/IntroduceText';
-import ImgBanner from '../projectComponents/ImgBanner';
-import life from '../images/life.png';
-import happiness from '../images/happiness.png';
-import moah from '../images/moah.png';
-import lisa from '../images/prj4.PNG';
-import book from '../images/prj5.PNG';
-import bear from '../images/prj6.PNG';
-import Footer from '../footer/footer';
-import { useState } from 'react';
+import "./project.css";
+import styled from "styled-components";
+import Intro from "../Intro/Intro";
+import plan from "../images/plan.svg";
+import design from "../images/design.svg";
+import developer from "../images/developer.svg";
+import HexagonBox from "../projectComponents/HexagonBox";
+import IntroduceText from "../projectComponents/IntroduceText";
+import ImgBanner from "../projectComponents/ImgBanner";
+import life from "../images/lifeteacher.png";
+import happiness from "../images/happiness.jpg";
+import moah from "../images/moah.jpg";
+import lisa from "../images/prj4.PNG";
+import book from "../images/prj5.PNG";
+import bear from "../images/prj6.PNG";
+import Footer from "../footer/footer";
+import { useState } from "react";
 
 const TitleText = styled.p`
   margin-top: 3.75rem;
@@ -44,7 +44,7 @@ const MoreButton = styled.button`
 `;
 
 const containerStyle = {
-  maxWidth: '428px',
+  maxWidth: "428px",
 };
 
 function Project() {
@@ -84,9 +84,20 @@ function Project() {
 
       <TitleText>11기</TitleText>
 
-      <div className={moreImg ? 'moreProjectBg' : 'projectBg'}>
+      <div className={moreImg ? "moreProjectBg" : "projectBg"}>
         {projectImg.map((image, index) => {
-          return <img src={image} key={index} alt={`이미지[${index}]`} />;
+          return (
+            <img
+              src={image}
+              key={index}
+              alt={`이미지[${index}]`}
+              style={{
+                width: "20.75rem",
+                height: "11.625rem",
+                borderRadius: "0.5rem",
+              }}
+            />
+          );
         })}
         {moreImg &&
           moreProjectImg.map((image, index) => {
@@ -96,9 +107,9 @@ function Project() {
                 key={index}
                 alt={`이미지[${index}]`}
                 style={{
-                  width: '20.75rem',
-                  height: '11.625rem',
-                  borderRadius: '0.5rem',
+                  width: "20.75rem",
+                  height: "11.625rem",
+                  borderRadius: "0.5rem",
                 }}
               />
             );
@@ -107,9 +118,9 @@ function Project() {
 
       <div
         style={{
-          marginTop: '1rem',
-          marginBottom: '5rem',
-          position: 'relative',
+          marginTop: "1rem",
+          marginBottom: "5rem",
+          position: "relative",
         }}
       >
         <MoreButton onClick={moreContentHandler}>더보기</MoreButton>
