@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import Footer from "../footer/footer";
 import logo from '../images/Group 972.svg'
-import prj1 from '../images/prj1.png'
-import prj2 from '../images/prg2.png'
+import prj1 from '../images/lifeteacher.png'
+import prj2 from '../images/happiness.jpg'
 import left from '../images/leftArrow.svg'
 import right from '../images/rightArrow.svg'
-import prj3 from '../images/prj3.png'
+import prj3 from '../images/moah.jpg'
 import prj4 from '../images/prj4.PNG'
 import prj5 from '../images/prj5.PNG'
 import prj6 from '../images/prj6.PNG'
