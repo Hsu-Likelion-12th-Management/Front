@@ -452,7 +452,7 @@ function EleventhProject(){
     `;
 
     const StyledMotionImg = styled(motion.img)`
-    height: 188px;
+    height: 200px;
     width: 100%;
     flex-shrink: 0;
     border-radius: 8px;
