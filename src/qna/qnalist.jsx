@@ -280,6 +280,17 @@ function Qnalist() {
   const formattedDate = formatDate(updatedAt);
   console.log(formattedDate);
 
+  const Warning={
+    display: "flex",
+    fontColor:"white",
+    fontSize: "20px",
+    fontStyle: "normal",
+    fontWeight: "800",
+    justifyContent: "center",
+    alignItems:"center",
+    marginTop: "100px"
+  }
+
   return (
     <>
       <QnaLayout>
@@ -298,53 +309,10 @@ function Qnalist() {
                 <span>무엇이든 물어보세요!</span>
               </AskP>
             </Pcontainer>
-            <StyledLink to="/question">질문하기</StyledLink>
           </AskContainer>
-          <QuestionListContainer>
-            {currentQuestions.map((question) => (
-              <div key={question.postId}>
-                <Link to={{ pathname: `/Qnacontent/${question.postId}` }}>
-                  <QuestionItem>
-                    <AuthorContainer>
-                      <Graycircle
-                        src={GrayCircle}
-                        alt="Gray Circle"
-                        style={{ marginRight: '7px' }}
-                      />
-                      <ItemContent>{question.postedUserName}</ItemContent>
-                    </AuthorContainer>
-                    <ItemContent>{question.title}</ItemContent>
-                    <ItemContent>{formatDate(question.createdAt)}</ItemContent>
-                    <Reply status={getReplyStatusClassName(question.status)}>
-                      {getReplyStatusClassName(question.status)}{' '}
-                      {/* 상태에 따른 CSS 클래스 추가 */}
-                    </Reply>
-                  </QuestionItem>
-                </Link>
-              </div>
-            ))}
-          </QuestionListContainer>
+          <div style={Warning}>Q&A는 모집 기간에만 볼 수 있습니다.</div>
         </ContentContainer>
 
-        <PaginationContainer>
-          {Array.from({ length: totalPages }, (_, index) => index + 1).map(
-            (number, index) => (
-              <React.Fragment key={number}>
-                <PageNumber
-                  onClick={() => handlePageClick(number)}
-                  style={
-                    currentPage === number
-                      ? { color: 'var(--White, #FFF)', fontWeight: 700 }
-                      : {}
-                  }
-                >
-                  {number}
-                </PageNumber>
-                {index < totalPages - 1 && <Divider />}
-              </React.Fragment>
-            )
-          )}
-        </PaginationContainer>
 
         <Footer />
       </QnaLayout>
